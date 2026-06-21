@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Airtable for NOV</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--ink:#0a0a0a;--ink2:#555;--bg:#fff;--blue:#2D7FF9;--blue-bg:#F0F6FF;--border:#e5e5e5}
+html{font-size:16px;scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{font-family:'Inter',sans-serif;color:var(--ink);background:var(--bg);line-height:1.5}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 5%}
+.nav-brand{font-weight:800;font-size:.9375rem;letter-spacing:-.3px;display:flex;align-items:center;gap:8px}
+.nav-brand .dot{width:18px;height:18px;background:var(--blue);border-radius:4px}
+.nav-tag{font-size:.6875rem;font-weight:600;color:var(--ink2);letter-spacing:.06em;text-transform:uppercase}
+.nav-cta{font-size:.8125rem;font-weight:600;color:#fff;background:var(--blue);padding:7px 18px;border-radius:6px;text-decoration:none;transition:opacity .15s}
+.nav-cta:hover{opacity:.85}
+
+/* HERO */
+.hero{padding:120px 5% 80px;max-width:800px}
+.hero-tag{font-size:.6875rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:20px}
+.hero h1{font-size:clamp(2.5rem,5.5vw,4rem);font-weight:900;line-height:1.05;letter-spacing:-.04em;margin-bottom:24px}
+.hero p{font-size:1.125rem;color:var(--ink2);max-width:540px;line-height:1.65}
+
+/* STATS BAR */
+.stats{display:flex;gap:0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stat{flex:1;padding:32px 5%;border-right:1px solid var(--border)}
+.stat:last-child{border-right:none}
+.stat-val{font-size:2rem;font-weight:900;letter-spacing:-.03em}
+.stat-label{font-size:.75rem;color:var(--ink2);margin-top:4px}
+
+/* SECTION */
+.section{padding:80px 5%}
+.section-dark{background:#0a0a0a;color:#fff}
+.section-dark .ink2{color:rgba(255,255,255,.6)}
+.section-alt{background:#fafafa;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.tag{font-size:.625rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:16px}
+.section-dark .tag{color:var(--blue)}
+h2{font-size:clamp(1.75rem,3.5vw,2.5rem);font-weight:800;letter-spacing:-.03em;line-height:1.1;margin-bottom:16px;max-width:600px}
+
+/* USE CASE GRID */
+.uc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-top:40px}
+.uc-card{border:1px solid var(--border);border-radius:10px;padding:28px;background:#fff}
+.uc-num{font-size:.6875rem;font-weight:800;color:var(--blue);margin-bottom:10px;letter-spacing:.08em}
+.uc-card h3{font-size:1rem;font-weight:700;margin-bottom:6px;letter-spacing:-.01em}
+.uc-card p{font-size:.875rem;color:var(--ink2);line-height:1.55}
+
+/* PROOF */
+.proof-row{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:40px}
+.proof-item{padding:32px}
+.proof-item+.proof-item{border-left:1px solid rgba(255,255,255,.12)}
+.proof-name{font-size:.6875rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:4px}
+.proof-meta{font-size:.75rem;color:rgba(255,255,255,.4);margin-bottom:14px}
+.proof-stat{font-size:1.5rem;font-weight:800;letter-spacing:-.02em;margin-bottom:6px}
+.proof-desc{font-size:.8125rem;color:rgba(255,255,255,.55);line-height:1.55}
+
+/* CTA */
+.cta{text-align:center;padding:80px 5%}
+.cta h2{max-width:none;margin:0 auto 12px}
+.cta p{color:var(--ink2);font-size:1rem;max-width:440px;margin:0 auto 32px}
+.cta-btn{display:inline-block;background:var(--blue);color:#fff;font-size:1rem;font-weight:600;padding:14px 32px;border-radius:8px;text-decoration:none;transition:opacity .15s}
+.cta-btn:hover{opacity:.85}
+.cta-contact{margin-top:24px;font-size:.8125rem;color:var(--ink2)}
+.cta-contact strong{color:var(--ink);font-weight:600}
+
+footer{border-top:1px solid var(--border);padding:20px 5%;text-align:center;font-size:.6875rem;color:#999}
+
+@media(max-width:768px){
+  .stats{flex-direction:column}
+  .stat{border-right:none;border-bottom:1px solid var(--border)}
+  .stat:last-child{border-bottom:none}
+  .proof-row{grid-template-columns:1fr}
+  .proof-item+.proof-item{border-left:none;border-top:1px solid rgba(255,255,255,.12)}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand"><div class="dot"></div>airtable</div>
+  <span class="nav-tag">Prepared for NOV</span>
+  <a href="mailto:quinn.daniell@airtable.com?subject=NOV%20%2B%20Airtable" class="nav-cta" target="_blank" rel="noopener noreferrer">Let's Talk</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-tag">Airtable for NOV</div>
+  <h1>Your product teams deserve better than spreadsheets.</h1>
+  <p>NOV runs Stage-Gate across dozens of BUs. The coordination layer between Teamcenter, JDE, and your teams is held together by email and Excel. Airtable replaces that gap.</p>
+</div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-val">$8.7B</div><div class="stat-label">FY2025 Revenue</div></div>
+  <div class="stat"><div class="stat-val">$100M</div><div class="stat-label">Cost-Out Target</div></div>
+  <div class="stat"><div class="stat-val">30+</div><div class="stat-label">Business Units</div></div>
+  <div class="stat"><div class="stat-val">0</div><div class="stat-label">Unified Product Workflow Tool</div></div>
+</div>
+
+<div class="section section-alt">
+  <div class="tag">Use Cases</div>
+  <h2>Five starting points. Each deploys in weeks.</h2>
+  <div class="uc-grid">
+    <div class="uc-card">
+      <div class="uc-num">01</div>
+      <h3>NPD Portfolio Tracker</h3>
+      <p>Stage-Gate status across every BU. One view for leadership.</p>
+    </div>
+    <div class="uc-card">
+      <div class="uc-num">02</div>
+      <h3>ECR Workflow</h3>
+      <p>Route change requests from intake to approval. No more email chains.</p>
+    </div>
+    <div class="uc-card">
+      <div class="uc-num">03</div>
+      <h3>Product Roadmap</h3>
+      <p>Align engineering and commercial teams around shared timelines.</p>
+    </div>
+    <div class="uc-card">
+      <div class="uc-num">04</div>
+      <h3>Max Platform Ops</h3>
+      <p>Sprint coordination and release tracking for NOV's digital products.</p>
+    </div>
+    <div class="uc-card">
+      <div class="uc-num">05</div>
+      <h3>M&A Integration</h3>
+      <p>Track acquired product lines, system migrations, and team onboarding.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section section-dark">
+  <div class="tag">Proof</div>
+  <h2>Companies like NOV already run on Airtable.</h2>
+  <div class="proof-row">
+    <div class="proof-item">
+      <div class="proof-name">Baker Hughes</div>
+      <div class="proof-meta">Energy, 55,000+ employees</div>
+      <div class="proof-stat">"Exponential" impact</div>
+      <div class="proof-desc">Replaced PowerPoint and Outlook with a single source of truth for project management.</div>
+    </div>
+    <div class="proof-item">
+      <div class="proof-name">dormakaba</div>
+      <div class="proof-meta">Manufacturing, 50+ countries</div>
+      <div class="proof-stat">5 systems to 1</div>
+      <div class="proof-desc">Unified entire project lifecycle. Full traceability from order to completion.</div>
+    </div>
+    <div class="proof-item">
+      <div class="proof-name">Schaeffler AG</div>
+      <div class="proof-meta">Industrial, 120K employees</div>
+      <div class="proof-stat">Cycle time cut 50%</div>
+      <div class="proof-desc">6 tools consolidated. Deployed to hundreds of users across 55 countries.</div>
+    </div>
+  </div>
+</div>
+
+<div class="cta">
+  <h2>15 minutes. No generic demo.</h2>
+  <p>A focused conversation about where Airtable fits in NOV's product operations.</p>
+  <a href="mailto:quinn.daniell@airtable.com?subject=NOV%20%2B%20Airtable" class="cta-btn" target="_blank" rel="noopener noreferrer">Start a Conversation</a>
+  <div class="cta-contact"><strong>Quinn Daniell</strong> - Business Development, Airtable</div>
+</div>
+
+<footer>Prepared by Airtable for NOV product leadership. June 2026.</footer>
+
+</body>
+</html>
