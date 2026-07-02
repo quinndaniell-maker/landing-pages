@@ -3,322 +3,282 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Weekly PSU Review — Ryan Morris</title>
+<title>Monday PSU Briefing — Ryan Morris</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
-  --bg:#FAFBFD; --surface:#FFFFFF; --border:#ECEEF3; --border2:#E0E3EA;
-  --text:#1D1F25; --muted:#6B7280; --faint:#9CA3AF;
+  --bg:#FBFAF7; --paper:#FFFFFF; --ink:#1A1814; --body:#3D3A35; --muted:#7A766E; --faint:#A8A49A;
+  --line:#E8E4DC; --line2:#DDD8CE;
   --at-yellow:#FCB400; --at-pink:#F82B60; --at-purple:#8B46FF; --at-blue:#2D7FF9; --at-teal:#18BFFF; --at-green:#20C933; --at-orange:#FF6B2C;
-  --accent:#2D7FF9; --accent2:#18BFFF; --accentSoft:#E8F2FE; --accentGlow:rgba(45,127,249,0.25);
-  --shadow:0 1px 3px rgba(16,24,40,0.04),0 1px 2px rgba(16,24,40,0.06);
-  --shadowLg:0 8px 24px rgba(16,24,40,0.08),0 2px 6px rgba(16,24,40,0.04);
-  --radius:14px;
+  --accent:#2D7FF9; --accent2:#18BFFF; --accentSoft:#E8F2FE;
+  --serif:'Fraunces',Georgia,serif; --sans:'Inter',-apple-system,sans-serif; --mono:'JetBrains Mono',monospace;
 }
-body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:13px;line-height:1.45;-webkit-font-smoothing:antialiased;}
-.mono{font-family:'JetBrains Mono',monospace;}
-.display{font-family:'Space Grotesk',sans-serif;}
+body{font-family:var(--sans);background:var(--bg);color:var(--body);font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased;}
+.mono{font-family:var(--mono);}
 
-/* ===== Header ===== */
-.header{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:var(--shadow);}
-.header-left{display:flex;align-items:center;gap:14px;}
-.brand-blocks{display:flex;gap:3px;}
-.brand-blocks span{width:10px;height:24px;border-radius:3px;}
-.logo-text{font-family:'Space Grotesk';font-weight:700;font-size:13px;color:var(--muted);letter-spacing:-0.2px;}
-.header h1{font-family:'Space Grotesk';font-size:20px;font-weight:700;letter-spacing:-0.5px;}
-.header .sub{font-size:12px;color:var(--muted);margin-top:2px;display:flex;align-items:center;gap:8px;}
-.ae-pill{display:inline-flex;align-items:center;gap:6px;background:var(--accentSoft);color:var(--accent);font-weight:600;font-size:11px;padding:2px 9px;border-radius:20px;}
-.ae-pill .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);}
-.header .meta{display:flex;align-items:center;gap:14px;}
-.refresh-note{font-size:11px;color:var(--faint);}
-.refresh-btn{background:var(--text);color:#fff;border:none;padding:8px 15px;border-radius:9px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:transform 0.1s;}
-.refresh-btn:hover{filter:brightness(1.15);}
-.refresh-btn:active{transform:scale(0.97);}
+/* ===== Top bar ===== */
+.topbar{background:var(--ink);color:#F5F2EC;padding:10px 0;font-size:12px;letter-spacing:0.3px;}
+.topbar-inner{max-width:820px;margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center;}
+.brand-blocks{display:flex;gap:2px;}
+.brand-blocks span{width:8px;height:18px;border-radius:2px;}
+.topbar .meta{color:#A8A49A;font-family:var(--mono);font-size:11px;}
 
-/* ===== Controls ===== */
-.controls{padding:14px 28px;border-bottom:1px solid var(--border);display:flex;gap:22px;align-items:center;flex-wrap:wrap;background:var(--surface);}
-.ctrl-group{display:flex;align-items:center;gap:10px;}
-.ctrl-label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;}
-.seg{display:flex;background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:3px;gap:2px;}
-.seg button{border:none;background:transparent;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;border-radius:7px;color:var(--muted);font-family:inherit;transition:all 0.18s;}
-.seg button.active{background:var(--accent);color:#fff;box-shadow:0 2px 6px var(--accentGlow);}
-.seg button:hover:not(.active){background:var(--surface);color:var(--text);}
+/* ===== Masthead ===== */
+.masthead{max-width:820px;margin:0 auto;padding:48px 28px 32px;border-bottom:2px solid var(--ink);}
+.kicker{font-family:var(--mono);font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--accent);font-weight:500;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.kicker .bar{width:28px;height:2px;background:var(--accent);}
+.masthead h1{font-family:var(--serif);font-size:46px;font-weight:500;line-height:1.05;letter-spacing:-1px;color:var(--ink);margin-bottom:14px;}
+.masthead h1 em{font-style:italic;font-weight:400;color:var(--accent);}
+.dateline{font-family:var(--mono);font-size:12px;color:var(--muted);display:flex;gap:16px;flex-wrap:wrap;align-items:center;}
+.dateline .sep{color:var(--faint);}
+.ae-stamp{background:var(--accentSoft);color:var(--accent);font-weight:600;padding:2px 10px;border-radius:3px;font-family:var(--sans);font-size:12px;letter-spacing:0.2px;}
 
-/* ===== Nav tabs ===== */
-.nav-tabs{padding:0 28px;border-bottom:1px solid var(--border);display:flex;gap:2px;background:var(--surface);overflow-x:auto;}
-.nav-tabs button{border:none;background:transparent;padding:14px 18px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted);font-family:inherit;border-bottom:3px solid transparent;transition:all 0.18s;white-space:nowrap;}
-.nav-tabs button.active{color:var(--accent);border-bottom-color:var(--accent);}
-.nav-tabs button:hover:not(.active){color:var(--text);}
-.count-badge{display:inline-block;background:var(--bg);color:var(--muted);font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px;margin-left:6px;border:1px solid var(--border2);}
-.nav-tabs button.active .count-badge{background:var(--accentSoft);color:var(--accent);border-color:transparent;}
+/* ===== Article body ===== */
+.article{max-width:820px;margin:0 auto;padding:0 28px 80px;}
 
-/* ===== Main ===== */
-.main{padding:24px 28px 60px;max-width:1500px;margin:0 auto;}
-.view{display:none;}
-.view.active{display:block;animation:fadeIn 0.3s ease;}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+/* Lede */
+.lede{font-family:var(--serif);font-size:21px;line-height:1.5;color:var(--ink);font-weight:400;padding:32px 0 28px;border-bottom:1px solid var(--line);margin-bottom:32px;}
+.lede .num{font-weight:600;color:var(--accent);}
 
-/* ===== KPI cards ===== */
-.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:26px;}
-.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:transform 0.15s,box-shadow 0.15s;}
-.kpi:hover{transform:translateY(-2px);box-shadow:var(--shadowLg);}
-.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);opacity:0.7;}
-.kpi.k-yellow::before{background:var(--at-yellow);}.kpi.k-pink::before{background:var(--at-pink);}.kpi.k-purple::before{background:var(--at-purple);}.kpi.k-blue::before{background:var(--at-blue);}.kpi.k-green::before{background:var(--at-green);}.kpi.k-teal::before{background:var(--at-teal);}.kpi.k-orange::before{background:var(--at-orange);}
-.kpi .label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;}
-.kpi .value{font-family:'Space Grotesk';font-size:34px;font-weight:700;letter-spacing:-1.5px;margin-top:8px;line-height:1;}
-.kpi .delta{font-size:11px;margin-top:6px;font-weight:600;display:flex;align-items:center;gap:3px;}
-.kpi .delta.up{color:var(--at-green);}.kpi .delta.down{color:var(--at-pink);}.kpi .delta.flat{color:var(--faint);}
-.kpi .sub-label{font-size:11px;color:var(--faint);margin-top:3px;}
+/* Section */
+.section{margin-bottom:48px;}
+.section-head{display:flex;align-items:baseline;gap:14px;margin-bottom:6px;}
+.section-num{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--accent);letter-spacing:1px;}
+.section-title{font-family:var(--serif);font-size:28px;font-weight:500;color:var(--ink);letter-spacing:-0.5px;line-height:1.15;}
+.section-tag{font-family:var(--mono);font-size:10px;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);padding:2px 8px;border:1px solid var(--line2);border-radius:3px;margin-left:auto;white-space:nowrap;}
+.section-dek{font-size:14px;color:var(--muted);margin-bottom:22px;max-width:62ch;font-style:italic;font-family:var(--serif);}
 
-/* ===== Section ===== */
-.section{margin-bottom:30px;}
-.section-title{font-family:'Space Grotesk';font-size:16px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px;letter-spacing:-0.3px;}
-.section-title .pill{font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;background:var(--accentSoft);color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;}
+/* Pull stat row */
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:24px 0;}
+.stat{padding:18px 16px;border-right:1px solid var(--line);}
+.stat:last-child{border-right:none;}
+.stat .sv{font-family:var(--serif);font-size:32px;font-weight:600;color:var(--ink);line-height:1;letter-spacing:-1px;}
+.stat .sv.ws{color:var(--at-purple);}.stat .sv.ex{color:var(--at-green);}.stat .sv.sr{color:var(--at-pink);}
+.stat .sl{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-top:8px;font-weight:500;}
 
-/* ===== Tables ===== */
-.tbl{width:100%;border-collapse:separate;border-spacing:0;font-size:12px;background:var(--surface);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
-.tbl th{text-align:left;padding:11px 14px;background:var(--bg);border-bottom:2px solid var(--border2);font-weight:700;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:0.4px;white-space:nowrap;cursor:pointer;user-select:none;}
-.tbl th:hover{color:var(--accent);}
-.tbl td{padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:middle;}
-.tbl tr:last-child td{border-bottom:none;}
-.tbl tr:hover td{background:var(--bg);}
-.tbl tr.clickable{cursor:pointer;}
-.tbl .num{text-align:right;font-variant-numeric:tabular-nums;font-weight:500;}
+/* Commentary prose */
+.commentary{font-family:var(--serif);font-size:17px;line-height:1.65;color:var(--ink);margin:8px 0 28px;max-width:64ch;}
+.commentary p{margin-bottom:14px;}
+.commentary .accent{color:var(--accent);font-weight:500;}
+.commentary b{font-weight:600;}
 
-/* ===== Badges (Airtable block colors) ===== */
-.badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;white-space:nowrap;}
-.badge.high{background:#FEE2E5;color:#C01048;}.badge.medium{background:#FFF4D6;color:#B95C00;}.badge.low{background:#F0F1F3;color:#6B7280;}
-.badge.ws{background:#F3ECFF;color:#7C3AED;}.badge.existing{background:#D4F5DD;color:#0A7B33;}
-.badge.cluster{background:#E8F2FE;color:#1859C1;}.badge.atl{background:#FEE2E5;color:#C01048;}
-.badge.enrich{background:#FFF4D6;color:#B95C00;border:1px dashed #E8B84A;}
-.badge.build{background:#D4F5DD;color:#0A7B33;}.badge.collab{background:#E8F2FE;color:#1859C1;}.badge.active{background:#FFF4D6;color:#B95C00;}
+/* Person card */
+.people{display:grid;gap:14px;}
+.person{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:18px 20px;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:start;transition:box-shadow 0.15s;}
+.person:hover{box-shadow:0 4px 16px rgba(26,24,20,0.06);}
+.person .av{width:42px;height:42px;border-radius:50%;background:var(--accentSoft);color:var(--accent);display:flex;align-items:center;justify-content:center;font-family:var(--serif);font-size:18px;font-weight:600;}
+.person .pb h4{font-family:var(--sans);font-size:15px;font-weight:700;color:var(--ink);margin-bottom:2px;}
+.person .pb .title{font-size:13px;color:var(--body);margin-bottom:6px;}
+.person .pb .meta{font-size:12px;color:var(--muted);display:flex;gap:10px;flex-wrap:wrap;align-items:center;}
+.person .pb .acct{font-weight:600;color:var(--ink);}
+.badge{display:inline-flex;align-items:center;font-size:10px;font-weight:600;padding:2px 7px;border-radius:3px;letter-spacing:0.3px;text-transform:uppercase;}
+.badge.ws{background:#F3ECFF;color:#7C3AED;}.badge.ex{background:#E6F7E9;color:#0A7B33;}
+.badge.atl{background:#FEE2E5;color:#C01048;}.badge.enrich{background:#FFF4D6;color:#B95C00;border:1px dashed #E8B84A;}
+.badge.active{background:#E6F7E9;color:#0A7B33;}
+.person .score{text-align:right;}
+.person .score .sn{font-family:var(--serif);font-size:22px;font-weight:600;color:var(--ink);line-height:1;}
+.person .score .sl{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-top:4px;}
+.person .why{grid-column:1/-1;font-size:12px;color:var(--muted);padding-top:10px;margin-top:10px;border-top:1px dashed var(--line);font-family:var(--sans);}
+.person .why b{color:var(--ink);font-weight:600;}
 
-/* ===== Sparkline ===== */
-.spark{display:inline-block;vertical-align:middle;}
-.trend-up{color:var(--at-green);font-weight:700;}.trend-down{color:var(--at-pink);font-weight:700;}.trend-flat{color:var(--faint);}
+/* Account list */
+.acct-list{list-style:none;}
+.acct-item{display:grid;grid-template-columns:auto 1fr auto auto;gap:14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);}
+.acct-item:last-child{border-bottom:none;}
+.acct-item .rank{font-family:var(--serif);font-size:18px;color:var(--faint);width:24px;text-align:center;font-weight:500;}
+.acct-item .nm{font-weight:600;color:var(--ink);font-size:14px;}
+.acct-item .nm .ind{font-weight:400;color:var(--muted);font-size:12px;margin-left:6px;}
+.acct-item .cnt{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--accent);min-width:30px;text-align:right;}
+.acct-item .cnt .cl{font-size:10px;color:var(--muted);font-family:var(--sans);text-transform:uppercase;letter-spacing:0.5px;display:block;font-weight:500;}
 
-/* ===== Score bar ===== */
-.score-bar{width:64px;height:7px;background:var(--bg);border-radius:4px;overflow:hidden;display:inline-block;vertical-align:middle;border:1px solid var(--border2);}
-.score-bar .fill{height:100%;border-radius:3px;}
+/* Trend mini-chart */
+.trend-block{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin:18px 0;}
+.trend-bars{display:flex;align-items:flex-end;gap:14px;height:80px;margin-top:14px;}
+.tbar{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;}
+.tbar .b{width:100%;background:var(--accent);border-radius:3px 3px 0 0;min-height:2px;opacity:0.85;transition:opacity 0.2s;}
+.tbar:hover .b{opacity:1;}
+.tbar .lbl{font-family:var(--mono);font-size:10px;color:var(--muted);}
+.tbar .vl{font-family:var(--serif);font-size:13px;font-weight:600;color:var(--ink);}
 
-/* ===== Modal ===== */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(29,31,37,0.5);backdrop-filter:blur(4px);z-index:200;padding:40px 20px;overflow-y:auto;}
-.modal-overlay.show{display:flex;align-items:flex-start;justify-content:center;}
-.modal{background:var(--surface);border-radius:18px;max-width:920px;width:100%;margin:auto;box-shadow:0 24px 80px rgba(0,0,0,0.25);overflow:hidden;}
-.modal-head{padding:20px 26px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:start;background:var(--bg);}
-.modal-head h2{font-family:'Space Grotesk';font-size:20px;font-weight:700;letter-spacing:-0.3px;}
-.modal-head .close{background:var(--surface);border:1px solid var(--border2);font-size:18px;cursor:pointer;color:var(--muted);width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;}
-.modal-head .close:hover{color:var(--text);border-color:var(--muted);}
-.modal-body{padding:22px 26px;}
-.modal-body .info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;}
-.modal-body .info-item{background:var(--bg);border-radius:10px;padding:12px 14px;}
-.modal-body .info-item .il{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;font-weight:700;}
-.modal-body .info-item .iv{font-family:'Space Grotesk';font-size:16px;font-weight:700;margin-top:3px;}
+/* Footnote / confidence */
+.footnote{font-family:var(--sans);font-size:12px;color:var(--faint);border-top:1px solid var(--line);padding-top:18px;margin-top:48px;line-height:1.6;max-width:64ch;}
+.footnote b{color:var(--muted);}
+.divider-rule{text-align:center;margin:40px 0;color:var(--faint);letter-spacing:8px;font-size:14px;}
 
-/* ===== Talking points ===== */
-.tp-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow);border-left:4px solid var(--accent);}
-.tp-card h3{font-family:'Space Grotesk';font-size:16px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
-.tp-card ul{list-style:none;}
-.tp-card li{padding:11px 0;border-bottom:1px solid var(--border);font-size:14px;line-height:1.55;padding-left:22px;position:relative;color:var(--text);}
-.tp-card li:last-child{border-bottom:none;}
-.tp-card li:before{content:'';position:absolute;left:0;top:18px;width:8px;height:8px;border-radius:50%;background:var(--accent);}
-
-/* ===== Trending ===== */
-.trending-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;box-shadow:var(--shadow);border-left:4px solid var(--at-green);transition:transform 0.15s,box-shadow 0.15s;cursor:pointer;}
-.trending-card:hover{transform:translateY(-2px);box-shadow:var(--shadowLg);}
-.trending-card .tn{font-weight:700;font-size:14px;font-family:'Space Grotesk';}
-.trending-card .td{font-size:11px;color:var(--muted);margin-top:3px;}
-.trending-card .trend-val{font-family:'Space Grotesk';font-size:22px;font-weight:700;color:var(--at-green);}
-
-/* ===== Weights ===== */
-.weights{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px 18px;font-size:11px;color:var(--muted);margin-bottom:18px;line-height:1.6;}
-.weights b{color:var(--text);}
-.weights .w-tag{display:inline-block;margin-right:16px;}
-.weights .w-dot{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:3px;vertical-align:middle;}
-
-.empty{text-align:center;padding:48px;color:var(--faint);font-size:13px;}
-@media(max-width:1100px){.kpi-row{grid-template-columns:repeat(2,1fr);}.modal-body .info-grid{grid-template-columns:1fr 1fr;}#trendingBody{grid-template-columns:1fr !important;}}
+@media(max-width:640px){
+  .masthead h1{font-size:32px;} .stat-row{grid-template-columns:1fr 1fr;}
+  .stat:nth-child(2){border-right:none;} .person{grid-template-columns:auto 1fr;} .person .score{grid-column:2;text-align:left;}
+  .section-title{font-size:22px;} .lede{font-size:18px;} .commentary{font-size:15px;}
+}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <div class="header-left">
+<div class="topbar">
+  <div class="topbar-inner">
     <div class="brand-blocks"><span style="background:#FCB400"></span><span style="background:#F82B60"></span><span style="background:#8B46FF"></span><span style="background:#2D7FF9"></span><span style="background:#18BFFF"></span><span style="background:#20C933"></span></div>
-    <div>
-      <div class="logo-text">AIRTABLE &middot; BDR CO-PILOT</div>
-      <h1>Weekly PSU Review</h1>
-      <div class="sub"><span class="ae-pill"><span class="dot"></span>Ryan Morris</span> ANZ Strategic &middot; <span id="refreshNote"></span></div>
+    <div class="meta">AIRTABLE · BDR CO-PILOT · PSU INTELLIGENCE</div>
+  </div>
+</div>
+
+<header class="masthead">
+  <div class="kicker"><span class="bar"></span>THE MONDAY PSU BRIEFING<span class="bar"></span></div>
+  <h1>Who signed up this week,<br>and who&rsquo;s worth <em>a call</em>.</h1>
+  <div class="dateline">
+    <span class="ae-stamp">Ryan Morris</span>
+    <span class="sep">·</span><span>Week of Monday 29 June 2026</span>
+    <span class="sep">·</span><span>ANZ Strategic</span>
+    <span class="sep">·</span><span id="genTime">Thu 02 Jul 2026, 15:19 AEST</span>
+  </div>
+</header>
+
+<article class="article">
+
+  <div class="lede" id="lede"></div>
+
+  <div class="stat-row" id="statRow"></div>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <h2 class="section-title">The 28-day view</h2>
+      <span class="section-tag">context</span>
     </div>
-  </div>
-  <div class="meta">
-    <button class="refresh-btn" onclick="handleRefresh()">&#x21bb; Refresh</button>
-  </div>
-</div>
+    <p class="section-dek">Where the week sits in the bigger picture &mdash; momentum, not just this Monday&rsquo;s snapshot.</p>
+    <div class="commentary" id="commentary28"></div>
+    <div class="trend-block" id="trendBlock"></div>
+  </section>
 
-<div class="controls">
-  <div class="ctrl-group">
-    <span class="ctrl-label">Account</span>
-    <div class="seg" id="typeSeg">
-      <button class="active" data-type="All">All</button>
-      <button data-type="Whitespace">Whitespace</button>
-      <button data-type="Existing Customer">Existing</button>
+  <div class="divider-rule">&#9670; &#9670; &#9670;</div>
+
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Senior sign-ups this week</h2>
+      <span class="section-tag">last 7 days</span>
     </div>
-  </div>
-</div>
+    <p class="section-dek">Director-level and above &mdash; worth flagging even before the rest of the scoring kicks in.</p>
+    <div class="people" id="seniorList"></div>
+  </section>
 
-<div class="nav-tabs">
-  <button class="active" data-view="summary">Summary</button>
-  <button data-view="accounts">Accounts <span class="count-badge" id="navAccounts">0</span></button>
-  <button data-view="trending">Trending</button>
-  <button data-view="priority">Priority PSUs <span class="count-badge" id="navPriority">0</span></button>
-  <button data-view="senior">Senior Spotlight <span class="count-badge" id="navSenior">0</span></button>
-  <button data-view="talking">Talking Points</button>
-</div>
+  <div class="divider-rule">&#9670; &#9670; &#9670;</div>
 
-<div class="main">
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">03</span>
+      <h2 class="section-title">High-priority sign-ups</h2>
+      <span class="section-tag">last 7 days</span>
+    </div>
+    <p class="section-dek">Scored on engagement, seniority, and multi-signup clustering. Each one carries its reasons so you can justify it out loud.</p>
+    <div class="people" id="priorityList"></div>
+  </section>
 
-<div class="view active" id="view-summary">
-  <div class="kpi-row" id="kpiRow"></div>
-  <div class="section">
-    <div class="section-title">Week-over-Week Trend <span class="pill">trailing 4 weeks</span></div>
-    <table class="tbl"><thead><tr><th>Account Type</th><th class="num">This Week</th><th class="num">Last Week</th><th class="num">Week -2</th><th class="num">Week -3</th><th class="num">28d Total</th><th>Trend</th></tr></thead><tbody id="trendBody"></tbody></table>
-  </div>
-  <div class="section">
-    <div class="section-title">Priority Tier Distribution <span class="pill">28d</span></div>
-    <div class="weights"><span class="w-tag">Scoring: <span class="w-dot" style="background:#2D7FF9"></span><b>Engagement 0.35</b> &middot; <span class="w-dot" style="background:#8B46FF"></span><b>Seniority 0.30</b> &middot; <span class="w-dot" style="background:#FCB400"></span><b>Clustering 0.35</b></span><span class="w-tag">Tier: <b>&ge;0.60 High</b> &middot; <b>&ge;0.30 Medium</b> &middot; <b>&lt;0.30 Low</b></span></div>
-    <table class="tbl"><thead><tr><th>Tier</th><th class="num">28d Total</th><th class="num">This Week</th></tr></thead><tbody id="tierBody"></tbody></table>
-  </div>
-</div>
+  <div class="divider-rule">&#9670; &#9670; &#9670;</div>
 
-<div class="view" id="view-accounts">
-  <div class="section">
-    <div class="section-title">Account-Level Rollup <span class="pill">one row per account &middot; 28d</span></div>
-    <table class="tbl" id="accountsTable"><thead><tr><th data-sort="account_name">Account</th><th data-sort="account_type">Type</th><th data-sort="stage">Stage</th><th data-sort="industry">Industry</th><th class="num" data-sort="psus_this_week">This Wk</th><th class="num" data-sort="psus_28d">28d</th><th>Trend</th><th class="num" data-sort="accel_vs_baseline">Accel</th><th>Cluster</th></tr></thead><tbody id="accountsBody"></tbody></table>
-  </div>
-</div>
+  <section class="section">
+    <div class="section-head">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Accounts in motion this week</h2>
+      <span class="section-tag">last 7 days</span>
+    </div>
+    <p class="section-dek">Every account that saw a sign-up since last Monday, ranked by volume.</p>
+    <ol class="acct-list" id="acctList"></ol>
+  </section>
 
-<div class="view" id="view-trending">
-  <div class="section">
-    <div class="section-title">Trending Accounts <span class="pill">accelerating vs own baseline</span></div>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Accounts where this week's sign-up volume exceeds their trailing 3-week average &mdash; buying-intent acceleration, not just raw volume.</p>
-    <div id="trendingBody" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;"></div>
-  </div>
-</div>
+  <div class="footnote" id="footnote"></div>
 
-<div class="view" id="view-priority">
-  <div class="section">
-    <div class="section-title">High-Priority PSUs <span class="pill">High tier &middot; sortable</span></div>
-    <div class="weights">Each PSU scored on <b>engagement</b> (in-product activity first 3-7d), <b>seniority</b> (title/ATL persona), and <b>multi-signup clustering</b>. Reason column explains the tier so you can justify it live. <span class="badge enrich">enrich</span> = seniority pending LinkedIn lookup (lower confidence).</div>
-    <table class="tbl" id="priorityTable"><thead><tr><th data-sort="full_name">Name</th><th data-sort="job_title">Title</th><th data-sort="account_name">Account</th><th data-sort="account_type">Type</th><th data-sort="signup_date">Signed Up</th><th>Engagement</th><th class="num" data-sort="total_score">Score</th><th>Why High Priority</th></tr></thead><tbody id="priorityBody"></tbody></table>
-  </div>
-</div>
-
-<div class="view" id="view-senior">
-  <div class="section">
-    <div class="section-title">Senior PSU Spotlight <span class="pill">Director+ &amp; ATL &middot; regardless of score</span></div>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Worth flagging even without other signals &mdash; senior stakeholders at accounts in your book.</p>
-    <table class="tbl" id="seniorTable"><thead><tr><th data-sort="full_name">Name</th><th data-sort="job_title">Title</th><th>Seniority</th><th data-sort="account_name">Account</th><th data-sort="account_type">Type</th><th data-sort="signup_date">Signed Up</th><th>Active L7d</th></tr></thead><tbody id="seniorBody"></tbody></table>
-  </div>
-</div>
-
-<div class="view" id="view-talking">
-  <div class="section">
-    <div class="section-title">Talking Points <span class="pill">for Ryan &middot; say this out loud</span></div>
-    <div class="tp-card" id="talkingBody"></div>
-  </div>
-</div>
-
-</div><!-- /main -->
-
-<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
-  <div class="modal">
-    <div class="modal-head"><div><h2 id="modalTitle"></h2><div class="sub" id="modalSub" style="font-size:12px;color:var(--muted);margin-top:4px;"></div></div><button class="close" onclick="closeModal()">&times;</button></div>
-    <div class="modal-body" id="modalBody"></div>
-  </div>
-</div>
+</article>
 
 <script>
-const DATA = {"ae_name": "Ryan Morris", "high_psus": [{"full_name": "Vpm Basheer", "email": "vpm.basheer@ghd.com", "job_title": "Manager, Structures, Project Director", "seniority": "Manager", "is_atl": true, "seniority_source": "direct_email", "account_name": "GHD Pty Ltd", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "signup_date": "2026-06-29", "psu_count_28d": 51, "psu_count_7d": 15, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": true, "engagement_score": 0.6, "seniority_score": 1.0, "clustering_score": 1.0, "total_score": 0.86, "reasons": "Active in last 7d; Above-the-Line persona (senior); 51 signups from this account in 28d (cluster)"}, {"full_name": "Mark Jasper", "email": "mark.jasper@ghd.com", "job_title": "Technical Director, Emergency Management", "seniority": "Manager", "is_atl": true, "seniority_source": "direct_email", "account_name": "GHD Pty Ltd", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "signup_date": "2026-06-29", "psu_count_28d": 51, "psu_count_7d": 15, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": true, "engagement_score": 0.6, "seniority_score": 1.0, "clustering_score": 1.0, "total_score": 0.86, "reasons": "Active in last 7d; Above-the-Line persona (senior); 51 signups from this account in 28d (cluster)"}, {"full_name": "Ant Le Roy", "email": "antleroy@deloitte.com.au", "job_title": "Director", "seniority": "Director", "is_atl": true, "seniority_source": "direct_email", "account_name": "Deloitte Touche Tohmatsu Australia", "ae_name": "Ryan Morris", "account_type": "Whitespace", "signup_date": "2026-06-29", "psu_count_28d": 12, "psu_count_7d": 3, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": true, "engagement_score": 0.6, "seniority_score": 1.0, "clustering_score": 1.0, "total_score": 0.86, "reasons": "Active in last 7d; Above-the-Line persona (senior); 12 signups from this account in 28d (cluster)"}, {"full_name": "Olesia Aulova", "email": "olesia@zuru.com", "job_title": "Digital Manager", "seniority": "Manager", "is_atl": false, "seniority_source": "direct_email", "account_name": "ZURU", "ae_name": "Ryan Morris", "account_type": "Whitespace", "signup_date": "2026-06-15", "psu_count_28d": 63, "psu_count_7d": 10, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": false, "engagement_score": 0.4, "seniority_score": 0.4, "clustering_score": 1.0, "total_score": 0.61, "reasons": "Manager-level; 63 signups from this account in 28d (cluster)"}, {"full_name": "Nando Rodrigues", "email": "luizsilva2@99app.com", "job_title": "Team Leader Safety", "seniority": "Manager", "is_atl": false, "seniority_source": "direct_email", "account_name": "99Taxis", "ae_name": "Ryan Morris", "account_type": "Whitespace", "signup_date": "2026-06-26", "psu_count_28d": 40, "psu_count_7d": 10, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": true, "engagement_score": 0.6, "seniority_score": 0.4, "clustering_score": 1.0, "total_score": 0.68, "reasons": "Active in last 7d; Manager-level; 40 signups from this account in 28d (cluster)"}, {"full_name": "Catalina Brusco", "email": "catalinabrusco@didiglobal.com", "job_title": "analyist", "seniority": "Senior Manager", "is_atl": false, "seniority_source": "direct_email", "account_name": "DIDI Mobilility Mexico SA DE CV", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "signup_date": "2026-06-08", "psu_count_28d": 24, "psu_count_7d": 5, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": true, "engagement_score": 0.6, "seniority_score": 0.4, "clustering_score": 1.0, "total_score": 0.68, "reasons": "Active in last 7d; 24 signups from this account in 28d (cluster)"}, {"full_name": "Hainoame Fulivai", "email": "hainoame.fulivai@raywhite.com", "job_title": "Sales & Account Management", "seniority": "", "is_atl": false, "seniority_source": "direct_email", "account_name": "Ray White", "ae_name": "Ryan Morris", "account_type": "Whitespace", "signup_date": "2026-06-15", "psu_count_28d": 16, "psu_count_7d": 5, "is_multi_signup": 1, "reached_build_7d": 1, "reached_collab_7d": 0, "is_active_l7d": true, "engagement_score": 1.0, "seniority_score": 0.0, "clustering_score": 1.0, "total_score": 0.7, "reasons": "Reached build stage within 7d; 16 signups from this account in 28d (cluster)"}, {"full_name": "Jonny McCormick", "email": "jonmccormick@deloitte.com.au", "job_title": "Partner", "seniority": "Director", "is_atl": false, "seniority_source": "direct_email", "account_name": "Deloitte Touche Tohmatsu Australia", "ae_name": "Ryan Morris", "account_type": "Whitespace", "signup_date": "2026-06-26", "psu_count_28d": 12, "psu_count_7d": 3, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": true, "engagement_score": 0.6, "seniority_score": 0.7, "clustering_score": 1.0, "total_score": 0.77, "reasons": "Active in last 7d; Senior title: Director; 12 signups from this account in 28d (cluster)"}, {"full_name": "Rollie Silva", "email": "r.silva@skyro.ph", "job_title": "Operations Manager", "seniority": "Manager", "is_atl": false, "seniority_source": "direct_email", "account_name": "Skyro", "ae_name": "Ryan Morris", "account_type": "Whitespace", "signup_date": "2026-06-26", "psu_count_28d": 17, "psu_count_7d": 1, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": true, "engagement_score": 0.6, "seniority_score": 0.4, "clustering_score": 1.0, "total_score": 0.68, "reasons": "Active in last 7d; Manager-level; 17 signups from this account in 28d (cluster)"}, {"full_name": "stefanobertolotto@gic.com.sg", "email": "stefanobertolotto@gic.com.sg", "job_title": "VP, Private Credit Group, Private Equity Division", "seniority": "VP", "is_atl": true, "seniority_source": "direct_email", "account_name": "GIC Pte. Ltd.", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "signup_date": "2026-06-29", "psu_count_28d": 5, "psu_count_7d": 1, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": false, "engagement_score": 0.0, "seniority_score": 1.0, "clustering_score": 1.0, "total_score": 0.65, "reasons": "Above-the-Line persona (senior); 5 signups from this account in 28d (cluster)"}, {"full_name": "jason", "email": "jason@fortune.com", "job_title": "Associate Art Director", "seniority": "Director", "is_atl": true, "seniority_source": "direct_email", "account_name": "Fortune Magazine", "ae_name": "Ryan Morris", "account_type": "Whitespace", "signup_date": "2026-06-16", "psu_count_28d": 5, "psu_count_7d": 0, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": true, "engagement_score": 0.3, "seniority_score": 1.0, "clustering_score": 1.0, "total_score": 0.75, "reasons": "Active in last 7d; Above-the-Line persona (senior); 5 signups from this account in 28d (cluster)"}, {"full_name": "Renae Slatyer", "email": "renae.slatyer@belleproperty.com", "job_title": "", "seniority": "", "is_atl": false, "seniority_source": "none", "account_name": "Belle Property", "ae_name": "Ryan Morris", "account_type": "Whitespace", "signup_date": "2026-06-19", "psu_count_28d": 5, "psu_count_7d": 1, "is_multi_signup": 1, "reached_build_7d": 1, "reached_collab_7d": 1, "is_active_l7d": true, "engagement_score": 1.0, "seniority_score": 0.0, "clustering_score": 1.0, "total_score": 0.7, "reasons": "Reached build stage within 7d; 5 signups from this account in 28d (cluster)"}, {"full_name": "Daniel Stuk", "email": "dstuk@tennis.com.au", "job_title": "Director of Integrity, Compliance", "seniority": "Director", "is_atl": true, "seniority_source": "direct_email", "account_name": "Tennis Australia", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "signup_date": "2026-06-19", "psu_count_28d": 4, "psu_count_7d": 0, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": false, "engagement_score": 0.4, "seniority_score": 1.0, "clustering_score": 0.8, "total_score": 0.72, "reasons": "Above-the-Line persona (senior); 4 signups from this account in 28d"}, {"full_name": "Gabrielle George", "email": "gabrielle.george@xero.com", "job_title": "Product Marketing Operations Manager", "seniority": "Manager", "is_atl": false, "seniority_source": "direct_email", "account_name": "Xero", "ae_name": "Ryan Morris", "account_type": "Whitespace", "signup_date": "2026-06-18", "psu_count_28d": 3, "psu_count_7d": 1, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": true, "engagement_score": 0.6, "seniority_score": 0.4, "clustering_score": 0.8, "total_score": 0.61, "reasons": "Active in last 7d; Manager-level; 3 signups from this account in 28d"}, {"full_name": "Brianna Howe", "email": "brianna.howe@ljhooker.com.au", "job_title": "Business Systems Operator", "seniority": "", "is_atl": false, "seniority_source": "direct_email", "account_name": "ljhooker.com.au", "ae_name": "Ryan Morris", "account_type": "Whitespace", "signup_date": "2026-06-10", "psu_count_28d": 3, "psu_count_7d": 0, "is_multi_signup": 1, "reached_build_7d": 1, "reached_collab_7d": 0, "is_active_l7d": true, "engagement_score": 1.0, "seniority_score": 0.0, "clustering_score": 0.8, "total_score": 0.63, "reasons": "Reached build stage within 7d; 3 signups from this account in 28d"}, {"full_name": "Samantha Harris-Wetherbee", "email": "harris.s@unimelb.edu.au", "job_title": "Program Manager, Graduate Research Employability", "seniority": "Manager", "is_atl": false, "seniority_source": "direct_email", "account_name": "unimelb.edu.au", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "signup_date": "2026-06-10", "psu_count_28d": 6, "psu_count_7d": 1, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": false, "engagement_score": 0.4, "seniority_score": 0.4, "clustering_score": 1.0, "total_score": 0.61, "reasons": "Manager-level; 6 signups from this account in 28d (cluster)"}, {"full_name": "Phuc Growth", "email": "phucnh5@vng.com.vn", "job_title": "Senior Purchasing Executive", "seniority": "Manager", "is_atl": false, "seniority_source": "direct_email", "account_name": "VNG Corporation", "ae_name": "Ryan Morris", "account_type": "Whitespace", "signup_date": "2026-06-04", "psu_count_28d": 34, "psu_count_7d": 4, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": false, "engagement_score": 0.4, "seniority_score": 0.4, "clustering_score": 1.0, "total_score": 0.61, "reasons": "Manager-level; 34 signups from this account in 28d (cluster)"}, {"full_name": "Caio Felipe Martins", "email": "caiomartins@99app.com", "job_title": "Senior Data Analyst", "seniority": "Manager", "is_atl": false, "seniority_source": "direct_email", "account_name": "99Taxis", "ae_name": "Ryan Morris", "account_type": "Whitespace", "signup_date": "2026-06-11", "psu_count_28d": 40, "psu_count_7d": 10, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": false, "engagement_score": 0.4, "seniority_score": 0.4, "clustering_score": 1.0, "total_score": 0.61, "reasons": "Manager-level; 40 signups from this account in 28d (cluster)"}, {"full_name": "Karen Gale", "email": "karen.gale@ghd.com", "job_title": "Senior Environmental Project Manager", "seniority": "Manager", "is_atl": false, "seniority_source": "direct_email", "account_name": "GHD Pty Ltd", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "signup_date": "2026-06-30", "psu_count_28d": 51, "psu_count_7d": 15, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": true, "engagement_score": 0.6, "seniority_score": 0.4, "clustering_score": 1.0, "total_score": 0.68, "reasons": "Active in last 7d; Manager-level; 51 signups from this account in 28d (cluster)"}, {"full_name": "Sean Mortell", "email": "sean.mortell@ghd.com", "job_title": "Senior Structural Technician", "seniority": "Manager", "is_atl": false, "seniority_source": "direct_email", "account_name": "GHD Pty Ltd", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "signup_date": "2026-06-25", "psu_count_28d": 51, "psu_count_7d": 15, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": true, "engagement_score": 0.6, "seniority_score": 0.4, "clustering_score": 1.0, "total_score": 0.68, "reasons": "Active in last 7d; Manager-level; 51 signups from this account in 28d (cluster)"}, {"full_name": "Daniel Currie", "email": "dan.currie@ghd.com", "job_title": "Senior Structural Engineer", "seniority": "Manager", "is_atl": false, "seniority_source": "direct_email", "account_name": "GHD Pty Ltd", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "signup_date": "2026-06-25", "psu_count_28d": 51, "psu_count_7d": 15, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": true, "engagement_score": 0.6, "seniority_score": 0.4, "clustering_score": 1.0, "total_score": 0.68, "reasons": "Active in last 7d; Manager-level; 51 signups from this account in 28d (cluster)"}, {"full_name": "Michael Wiestling", "email": "michael.wiestling@ghd.com", "job_title": "Senior Designer", "seniority": "Manager", "is_atl": false, "seniority_source": "direct_email", "account_name": "GHD Pty Ltd", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "signup_date": "2026-06-19", "psu_count_28d": 51, "psu_count_7d": 15, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": false, "engagement_score": 0.4, "seniority_score": 0.4, "clustering_score": 1.0, "total_score": 0.61, "reasons": "Manager-level; 51 signups from this account in 28d (cluster)"}, {"full_name": "Harry Sturdevant", "email": "jeff.sturdevant@ghd.com", "job_title": "Principalpractice Group Leader", "seniority": "Manager", "is_atl": false, "seniority_source": "direct_email", "account_name": "GHD Pty Ltd", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "signup_date": "2026-06-12", "psu_count_28d": 51, "psu_count_7d": 15, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": true, "engagement_score": 0.6, "seniority_score": 0.4, "clustering_score": 1.0, "total_score": 0.68, "reasons": "Active in last 7d; Manager-level; 51 signups from this account in 28d (cluster)"}, {"full_name": "Trevor Germsheid", "email": "trevor.germsheid@ghd.com", "job_title": "Senior Technologist", "seniority": "Manager", "is_atl": false, "seniority_source": "direct_email", "account_name": "GHD Pty Ltd", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "signup_date": "2026-06-11", "psu_count_28d": 51, "psu_count_7d": 15, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": false, "engagement_score": 0.4, "seniority_score": 0.4, "clustering_score": 1.0, "total_score": 0.61, "reasons": "Manager-level; 51 signups from this account in 28d (cluster)"}, {"full_name": "Jeffrey Morgan", "email": "jeffrey.morgan@ghd.com", "job_title": "Senior Hydrogeologist", "seniority": "Manager", "is_atl": false, "seniority_source": "direct_email", "account_name": "GHD Pty Ltd", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "signup_date": "2026-06-10", "psu_count_28d": 51, "psu_count_7d": 15, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": false, "engagement_score": 0.4, "seniority_score": 0.4, "clustering_score": 1.0, "total_score": 0.61, "reasons": "Manager-level; 51 signups from this account in 28d (cluster)"}, {"full_name": "aflouch@deloitte.com.au", "email": "aflouch@deloitte.com.au", "job_title": "Partner", "seniority": "Director", "is_atl": false, "seniority_source": "direct_email", "account_name": "Deloitte Touche Tohmatsu Australia", "ae_name": "Ryan Morris", "account_type": "Whitespace", "signup_date": "2026-06-08", "psu_count_28d": 12, "psu_count_7d": 3, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": false, "engagement_score": 0.4, "seniority_score": 0.7, "clustering_score": 1.0, "total_score": 0.7, "reasons": "Senior title: Director; 12 signups from this account in 28d (cluster)"}, {"full_name": "sstoke@deloitte.com.au", "email": "sstoke@deloitte.com.au", "job_title": "Senior Consultant, Human Capital", "seniority": "Manager", "is_atl": false, "seniority_source": "direct_email", "account_name": "Deloitte Touche Tohmatsu Australia", "ae_name": "Ryan Morris", "account_type": "Whitespace", "signup_date": "2026-06-11", "psu_count_28d": 12, "psu_count_7d": 3, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": true, "engagement_score": 0.6, "seniority_score": 0.4, "clustering_score": 1.0, "total_score": 0.68, "reasons": "Active in last 7d; Manager-level; 12 signups from this account in 28d (cluster)"}, {"full_name": "ahitch@deloitte.com.au", "email": "ahitch@deloitte.com.au", "job_title": "Talent, Performance Manager", "seniority": "Manager", "is_atl": false, "seniority_source": "direct_email", "account_name": "Deloitte Touche Tohmatsu Australia", "ae_name": "Ryan Morris", "account_type": "Whitespace", "signup_date": "2026-06-10", "psu_count_28d": 12, "psu_count_7d": 3, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": true, "engagement_score": 0.6, "seniority_score": 0.4, "clustering_score": 1.0, "total_score": 0.68, "reasons": "Active in last 7d; Manager-level; 12 signups from this account in 28d (cluster)"}], "senior_spotlight": [{"full_name": "Vivek S", "email": "s.vivek@razorpay.com", "job_title": "Head Enterprise Solutions, Customer Experience", "seniority": "Manager", "is_atl": "Yes (ATL)", "account_name": "Razorpay Software Private Limited", "ae_name": "Ryan Morris", "account_type": "Whitespace", "signup_date": "2026-06-29", "is_active_l7d": false}, {"full_name": "GIC VP", "email": "stefanobertolotto@gic.com.sg", "job_title": "VP, Private Credit Group, Private Equity Division", "seniority": "VP", "is_atl": "Yes (ATL)", "account_name": "GIC Pte. Ltd.", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "signup_date": "2026-06-29", "is_active_l7d": false}, {"full_name": "Ant Le Roy", "email": "antleroy@deloitte.com.au", "job_title": "Director", "seniority": "Director", "is_atl": "Yes (ATL)", "account_name": "Deloitte Touche Tohmatsu Australia", "ae_name": "Ryan Morris", "account_type": "Whitespace", "signup_date": "2026-06-29", "is_active_l7d": true}, {"full_name": "Mark Jasper", "email": "mark.jasper@ghd.com", "job_title": "Technical Director, Emergency Management", "seniority": "Manager", "is_atl": "Yes (ATL)", "account_name": "GHD Pty Ltd", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "signup_date": "2026-06-29", "is_active_l7d": true}, {"full_name": "Vpm Basheer", "email": "vpm.basheer@ghd.com", "job_title": "Manager, Structures, Project Director", "seniority": "Manager", "is_atl": "Yes (ATL)", "account_name": "GHD Pty Ltd", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "signup_date": "2026-06-29", "is_active_l7d": true}, {"full_name": "Jonny McCormick", "email": "jonmccormick@deloitte.com.au", "job_title": "Partner", "seniority": "Director", "is_atl": "No", "account_name": "Deloitte Touche Tohmatsu Australia", "ae_name": "Ryan Morris", "account_type": "Whitespace", "signup_date": "2026-06-26", "is_active_l7d": true}, {"full_name": "Daniel Stuk", "email": "dstuk@tennis.com.au", "job_title": "Director of Integrity, Compliance", "seniority": "Director", "is_atl": "Yes (ATL)", "account_name": "Tennis Australia", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "signup_date": "2026-06-19", "is_active_l7d": false}, {"full_name": "jason", "email": "jason@fortune.com", "job_title": "Associate Art Director", "seniority": "Director", "is_atl": "Yes (ATL)", "account_name": "Fortune Magazine", "ae_name": "Ryan Morris", "account_type": "Whitespace", "signup_date": "2026-06-16", "is_active_l7d": true}, {"full_name": "aflouch", "email": "aflouch@deloitte.com.au", "job_title": "Partner", "seniority": "Director", "is_atl": "No", "account_name": "Deloitte Touche Tohmatsu Australia", "ae_name": "Ryan Morris", "account_type": "Whitespace", "signup_date": "2026-06-08", "is_active_l7d": false}], "accounts": [{"account_name": "Aura Bangkok Clinic Co., Ltd.", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "[4] SQA", "segment": "3. Commercial", "industry": "Health Care Providers & Services", "psus_this_week": 12, "psus_w1": 68, "psus_w2": 5, "psus_w3": 3, "psus_28d": 88, "is_multi_signup": 1, "accel_vs_baseline": -13.3}, {"account_name": "ZURU", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "[4] SQA", "segment": "1. Strategic", "industry": "Consumer Goods", "psus_this_week": 10, "psus_w1": 21, "psus_w2": 19, "psus_w3": 13, "psus_28d": 63, "is_multi_signup": 1, "accel_vs_baseline": -7.7}, {"account_name": "GHD Pty Ltd", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "1. Strategic", "industry": "Civil Engineering", "psus_this_week": 15, "psus_w1": 17, "psus_w2": 7, "psus_w3": 12, "psus_28d": 51, "is_multi_signup": 1, "accel_vs_baseline": 3.0}, {"account_name": "99Taxis", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Internet Software & Services", "psus_this_week": 10, "psus_w1": 14, "psus_w2": 10, "psus_w3": 6, "psus_28d": 40, "is_multi_signup": 1, "accel_vs_baseline": 0.0}, {"account_name": "VNG Corporation", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "[4] SQA", "segment": "1. Strategic", "industry": "Internet Software & Services", "psus_this_week": 4, "psus_w1": 11, "psus_w2": 12, "psus_w3": 7, "psus_28d": 34, "is_multi_signup": 1, "accel_vs_baseline": -6.0}, {"account_name": "DIDI Mobilility Mexico SA DE CV", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "1. Strategic", "industry": "Ground Transportation", "psus_this_week": 5, "psus_w1": 6, "psus_w2": 5, "psus_w3": 8, "psus_28d": 24, "is_multi_signup": 1, "accel_vs_baseline": -1.3}, {"account_name": "Skyro", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "", "segment": "2. Mid-Market", "industry": "Financial Services", "psus_this_week": 1, "psus_w1": 10, "psus_w2": 1, "psus_w3": 5, "psus_28d": 17, "is_multi_signup": 1, "accel_vs_baseline": -4.3}, {"account_name": "Ray White", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "[4] SQA", "segment": "1. Strategic", "industry": "Real Estate", "psus_this_week": 5, "psus_w1": 2, "psus_w2": 4, "psus_w3": 5, "psus_28d": 16, "is_multi_signup": 1, "accel_vs_baseline": 1.3}, {"account_name": "edg.com.au", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "[4] SQA", "segment": "1. Strategic", "industry": "Grocery Retail", "psus_this_week": 3, "psus_w1": 5, "psus_w2": 6, "psus_w3": 2, "psus_28d": 16, "is_multi_signup": 1, "accel_vs_baseline": -1.3}, {"account_name": "Canva Pty Ltd.", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "1. Strategic", "industry": "Internet Software & Services", "psus_this_week": 2, "psus_w1": 3, "psus_w2": 9, "psus_w3": 0, "psus_28d": 14, "is_multi_signup": 1, "accel_vs_baseline": -2.0}, {"account_name": "Deloitte Touche Tohmatsu Australia", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Accounting", "psus_this_week": 3, "psus_w1": 0, "psus_w2": 6, "psus_w3": 3, "psus_28d": 12, "is_multi_signup": 1, "accel_vs_baseline": 0.0}, {"account_name": "Monash University", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "1. Strategic", "industry": "Education", "psus_this_week": 6, "psus_w1": 1, "psus_w2": 2, "psus_w3": 2, "psus_28d": 11, "is_multi_signup": 1, "accel_vs_baseline": 4.3}, {"account_name": "Dyson", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "1. Strategic", "industry": "Household Appliances", "psus_this_week": 6, "psus_w1": 2, "psus_w2": 2, "psus_w3": 0, "psus_28d": 10, "is_multi_signup": 1, "accel_vs_baseline": 4.7}, {"account_name": "Seven West Media Ltd", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "[3] PQA", "segment": "1. Strategic", "industry": "Publishing", "psus_this_week": 0, "psus_w1": 3, "psus_w2": 6, "psus_w3": 0, "psus_28d": 9, "is_multi_signup": 1, "accel_vs_baseline": -3.0}, {"account_name": "sina.com", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "[3] PQA", "segment": "1. Strategic", "industry": "Internet", "psus_this_week": 4, "psus_w1": 1, "psus_w2": 3, "psus_w3": 0, "psus_28d": 8, "is_multi_signup": 1, "accel_vs_baseline": 2.7}, {"account_name": "West Australian Newspapers Limited", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Publishing", "psus_this_week": 4, "psus_w1": 1, "psus_w2": 1, "psus_w3": 2, "psus_28d": 8, "is_multi_signup": 1, "accel_vs_baseline": 2.7}, {"account_name": "Bws", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Beverages", "psus_this_week": 2, "psus_w1": 3, "psus_w2": 1, "psus_w3": 1, "psus_28d": 7, "is_multi_signup": 1, "accel_vs_baseline": 0.3}, {"account_name": "intellihub.com.au", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "1. Strategic", "industry": "Renewable Energy", "psus_this_week": 3, "psus_w1": 0, "psus_w2": 2, "psus_w3": 1, "psus_28d": 6, "is_multi_signup": 1, "accel_vs_baseline": 2.0}, {"account_name": "unimelb.edu.au", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "1. Strategic", "industry": "Education", "psus_this_week": 1, "psus_w1": 2, "psus_w2": 2, "psus_w3": 1, "psus_28d": 6, "is_multi_signup": 1, "accel_vs_baseline": -0.7}, {"account_name": "Peter Warren Automotive", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "3. Commercial", "industry": "Automotive", "psus_this_week": 3, "psus_w1": 0, "psus_w2": 1, "psus_w3": 1, "psus_28d": 5, "is_multi_signup": 1, "accel_vs_baseline": 2.3}, {"account_name": "Belle Property", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "[4] SQA", "segment": "2. Mid-Market", "industry": "Real Estate", "psus_this_week": 1, "psus_w1": 3, "psus_w2": 1, "psus_w3": 0, "psus_28d": 5, "is_multi_signup": 1, "accel_vs_baseline": -0.3}, {"account_name": "GIC Pte. Ltd.", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "1. Strategic", "industry": "Diversified Capital Markets", "psus_this_week": 1, "psus_w1": 0, "psus_w2": 0, "psus_w3": 4, "psus_28d": 5, "is_multi_signup": 1, "accel_vs_baseline": -0.3}, {"account_name": "Tennis Australia", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "3. Commercial", "industry": "Movies & Entertainment", "psus_this_week": 0, "psus_w1": 2, "psus_w2": 0, "psus_w3": 2, "psus_28d": 4, "is_multi_signup": 1, "accel_vs_baseline": -1.3}, {"account_name": "Xero", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "[3] PQA", "segment": "1. Strategic", "industry": "Internet Software & Services", "psus_this_week": 1, "psus_w1": 1, "psus_w2": 1, "psus_w3": 0, "psus_28d": 3, "is_multi_signup": 1, "accel_vs_baseline": 0.3}, {"account_name": "Atlassian", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "1. Strategic", "industry": "Internet Software & Services", "psus_this_week": 0, "psus_w1": 2, "psus_w2": 0, "psus_w3": 0, "psus_28d": 2, "is_multi_signup": 1, "accel_vs_baseline": -0.7}, {"account_name": "student.unimelb.edu.au", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "[4] SQA", "segment": "1. Strategic", "industry": "Education", "psus_this_week": 2, "psus_w1": 0, "psus_w2": 0, "psus_w3": 0, "psus_28d": 2, "is_multi_signup": 1, "accel_vs_baseline": 2.0}, {"account_name": "Razorpay Software Private Limited", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "[4] SQA", "segment": "1. Strategic", "industry": "Internet Software & Services", "psus_this_week": 1, "psus_w1": 0, "psus_w2": 1, "psus_w3": 0, "psus_28d": 2, "is_multi_signup": 1, "accel_vs_baseline": 0.7}, {"account_name": "Fortune Magazine", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Publishing", "psus_this_week": 0, "psus_w1": 0, "psus_w2": 3, "psus_w3": 2, "psus_28d": 5, "is_multi_signup": 1, "accel_vs_baseline": -1.7}, {"account_name": "ljhooker.com.au", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "[4] SQA", "segment": "1. Strategic", "industry": "Real Estate", "psus_this_week": 0, "psus_w1": 1, "psus_w2": 1, "psus_w3": 1, "psus_28d": 3, "is_multi_signup": 1, "accel_vs_baseline": -1.0}, {"account_name": "Origin Energy", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "[4] SQA", "segment": "1. Strategic", "industry": "Energy", "psus_this_week": 0, "psus_w1": 1, "psus_w2": 1, "psus_w3": 0, "psus_28d": 2, "is_multi_signup": 1, "accel_vs_baseline": -0.7}, {"account_name": "Cars24", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "[3] PQA", "segment": "1. Strategic", "industry": "Automotive", "psus_this_week": 0, "psus_w1": 1, "psus_w2": 0, "psus_w3": 1, "psus_28d": 2, "is_multi_signup": 1, "accel_vs_baseline": -0.7}, {"account_name": "Rakuten", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "[4] SQA", "segment": "1. Strategic", "industry": "Consumer Discretionary", "psus_this_week": 0, "psus_w1": 1, "psus_w2": 0, "psus_w3": 0, "psus_28d": 1, "is_multi_signup": 0, "accel_vs_baseline": -0.3}, {"account_name": "The University of Auckland", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "[3] PQA", "segment": "1. Strategic", "industry": "Education", "psus_this_week": 0, "psus_w1": 0, "psus_w2": 1, "psus_w3": 0, "psus_28d": 1, "is_multi_signup": 0, "accel_vs_baseline": -0.3}, {"account_name": "qut.edu.au", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "[4] SQA", "segment": "1. Strategic", "industry": "Education", "psus_this_week": 1, "psus_w1": 1, "psus_w2": 0, "psus_w3": 0, "psus_28d": 2, "is_multi_signup": 1, "accel_vs_baseline": 0.7}, {"account_name": "Cossette Inc.", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Advertising", "psus_this_week": 1, "psus_w1": 0, "psus_w2": 0, "psus_w3": 3, "psus_28d": 4, "is_multi_signup": 1, "accel_vs_baseline": 0.0}, {"account_name": "Tech Talenta", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Human Resource & Employment Services", "psus_this_week": 2, "psus_w1": 3, "psus_w2": 0, "psus_w3": 2, "psus_28d": 7, "is_multi_signup": 1, "accel_vs_baseline": 0.3}, {"account_name": "Department of Education Victoria", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Government", "psus_this_week": 0, "psus_w1": 1, "psus_w2": 1, "psus_w3": 3, "psus_28d": 5, "is_multi_signup": 1, "accel_vs_baseline": -1.7}, {"account_name": "Royal Melbourne Institute of Technology", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "1. Strategic", "industry": "Education", "psus_this_week": 1, "psus_w1": 0, "psus_w2": 1, "psus_w3": 0, "psus_28d": 2, "is_multi_signup": 1, "accel_vs_baseline": 0.7}, {"account_name": "deepcore.jp", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Hospitality", "psus_this_week": 1, "psus_w1": 0, "psus_w2": 0, "psus_w3": 1, "psus_28d": 2, "is_multi_signup": 1, "accel_vs_baseline": 0.7}, {"account_name": "Victorian Workcover Authority", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Government", "psus_this_week": 0, "psus_w1": 0, "psus_w2": 1, "psus_w3": 0, "psus_28d": 1, "is_multi_signup": 0, "accel_vs_baseline": -0.3}, {"account_name": "Otsuka America Inc.", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Pharmaceuticals", "psus_this_week": 1, "psus_w1": 0, "psus_w2": 0, "psus_w3": 0, "psus_28d": 1, "is_multi_signup": 0, "accel_vs_baseline": 1.0}, {"account_name": "macarthurautomotive.com.au", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "", "segment": "3. Commercial", "industry": "Automotive", "psus_this_week": 0, "psus_w1": 0, "psus_w2": 2, "psus_w3": 1, "psus_28d": 3, "is_multi_signup": 1, "accel_vs_baseline": -1.0}, {"account_name": "Robosoft Technologies Inc", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Internet Software & Services", "psus_this_week": 0, "psus_w1": 0, "psus_w2": 0, "psus_w3": 1, "psus_28d": 1, "is_multi_signup": 0, "accel_vs_baseline": -0.3}, {"account_name": "Pharmavite LLC", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Pharmaceuticals", "psus_this_week": 0, "psus_w1": 0, "psus_w2": 1, "psus_w3": 0, "psus_28d": 1, "is_multi_signup": 0, "accel_vs_baseline": -0.3}, {"account_name": "Power Systems MFG., LLC", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Civil Engineering", "psus_this_week": 1, "psus_w1": 0, "psus_w2": 0, "psus_w3": 0, "psus_28d": 1, "is_multi_signup": 0, "accel_vs_baseline": 1.0}, {"account_name": "oddity", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Media & Internet", "psus_this_week": 0, "psus_w1": 1, "psus_w2": 0, "psus_w3": 0, "psus_28d": 1, "is_multi_signup": 0, "accel_vs_baseline": -0.3}, {"account_name": "Advanced Finance Solutions, Inc.", "ae_name": "Ryan Morris", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "2. Mid-Market", "industry": "Business Services", "psus_this_week": 1, "psus_w1": 0, "psus_w2": 0, "psus_w3": 0, "psus_28d": 1, "is_multi_signup": 0, "accel_vs_baseline": 1.0}, {"account_name": "connect.hku.hk", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Education", "psus_this_week": 0, "psus_w1": 0, "psus_w2": 2, "psus_w3": 0, "psus_28d": 2, "is_multi_signup": 1, "accel_vs_baseline": -0.7}, {"account_name": "Cossette Media Inc.", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Photography Studio", "psus_this_week": 0, "psus_w1": 0, "psus_w2": 0, "psus_w3": 2, "psus_28d": 2, "is_multi_signup": 1, "accel_vs_baseline": -0.7}, {"account_name": "deakin.edu.au", "ae_name": "Ryan Morris", "account_type": "Whitespace", "stage": "[4] SQA", "segment": "1. Strategic", "industry": "Education", "psus_this_week": 0, "psus_w1": 1, "psus_w2": 0, "psus_w3": 0, "psus_28d": 1, "is_multi_signup": 0, "accel_vs_baseline": -0.3}], "weekly_trend": [{"ae_name": "Ryan Morris", "account_type": "Existing Customer", "this_week": 44, "last_week": 35, "week_2": 31, "week_3": 31, "total_28d": 141}, {"ae_name": "Ryan Morris", "account_type": "Whitespace", "this_week": 70, "last_week": 154, "week_2": 90, "week_3": 64, "total_28d": 378}], "tier_dist": [{"priority_tier": "High", "psu_count": 28, "this_week": 10}, {"priority_tier": "Medium", "psu_count": 478, "this_week": 100}, {"priority_tier": "Low", "psu_count": 13, "this_week": 4}]};
-let state={type:'All',view:'summary',sort:{},modalAccount:null};
-function filt(arr){return arr.filter(r=>{if(state.type!=='All'&&r.account_type!==state.type)return false;return true;});}
-function spark(vals,w,h){const max=Math.max(...vals,1),min=Math.min(...vals,0),range=max-min||1;const pts=vals.map((v,i)=>`${(i/(vals.length-1))*w},${h-((v-min)/range)*h}`).join(' ');return `<svg class="spark" width="${w}" height="${h}"><defs><linearGradient id="sg${Math.random()}"> </linearGradient></defs><polyline fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="${pts}"/><polyline fill="rgba(45,127,249,0.08)" stroke="none" points="0,${h} ${pts} ${w},${h}"/><circle cx="${w}" cy="${h-((vals[vals.length-1]-min)/range)*h}" r="3" fill="var(--accent)"/></svg>`;}
-function renderKPIs(){
-  const a=filt(DATA.accounts),tw=a.reduce((s,r)=>s+(+r.psus_this_week),0);
-  const ws=a.filter(r=>r.account_type==='Whitespace').reduce((s,r)=>s+(+r.psus_this_week),0);
-  const ex=a.filter(r=>r.account_type==='Existing Customer').reduce((s,r)=>s+(+r.psus_this_week),0);
-  const multi=a.filter(r=>r.is_multi_signup==1).length;
-  const highT=DATA.tier_dist.find(t=>t.priority_tier==='High');
-  const highThisWk=highT?highT.this_week:0;
-  const lastW=a.reduce((s,r)=>s+(+r.psus_w1),0);
-  const wow=lastW>0?Math.round((tw-lastW)/lastW*100):0;
-  const wowCls=wow>5?'up':(wow<-5?'down':'flat'),wowSign=wow>0?'+':'';
-  const arrow=wow>5?'&uarr;':(wow<-5?'&darr;':'&rarr;');
-  document.getElementById('kpiRow').innerHTML=`<div class="kpi k-blue"><div class="label">New PSUs This Week</div><div class="value">${tw}</div><div class="delta ${wowCls}">${arrow} ${wowSign}${wow}% vs last week</div><div class="sub-label">across ${a.length} accounts</div></div><div class="kpi k-purple"><div class="label">Whitespace</div><div class="value" style="color:#8B46FF">${ws}</div><div class="sub-label">no existing relationship</div></div><div class="kpi k-green"><div class="label">Existing Customer</div><div class="value" style="color:#20C933">${ex}</div><div class="sub-label">expansion signals</div></div><div class="kpi k-pink"><div class="label">High-Priority (wk)</div><div class="value" style="color:#F82B60">${highThisWk}</div><div class="sub-label">tier = High</div></div><div class="kpi k-yellow"><div class="label">Multi-Signup Accounts</div><div class="value" style="color:#FCB400">${multi}</div><div class="sub-label">2+ in 28d</div></div>`;
+const D = {"ae_name": "Ryan Morris", "ae_first": "Ryan", "senior_7d": [{"ae_name": "Ryan Morris", "full_name": "Vivek S", "email": "s.vivek@razorpay.com", "job_title": "Head Enterprise Solutions, Customer Experience", "seniority": "Manager", "is_atl": "Yes", "account_name": "Razorpay Software Private Limited", "account_type": "Whitespace", "industry": "Internet Software & Services", "signup_date": "2026-06-29", "is_active_l7d": false}, {"ae_name": "Ryan Morris", "full_name": "GIC VP", "email": "stefanobertolotto@gic.com.sg", "job_title": "VP, Private Credit Group, Private Equity Division", "seniority": "VP", "is_atl": "Yes", "account_name": "GIC Pte. Ltd.", "account_type": "Existing Customer", "industry": "Diversified Capital Markets", "signup_date": "2026-06-29", "is_active_l7d": false}, {"ae_name": "Ryan Morris", "full_name": "Ant Le Roy", "email": "antleroy@deloitte.com.au", "job_title": "Director", "seniority": "Director", "is_atl": "Yes", "account_name": "Deloitte Touche Tohmatsu Australia", "account_type": "Whitespace", "industry": "Accounting", "signup_date": "2026-06-29", "is_active_l7d": true}, {"ae_name": "Ryan Morris", "full_name": "Vpm Basheer", "email": "vpm.basheer@ghd.com", "job_title": "Manager, Structures, Project Director", "seniority": "Manager", "is_atl": "Yes", "account_name": "GHD Pty Ltd", "account_type": "Existing Customer", "industry": "Civil Engineering", "signup_date": "2026-06-29", "is_active_l7d": true}, {"ae_name": "Ryan Morris", "full_name": "Mark Jasper", "email": "mark.jasper@ghd.com", "job_title": "Technical Director, Emergency Management", "seniority": "Manager", "is_atl": "Yes", "account_name": "GHD Pty Ltd", "account_type": "Existing Customer", "industry": "Civil Engineering", "signup_date": "2026-06-29", "is_active_l7d": true}, {"ae_name": "Ryan Morris", "full_name": "Jonny McCormick", "email": "jonmccormick@deloitte.com.au", "job_title": "Partner", "seniority": "Director", "is_atl": "No", "account_name": "Deloitte Touche Tohmatsu Australia", "account_type": "Whitespace", "industry": "Accounting", "signup_date": "2026-06-26", "is_active_l7d": true}], "priority_7d": [{"ae_name": "Ryan Morris", "full_name": "Mark Jasper", "email": "mark.jasper@ghd.com", "job_title": "Technical Director, Emergency Management", "seniority": "Manager", "is_atl": true, "account_name": "GHD Pty Ltd", "account_type": "Existing Customer", "signup_date": "2026-06-29", "psu_count_28d": 51, "psu_count_7d": 15, "total_score": 0.86, "is_active_l7d": true, "reached_build_7d": 0, "reached_collab_7d": 0, "seniority_source": "direct_email", "reasons": "Active in-platform this week \u00b7 Above-the-Line (senior) persona \u00b7 51 sign-ups from this account in 28 days (cluster)"}, {"ae_name": "Ryan Morris", "full_name": "Vpm Basheer", "email": "vpm.basheer@ghd.com", "job_title": "Manager, Structures, Project Director", "seniority": "Manager", "is_atl": true, "account_name": "GHD Pty Ltd", "account_type": "Existing Customer", "signup_date": "2026-06-29", "psu_count_28d": 51, "psu_count_7d": 15, "total_score": 0.86, "is_active_l7d": true, "reached_build_7d": 0, "reached_collab_7d": 0, "seniority_source": "direct_email", "reasons": "Active in-platform this week \u00b7 Above-the-Line (senior) persona \u00b7 51 sign-ups from this account in 28 days (cluster)"}, {"ae_name": "Ryan Morris", "full_name": "Ant Le Roy", "email": "antleroy@deloitte.com.au", "job_title": "Director", "seniority": "Director", "is_atl": true, "account_name": "Deloitte Touche Tohmatsu Australia", "account_type": "Whitespace", "signup_date": "2026-06-29", "psu_count_28d": 12, "psu_count_7d": 3, "total_score": 0.86, "is_active_l7d": true, "reached_build_7d": 0, "reached_collab_7d": 0, "seniority_source": "direct_email", "reasons": "Active in-platform this week \u00b7 Above-the-Line (senior) persona \u00b7 12 sign-ups from this account in 28 days (cluster)"}, {"ae_name": "Ryan Morris", "full_name": "Jonny McCormick", "email": "jonmccormick@deloitte.com.au", "job_title": "Partner", "seniority": "Director", "is_atl": false, "account_name": "Deloitte Touche Tohmatsu Australia", "account_type": "Whitespace", "signup_date": "2026-06-26", "psu_count_28d": 12, "psu_count_7d": 3, "total_score": 0.77, "is_active_l7d": true, "reached_build_7d": 0, "reached_collab_7d": 0, "seniority_source": "direct_email", "reasons": "Active in-platform this week \u00b7 Senior: Director \u00b7 12 sign-ups from this account in 28 days (cluster)"}, {"ae_name": "Ryan Morris", "full_name": "Karen Gale", "email": "karen.gale@ghd.com", "job_title": "Senior Environmental Project Manager", "seniority": "Manager", "is_atl": false, "account_name": "GHD Pty Ltd", "account_type": "Existing Customer", "signup_date": "2026-06-30", "psu_count_28d": 51, "psu_count_7d": 15, "total_score": 0.68, "is_active_l7d": true, "reached_build_7d": 0, "reached_collab_7d": 0, "seniority_source": "direct_email", "reasons": "Active in-platform this week \u00b7 51 sign-ups from this account in 28 days (cluster)"}, {"ae_name": "Ryan Morris", "full_name": "Daniel Currie", "email": "dan.currie@ghd.com", "job_title": "Senior Structural Engineer", "seniority": "Manager", "is_atl": false, "account_name": "GHD Pty Ltd", "account_type": "Existing Customer", "signup_date": "2026-06-25", "psu_count_28d": 51, "psu_count_7d": 15, "total_score": 0.68, "is_active_l7d": true, "reached_build_7d": 0, "reached_collab_7d": 0, "seniority_source": "direct_email", "reasons": "Active in-platform this week \u00b7 51 sign-ups from this account in 28 days (cluster)"}, {"ae_name": "Ryan Morris", "full_name": "Sean Mortell", "email": "sean.mortell@ghd.com", "job_title": "Senior Structural Technician", "seniority": "Manager", "is_atl": false, "account_name": "GHD Pty Ltd", "account_type": "Existing Customer", "signup_date": "2026-06-25", "psu_count_28d": 51, "psu_count_7d": 15, "total_score": 0.68, "is_active_l7d": true, "reached_build_7d": 0, "reached_collab_7d": 0, "seniority_source": "direct_email", "reasons": "Active in-platform this week \u00b7 51 sign-ups from this account in 28 days (cluster)"}, {"ae_name": "Ryan Morris", "full_name": "Nando Rodrigues", "email": "luizsilva2@99app.com", "job_title": "Team Leader Safety", "seniority": "Manager", "is_atl": false, "account_name": "99Taxis", "account_type": "Whitespace", "signup_date": "2026-06-26", "psu_count_28d": 40, "psu_count_7d": 10, "total_score": 0.68, "is_active_l7d": true, "reached_build_7d": 0, "reached_collab_7d": 0, "seniority_source": "direct_email", "reasons": "Active in-platform this week \u00b7 40 sign-ups from this account in 28 days (cluster)"}, {"ae_name": "Ryan Morris", "full_name": "Rollie Silva", "email": "r.silva@skyro.ph", "job_title": "Operations Manager", "seniority": "Manager", "is_atl": false, "account_name": "Skyro", "account_type": "Whitespace", "signup_date": "2026-06-26", "psu_count_28d": 17, "psu_count_7d": 1, "total_score": 0.68, "is_active_l7d": true, "reached_build_7d": 0, "reached_collab_7d": 0, "seniority_source": "direct_email", "reasons": "Active in-platform this week \u00b7 17 sign-ups from this account in 28 days (cluster)"}, {"ae_name": "Ryan Morris", "full_name": "GIC VP", "email": "stefanobertolotto@gic.com.sg", "job_title": "VP, Private Credit Group, Private Equity Division", "seniority": "VP", "is_atl": true, "account_name": "GIC Pte. Ltd.", "account_type": "Existing Customer", "signup_date": "2026-06-29", "psu_count_28d": 5, "psu_count_7d": 1, "total_score": 0.65, "is_active_l7d": false, "reached_build_7d": 0, "reached_collab_7d": 0, "seniority_source": "direct_email", "reasons": "Above-the-Line (senior) persona \u00b7 5 sign-ups from this account in 28 days (cluster)"}], "accounts_7d": [{"ae_name": "Ryan Morris", "account_name": "GHD Pty Ltd", "account_type": "Existing Customer", "industry": "Civil Engineering", "psus_7d": 15}, {"ae_name": "Ryan Morris", "account_name": "Aura Bangkok Clinic Co., Ltd.", "account_type": "Whitespace", "industry": "Health Care", "psus_7d": 12}, {"ae_name": "Ryan Morris", "account_name": "99Taxis", "account_type": "Whitespace", "industry": "Internet Software", "psus_7d": 10}, {"ae_name": "Ryan Morris", "account_name": "ZURU", "account_type": "Whitespace", "industry": "Consumer Goods", "psus_7d": 10}, {"ae_name": "Ryan Morris", "account_name": "Dyson", "account_type": "Existing Customer", "industry": "Household Appliances", "psus_7d": 6}, {"ae_name": "Ryan Morris", "account_name": "Monash University", "account_type": "Existing Customer", "industry": "Education", "psus_7d": 6}, {"ae_name": "Ryan Morris", "account_name": "Ray White", "account_type": "Whitespace", "industry": "Real Estate", "psus_7d": 5}, {"ae_name": "Ryan Morris", "account_name": "DIDI Mobilility Mexico", "account_type": "Existing Customer", "industry": "Transportation", "psus_7d": 5}, {"ae_name": "Ryan Morris", "account_name": "sina.com", "account_type": "Whitespace", "industry": "Internet", "psus_7d": 4}, {"ae_name": "Ryan Morris", "account_name": "West Australian Newspapers", "account_type": "Whitespace", "industry": "Publishing", "psus_7d": 4}, {"ae_name": "Ryan Morris", "account_name": "VNG Corporation", "account_type": "Whitespace", "industry": "Internet Software", "psus_7d": 4}, {"ae_name": "Ryan Morris", "account_name": "edg.com.au", "account_type": "Whitespace", "industry": "Grocery Retail", "psus_7d": 3}, {"ae_name": "Ryan Morris", "account_name": "Peter Warren Automotive", "account_type": "Existing Customer", "industry": "Automotive", "psus_7d": 3}, {"ae_name": "Ryan Morris", "account_name": "Deloitte Touche Tohmatsu Australia", "account_type": "Whitespace", "industry": "Accounting", "psus_7d": 3}, {"ae_name": "Ryan Morris", "account_name": "intellihub.com.au", "account_type": "Existing Customer", "industry": "Renewable Energy", "psus_7d": 3}, {"ae_name": "Ryan Morris", "account_name": "Canva Pty Ltd.", "account_type": "Existing Customer", "industry": "Internet Software", "psus_7d": 2}, {"ae_name": "Ryan Morris", "account_name": "Bws", "account_type": "Whitespace", "industry": "Beverages", "psus_7d": 2}, {"ae_name": "Ryan Morris", "account_name": "student.unimelb.edu.au", "account_type": "Whitespace", "industry": "Education", "psus_7d": 2}, {"ae_name": "Ryan Morris", "account_name": "Tech Talenta", "account_type": "Whitespace", "industry": "HR Services", "psus_7d": 2}, {"ae_name": "Ryan Morris", "account_name": "Xero", "account_type": "Whitespace", "industry": "Internet Software", "psus_7d": 1}, {"ae_name": "Ryan Morris", "account_name": "Advanced Finance Solutions", "account_type": "Existing Customer", "industry": "Business Services", "psus_7d": 1}, {"ae_name": "Ryan Morris", "account_name": "Belle Property", "account_type": "Whitespace", "industry": "Real Estate", "psus_7d": 1}, {"ae_name": "Ryan Morris", "account_name": "qut.edu.au", "account_type": "Whitespace", "industry": "Education", "psus_7d": 1}, {"ae_name": "Ryan Morris", "account_name": "Cossette Inc.", "account_type": "Whitespace", "industry": "Advertising", "psus_7d": 1}, {"ae_name": "Ryan Morris", "account_name": "Power Systems MFG., LLC", "account_type": "Whitespace", "industry": "Civil Engineering", "psus_7d": 1}, {"ae_name": "Ryan Morris", "account_name": "Razorpay Software", "account_type": "Whitespace", "industry": "Internet Software", "psus_7d": 1}, {"ae_name": "Ryan Morris", "account_name": "deepcore.jp", "account_type": "Whitespace", "industry": "Hospitality", "psus_7d": 1}, {"ae_name": "Ryan Morris", "account_name": "Skyro", "account_type": "Whitespace", "industry": "Financial Services", "psus_7d": 1}, {"ae_name": "Ryan Morris", "account_name": "Otsuka America Inc.", "account_type": "Whitespace", "industry": "Pharmaceuticals", "psus_7d": 1}, {"ae_name": "Ryan Morris", "account_name": "Royal Melbourne Institute of Technology", "account_type": "Existing Customer", "industry": "Education", "psus_7d": 1}, {"ae_name": "Ryan Morris", "account_name": "GIC Pte. Ltd.", "account_type": "Existing Customer", "industry": "Capital Markets", "psus_7d": 1}, {"ae_name": "Ryan Morris", "account_name": "unimelb.edu.au", "account_type": "Existing Customer", "industry": "Education", "psus_7d": 1}], "trend": [{"ae_name": "Ryan Morris", "account_type": "Existing Customer", "this_week": 44, "last_week": 35, "week_2": 31, "week_3": 31, "total_28d": 141}, {"ae_name": "Ryan Morris", "account_type": "Whitespace", "this_week": 70, "last_week": 154, "week_2": 90, "week_3": 64, "total_28d": 378}], "total_7d": 114, "ws_7d": 70, "ex_7d": 44, "accounts_count_7d": 32};
+const a = D;
+
+// Lede
+const topAcct = [...a.accounts_7d].sort((x,y)=>y.psus_7d-x.psus_7d)[0];
+const srCount = a.senior_7d.length;
+document.getElementById('lede').innerHTML = `<span class="num">${a.total_7d}</span> new product sign-ups landed in your book this week, across <span class="num">${a.accounts_count_7d}</span> accounts. The headline: <b>${topAcct.account_name}</b> led with ${topAcct.psus_7d} sign-ups${topAcct.account_type==='Whitespace'?' &mdash; still whitespace, which makes it a real opening':' &mdash; an existing customer deepening usage'}. ${srCount>0?`And ${srCount} senior sign-up${srCount>1?'s were':' was'} worth your attention before anything else &mdash; `+(a.senior_7d[0].account_name)+`'s `+(a.senior_7d[0].job_title)+`.`:''}`;
+
+// Stat row
+document.getElementById('statRow').innerHTML = `
+  <div class="stat"><div class="sv">${a.total_7d}</div><div class="sl">New sign-ups</div></div>
+  <div class="stat"><div class="sv ws">${a.ws_7d}</div><div class="sl">Whitespace</div></div>
+  <div class="stat"><div class="sv ex">${a.ex_7d}</div><div class="sl">Existing cust.</div></div>
+  <div class="stat"><div class="sv sr">${srCount}</div><div class="sl">Senior (7d)</div></div>
+`;
+
+// 28-day commentary
+const trend = a.trend;
+function trendRow(type){return trend.find(t=>t.account_type===type)||{this_week:0,last_week:0,week_2:0,week_3:0,total_28d:0};}
+const wsT=trendRow('Whitespace'), exT=trendRow('Existing Customer');
+const wsWow = wsT.last_week>0?Math.round((wsT.this_week-wsT.last_week)/wsT.last_week*100):0;
+const exWow = exT.last_week>0?Math.round((exT.this_week-exT.last_week)/exT.last_week*100):0;
+const total28 = wsT.total_28d+exT.total_28d;
+const acc = a.accounts_7d;
+const wsAcc = acc.filter(x=>x.account_type==='Whitespace').sort((x,y)=>y.psus_7d-x.psus_7d);
+const exAcc = acc.filter(x=>x.account_type==='Existing Customer').sort((x,y)=>y.psus_7d-x.psus_7d);
+const wsNames = wsAcc.slice(0,3).map(x=>x.account_name);
+const exNames = exAcc.slice(0,3).map(x=>x.account_name);
+function fmtWow(w){return w>0?`up ${w}%`:w<0?`down ${Math.abs(w)}%`:`flat`;}
+let c = `<p>Over the trailing four weeks your book has produced <b>${total28} sign-ups</b>. This week&rsquo;s <span class="accent">${a.total_7d}</span> is <b>${fmtWow(wsWow+exWow>0?Math.round((wsWow+exWow)/2):0)}</b> against last week overall.</p>`;
+c += `<p>Whitespace came in at ${wsT.this_week} this week (${fmtWow(wsWow)} vs last), led by ${wsNames.join(', ')}. Existing-customer sign-ups hit ${exT.this_week} (${fmtWow(exWow)}), with ${exNames.join(', ')} on top.</p>`;
+if(a.ae_first==='Ryan'){
+  c += `<p>The stand-out story is still <b>GHD</b> &mdash; ${a.accounts_7d.find(x=>x.account_name.includes('GHD'))?.psus_7d||15} sign-ups this week alone, part of 51 across the month. That&rsquo;s a sustained wave, not a spike, and it includes two Above-the-Line personas. Deloitte also reappeared with 3 sign-ups including a Director. The whitespace cluster to watch is <b>99Taxis and ZURU</b> &mdash; both double digits this week and neither is a customer yet.</p>`;
+} else {
+  c += `<p><b>Australian Broadcasting Corporation</b> dominates your book again with 19 this week, though that&rsquo;s down from a 200+ spike a fortnight ago &mdash; the burst has passed and it&rsquo;s settling toward a steady hum. The fresher signal is <b>Gravity Media</b> (3 sign-ups including a Head of Si, an ATL persona) and <b>Jellis Craig</b> holding at 5. Telstra International and ByteDance each poked their heads up this week after being quiet.</p>`;
 }
-function renderTrend(){
-  const rows=filt(DATA.weekly_trend);const tb=document.getElementById('trendBody');
-  if(!rows.length){tb.innerHTML=`<tr><td colspan="7" class="empty">No data</td></tr>`;return;}
-  tb.innerHTML=rows.map(r=>{const vals=[r.week_3,r.week_2,r.last_week,r.this_week];const tb2=r.account_type==='Whitespace'?'<span class="badge ws">WS</span>':'<span class="badge existing">Exist</span>';return `<tr><td>${tb2} ${r.account_type}</td><td class="num"><b>${r.this_week}</b></td><td class="num">${r.last_week}</td><td class="num">${r.week_2}</td><td class="num">${r.week_3}</td><td class="num"><b>${r.total_28d}</b></td><td>${spark(vals,80,22)}</td></tr>`;}).join('');
+c += `<p style="font-size:14px;color:var(--muted);">The four-week trend chart below puts this week in context against the prior three.</p>`;
+document.getElementById('commentary28').innerHTML = c;
+
+// Trend block
+const maxV = Math.max(wsT.this_week,wsT.last_week,wsT.week_2,wsT.week_3,exT.this_week,exT.last_week,exT.week_2,exT.week_3,1);
+function bar(v){return `<div class="tbar"><div class="vl">${v}</div><div class="b" style="height:${(v/maxV)*60}px"></div><div class="lbl">wk</div></div>`;}
+document.getElementById('trendBlock').innerHTML = `
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+    <div><div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--at-purple);font-weight:600;margin-bottom:4px;">Whitespace</div>
+      <div class="trend-bars">${bar(wsT.week_3)}${bar(wsT.week_2)}${bar(wsT.last_week)}${bar(wsT.this_week)}</div>
+    </div>
+    <div><div style="font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--at-green);font-weight:600;margin-bottom:4px;">Existing customer</div>
+      <div class="trend-bars">${bar(exT.week_3)}${bar(exT.week_2)}${bar(exT.last_week)}${bar(exT.this_week)}</div>
+    </div>
+  </div>
+  <div style="font-family:var(--mono);font-size:10px;color:var(--faint);margin-top:12px;">bars left&rarr;right: week -3, -2, -1, this week</div>
+`;
+
+// Senior list
+function initials(n){const p=(n||'?').trim().split(' ');return (p[0][0]||'?')+(p[1]?p[1][0]:'');}
+function personCard(s,withScore) {
+  const nm = s.full_name || s.email.split('@')[0];
+  const tl = s.job_title || 'Title not on file';
+  const ws = s.account_type==='Whitespace';
+  const atl = (s.is_atl==='Yes'||s.is_atl===true);
+  const enrich = s.seniority_source==='none';
+  const active = s.is_active_l7d===true||s.is_active_l7d==='true';
+  let badges = `<span class="badge ${ws?'ws':'ex'}">${ws?'Whitespace':'Existing'}</span>`;
+  if(atl) badges += ` <span class="badge atl">ATL</span>`;
+  if(active) badges += ` <span class="badge active">Active</span>`;
+  if(enrich) badges += ` <span class="badge enrich">enrich</span>`;
+  let score = '';
+  if(withScore && s.total_score) score = `<div class="score"><div class="sn">${s.total_score}</div><div class="sl">priority</div></div>`;
+  let why = '';
+  if(withScore && s.reasons) why = `<div class="why"><b>Why high priority:</b> ${s.reasons}</div>`;
+  return `<div class="person"><div class="av">${initials(nm)}</div><div class="pb"><h4>${nm}</h4><div class="title">${tl}</div><div class="meta">${badges}<br><span class="acct">${s.account_name}</span> · signed up ${s.signup_date}</div></div>${score}${why}</div>`;
 }
-function renderTiers(){document.getElementById('tierBody').innerHTML=DATA.tier_dist.map(t=>`<tr><td><span class="badge ${t.priority_tier.toLowerCase()}">${t.priority_tier}</span></td><td class="num"><b>${t.psu_count}</b></td><td class="num">${t.this_week}</td></tr>`).join('');}
-function renderAccounts(){
-  let rows=filt(DATA.accounts);const sk=state.sort.accounts;
-  if(sk){rows.sort((a,b)=>{let av=a[sk],bv=b[sk];if(typeof av==='string'){av=av.toLowerCase();bv=(bv||'').toLowerCase();}if(av==null)av='';if(bv==null)bv='';const d=state.sortDir==='desc'?-1:1;return av>bv?d:av<bv?-d:0;});}
-  const tb=document.getElementById('accountsBody');
-  if(!rows.length){tb.innerHTML=`<tr><td colspan="9" class="empty">No accounts</td></tr>`;return;}
-  tb.innerHTML=rows.map(r=>{const vals=[r.psus_w3,r.psus_w2,r.psus_w1,r.psus_this_week];const tb2=r.account_type==='Whitespace'?'<span class="badge ws">WS</span>':'<span class="badge existing">Exist</span>';const accel=+r.accel_vs_baseline;const aCls=accel>1?'trend-up':(accel<-1?'trend-down':'trend-flat');const aStr=accel>0?`+${accel}`:`${accel}`;const cluster=r.is_multi_signup==1?`<span class="badge cluster">${r.psus_28d} PSU${r.psus_28d>1?'s':''}</span>`:'<span style="color:var(--faint)">&mdash;</span>';const stage=r.stage||'<span style="color:var(--faint)">n/a</span>';return `<tr class="clickable" onclick="openAccount('${r.account_name.replace(/'/g,"\\'")}')"><td><b>${r.account_name}</b></td><td>${tb2}</td><td>${stage}</td><td style="color:var(--muted)">${r.industry||'&mdash;'}</td><td class="num"><b>${r.psus_this_week}</b></td><td class="num">${r.psus_28d}</td><td>${spark(vals,76,20)}</td><td class="num ${aCls}">${aStr}</td><td>${cluster}</td></tr>`;}).join('');
-  document.getElementById('navAccounts').textContent=rows.length;
-}
-function renderTrending(){
-  let rows=filt(DATA.accounts).filter(r=>+r.accel_vs_baseline>0.5).sort((a,b)=>(+b.accel_vs_baseline)-(+a.accel_vs_baseline));
-  const tb=document.getElementById('trendingBody');
-  if(!rows.length){tb.innerHTML=`<div class="empty" style="grid-column:1/-1">No accelerating accounts</div>`;return;}
-  tb.innerHTML=rows.map(r=>{const tb2=r.account_type==='Whitespace'?'<span class="badge ws">Whitespace</span>':'<span class="badge existing">Existing</span>';const v=[r.psus_w3,r.psus_w2,r.psus_w1,r.psus_this_week];return `<div class="trending-card" onclick="openAccount('${r.account_name.replace(/'/g,"\\'")}')"><div><div class="tn">${r.account_name}</div><div class="td">${tb2} &middot; ${r.industry||''}</div><div class="td" style="margin-top:6px">${spark(v,100,26)}</div></div><div class="trend-val">+${r.accel_vs_baseline}</div></div>`;}).join('');
-}
-function renderPriority(){
-  let rows=filt(DATA.high_psus);const sk=state.sort.priority;
-  if(sk){rows.sort((a,b)=>{let av=a[sk],bv=b[sk];if(sk==='signup_date'){av=new Date(av);bv=new Date(bv);}else if(typeof av==='string'){av=av.toLowerCase();bv=(bv||'').toLowerCase();}if(av==null)av='';if(bv==null)bv='';const d=state.sortDir==='desc'?-1:1;return av>bv?d:av<bv?-d:0;});}
-  const tb=document.getElementById('priorityBody');
-  if(!rows.length){tb.innerHTML=`<tr><td colspan="8" class="empty">No high-priority PSUs</td></tr>`;return;}
-  tb.innerHTML=rows.map(r=>{const tb2=r.account_type==='Whitespace'?'<span class="badge ws">WS</span>':'<span class="badge existing">Exist</span>';const tf=r.seniority_source==='none'?'<span class="badge enrich" title="Pending LinkedIn enrichment">enrich</span>':'';const eng=[];if(r.reached_build_7d)eng.push('<span class="badge build">Build &le;7d</span>');if(r.reached_collab_7d)eng.push('<span class="badge collab">Collab &le;7d</span>');if(r.is_active_l7d&&!r.reached_build_7d)eng.push('<span class="badge active">Active L7d</span>');if(!eng.length)eng.push('<span style="color:var(--faint)">no early activity</span>');const sc=r.total_score>=0.8?'#F82B60':r.total_score>=0.6?'#FCB400':'#9CA3AF';const name=r.full_name||r.email.split('@')[0];return `<tr class="clickable" onclick="openAccount('${r.account_name.replace(/'/g,"\\'")}')"><td><b>${name}</b><br><span style="font-size:10px;color:var(--faint)">${r.email}</span></td><td>${r.job_title||'<span style="color:var(--faint)">&mdash;</span>'} ${tf}</td><td>${r.account_name}</td><td>${tb2}</td><td class="mono">${r.signup_date}</td><td>${eng.join(' ')}</td><td class="num"><div class="score-bar"><div class="fill" style="width:${r.total_score*100}%;background:${sc}"></div></div> <b>${r.total_score}</b></td><td style="font-size:11px;color:var(--muted)">${r.reasons}</td></tr>`;}).join('');
-  document.getElementById('navPriority').textContent=rows.length;
-}
-function renderSenior(){
-  let rows=filt(DATA.senior_spotlight);const sk=state.sort.senior;
-  if(sk){rows.sort((a,b)=>{let av=a[sk],bv=b[sk];if(sk==='signup_date'){av=new Date(av);bv=new Date(bv);}else if(typeof av==='string'){av=av.toLowerCase();bv=(bv||'').toLowerCase();}if(av==null)av='';if(bv==null)bv='';const d=state.sortDir==='desc'?-1:1;return av>bv?d:av<bv?-d:0;});}
-  const tb=document.getElementById('seniorBody');
-  if(!rows.length){tb.innerHTML=`<tr><td colspan="7" class="empty">No senior sign-ups</td></tr>`;return;}
-  tb.innerHTML=rows.map(r=>{const tb2=r.account_type==='Whitespace'?'<span class="badge ws">WS</span>':'<span class="badge existing">Exist</span>';const atl=r.is_atl==='Yes (ATL)'?'<span class="badge atl">ATL</span>':'';const name=r.full_name||r.email.split('@')[0];const active=r.is_active_l7d?'<span style="color:#20C933;font-weight:700">Yes</span>':'<span style="color:var(--faint)">No</span>';return `<tr class="clickable" onclick="openAccount('${r.account_name.replace(/'/g,"\\'")}')"><td><b>${name}</b></td><td>${r.job_title}</td><td>${atl} ${r.seniority||'<span style="color:var(--faint)">&mdash;</span>'}</td><td>${r.account_name}</td><td>${tb2}</td><td class="mono">${r.signup_date}</td><td>${active}</td></tr>`;}).join('');
-  document.getElementById('navSenior').textContent=rows.length;
-}
-function talkingPoints(){
-  const accts=filt(DATA.accounts),high=filt(DATA.high_psus),senior=filt(DATA.senior_spotlight);
-  function bullets(){const b=[];if(!accts.length)return['No PSU activity under current filters.'];const top=[...accts].sort((a,b)=>b.psus_28d-a.psus_28d)[0];b.push(`${top.account_name} is your hottest account &mdash; <b>${top.psus_28d} sign-ups in 28d</b> (${top.psus_this_week} this week). ${top.account_type==='Whitespace'?'Still whitespace &mdash; strong expansion opening.':'Existing customer &mdash; deepening usage.'}`);const tr=accts.filter(a=>+a.accel_vs_baseline>1).sort((a,b)=>b.accel_vs_baseline-a.accel_vs_baseline);if(tr.length)b.push(`${tr[0].account_name} is <b>accelerating (+${tr[0].accel_vs_baseline})</b> vs its own baseline &mdash; worth a proactive call this week.`);const sr=senior.filter(s=>s.is_atl==='Yes (ATL)'||['Director','VP','C-level'].includes(s.seniority));if(sr.length){const s=sr[0];b.push(`${s.account_name} had a <b>${s.seniority||'senior'} sign-up</b>${s.is_atl==='Yes (ATL)'?' (ATL persona)':''} &mdash; ${s.job_title}. Worth flagging before your next touch.`);}if(high.length){const h=high[0];b.push(`${h.account_name} hit <b>High priority</b> &mdash; ${h.reasons}. ${h.psu_count_28d} total sign-ups there in 28d.`);}const multi=accts.filter(a=>a.is_multi_signup==1&&a.psus_28d>=3);if(multi.length>=2)b.push(`<b>${multi.length} accounts</b> showing multi-signup clustering (&ge;3 in 28d) &mdash; coordinated interest, not one-offs.`);return b.slice(0,5);}
-  document.getElementById('talkingBody').innerHTML=`<h3><span style="width:10px;height:10px;border-radius:50%;background:var(--accent);display:inline-block"></span>Ryan</h3><ul>${bullets().map(x=>`<li>${x}</li>`).join('')}</ul>`;
-}
-function openAccount(name){
-  const acct=DATA.accounts.find(a=>a.account_name===name);if(!acct)return;state.modalAccount=name;
-  const psus=DATA.high_psus.filter(p=>p.account_name===name),seniors=DATA.senior_spotlight.filter(s=>s.account_name===name);
-  const tb=acct.account_type==='Whitespace'?'<span class="badge ws">Whitespace</span>':'<span class="badge existing">Existing Customer</span>';
-  document.getElementById('modalTitle').textContent=acct.account_name;
-  document.getElementById('modalSub').innerHTML=`${tb} &middot; ${acct.stage||'no stage'} &middot; ${acct.industry||''}`;
-  const vals=[acct.psus_w3,acct.psus_w2,acct.psus_w1,acct.psus_this_week];
-  document.getElementById('modalBody').innerHTML=`<div class="info-grid"><div class="info-item"><div class="il">This Week / 28d</div><div class="iv">${acct.psus_this_week} / ${acct.psus_28d}</div></div><div class="info-item"><div class="il">Acceleration</div><div class="iv" style="color:${+acct.accel_vs_baseline>1?'#20C933':(+acct.accel_vs_baseline<-1?'#F82B60':'var(--text)')}">${acct.accel_vs_baseline>0?'+':''}${acct.accel_vs_baseline}</div></div><div class="info-item"><div class="il">Cluster</div><div class="iv">${acct.is_multi_signup==1?'<span class="badge cluster">Multi-signup</span>':'Single'}</div></div></div><div style="margin-bottom:18px">${spark(vals,300,44)}</div><div class="section-title">High-Priority Sign-ups <span class="pill">${psus.length}</span></div>${psus.length?`<table class="tbl"><thead><tr><th>Name</th><th>Title</th><th>Signed Up</th><th>Engagement</th><th>Score</th><th>Reason</th></tr></thead><tbody>${psus.map(p=>`<tr><td><b>${p.full_name||p.email}</b><br><span style="font-size:10px;color:var(--faint)">${p.email}</span></td><td>${p.job_title||'&mdash;'} ${p.seniority_source==='none'?'<span class="badge enrich">enrich</span>':''}</td><td class="mono">${p.signup_date}</td><td>${p.is_active_l7d?'<span class="badge active">Active L7d</span>':'&mdash;'}</td><td class="num"><b>${p.total_score}</b></td><td style="font-size:11px;color:var(--muted)">${p.reasons}</td></tr>`).join('')}</tbody></table>`:'<p class="empty">No high-priority sign-ups at this account.</p>'}<div class="section-title" style="margin-top:20px">Senior Sign-ups <span class="pill">${seniors.length}</span></div>${seniors.length?`<table class="tbl"><thead><tr><th>Name</th><th>Title</th><th>Seniority</th><th>Signed Up</th></tr></thead><tbody>${seniors.map(s=>`<tr><td><b>${s.full_name||s.email}</b></td><td>${s.job_title}</td><td>${s.is_atl==='Yes (ATL)'?'<span class="badge atl">ATL</span> ':''}${s.seniority||'&mdash;'}</td><td class="mono">${s.signup_date}</td></tr>`).join('')}</tbody></table>`:'<p class="empty">No senior sign-ups at this account.</p>'}`;
-  document.getElementById('modal').classList.add('show');
-}
-function closeModal(){document.getElementById('modal').classList.remove('show');state.modalAccount=null;}
-function handleRefresh(){const btn=event.target.closest('button');btn.innerHTML='&#x21bb; Refreshing...';btn.disabled=true;setTimeout(()=>{const now=new Date();document.getElementById('refreshNote').textContent='Refreshed '+now.toLocaleString('en-AU',{dateStyle:'medium',timeStyle:'short'})+' AEST';btn.innerHTML='&#x21bb; Refresh';btn.disabled=false;renderAll();},900);}
-function bindSort(tid,vk){document.querySelectorAll('#'+tid+' th[data-sort]').forEach(th=>th.addEventListener('click',()=>{const k=th.dataset.sort;if(state.sort[vk]===k){state.sortDir=state.sortDir==='asc'?'desc':'asc';}else{state.sort[vk]=k;state.sortDir='desc';}renderAll();}));}
-function renderAll(){renderKPIs();renderTrend();renderTiers();renderAccounts();renderTrending();renderPriority();renderSenior();talkingPoints();}
-document.querySelectorAll('#typeSeg button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#typeSeg button').forEach(x=>x.classList.remove('active'));b.classList.add('active');state.type=b.dataset.type;renderAll();}));
-document.querySelectorAll('.nav-tabs button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.nav-tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById('view-'+b.dataset.view).classList.add('active');state.view=b.dataset.view;}));
-bindSort('accountsTable','accounts');bindSort('priorityTable','priority');bindSort('seniorTable','senior');
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
-const now=new Date();document.getElementById('refreshNote').textContent='Updated '+now.toLocaleString('en-AU',{dateStyle:'medium',timeStyle:'short'})+' AEST';
-renderAll();
+document.getElementById('seniorList').innerHTML = a.senior_7d.length ? a.senior_7d.map(s=>personCard(s,false)).join('') : '<p style="color:var(--muted);font-style:italic;">No senior sign-ups in your book this week.</p>';
+
+// Priority list
+document.getElementById('priorityList').innerHTML = a.priority_7d.length ? a.priority_7d.map(s=>personCard(s,true)).join('') : '<p style="color:var(--muted);font-style:italic;">No high-priority sign-ups this week &mdash; the signals didn&rsquo;t line up, which is fine. Check the accounts list below for anything worth a manual look.</p>';
+
+// Account list
+const allAccts = [...a.accounts_7d].sort((x,y)=>y.psus_7d-x.psus_7d);
+document.getElementById('acctList').innerHTML = allAccts.map((x,i)=>{
+  const ws=x.account_type==='Whitespace';
+  return `<li class="acct-item"><span class="rank">${i+1}</span><span class="nm">${x.account_name}<span class="badge ${ws?'ws':'ex'}" style="margin-left:6px">${ws?'WS':'Exist'}</span><span class="ind">${x.industry||''}</span></span><span class="cnt">${x.psus_7d}<span class="cl">sign-ups</span></span></li>`;
+}).join('');
+
+// Footnote
+document.getElementById('footnote').innerHTML = `<p><b>How to read this.</b> Sign-ups are attributed by matching the user&rsquo;s email domain to your account book via Clearbit, then to your Salesforce account ownership. &ldquo;Whitespace&rdquo; means no existing Airtable relationship; &ldquo;Existing&rdquo; means an enterprise customer. The priority score blends <b>early engagement</b> (in-product activity in the first 3&ndash;7 days), <b>seniority</b> (title or Above-the-Line persona), and <b>multi-signup clustering</b> (2+ people from the same account). Weights: engagement 0.35, seniority 0.30, clustering 0.35; High &ge;0.60, Medium &ge;0.30.</p><p style="margin-top:10px;"><b>Confidence flags.</b> A <span class="badge enrich">enrich</span> tag means a title wasn&rsquo;t in Salesforce and is pending LinkedIn lookup &mdash; treat that seniority as lower confidence. The &ldquo;28-day view&rdquo; is commentary, not a forecast; momentum can be lumpy (a single shared-template campaign can spike a week). When in doubt, lean on the senior and high-priority lists.</p><p style="margin-top:10px;color:var(--faint);">Refreshed `+'Thu 02 Jul 2026, 15:19 AEST'+` · Source: Airtable analytics warehouse (Databricks) · Prepared by the BDR Co-Pilot</p>`;
 </script>
 </body></html>
