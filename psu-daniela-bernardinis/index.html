@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly PSU Review — Daniela Bernardinis</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#FAFBFD; --surface:#FFFFFF; --border:#ECEEF3; --border2:#E0E3EA;
+  --text:#1D1F25; --muted:#6B7280; --faint:#9CA3AF;
+  --at-yellow:#FCB400; --at-pink:#F82B60; --at-purple:#8B46FF; --at-blue:#2D7FF9; --at-teal:#18BFFF; --at-green:#20C933; --at-orange:#FF6B2C;
+  --accent:#8B46FF; --accent2:#F82B60; --accentSoft:#F3ECFF; --accentGlow:rgba(139,70,255,0.25);
+  --shadow:0 1px 3px rgba(16,24,40,0.04),0 1px 2px rgba(16,24,40,0.06);
+  --shadowLg:0 8px 24px rgba(16,24,40,0.08),0 2px 6px rgba(16,24,40,0.04);
+  --radius:14px;
+}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--text);font-size:13px;line-height:1.45;-webkit-font-smoothing:antialiased;}
+.mono{font-family:'JetBrains Mono',monospace;}
+.display{font-family:'Space Grotesk',sans-serif;}
+
+/* ===== Password gate ===== */
+#gate{position:fixed;inset:0;background:linear-gradient(135deg,#1D1F25 0%,#2A2D38 100%);z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px;}
+#gate.hide{display:none;}
+.gate-card{background:#fff;border-radius:20px;padding:40px 36px;max-width:380px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,0.3);text-align:center;}
+.gate-logo{display:flex;gap:4px;justify-content:center;margin-bottom:20px;}
+.gate-logo span{width:14px;height:14px;border-radius:4px;}
+.gate-card h2{font-family:'Space Grotesk';font-size:22px;font-weight:700;margin-bottom:6px;}
+.gate-card p{font-size:13px;color:var(--muted);margin-bottom:24px;}
+.gate-input{width:100%;padding:13px 16px;border:2px solid var(--border2);border-radius:10px;font-size:14px;font-family:inherit;margin-bottom:12px;transition:border-color 0.2s;}
+.gate-input:focus{outline:none;border-color:var(--accent);}
+.gate-btn{width:100%;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:600;font-family:inherit;cursor:pointer;transition:transform 0.1s;}
+.gate-btn:hover{filter:brightness(1.05);}
+.gate-btn:active{transform:scale(0.98);}
+.gate-err{color:var(--at-pink);font-size:12px;margin-top:10px;min-height:16px;}
+
+/* ===== Header ===== */
+.header{background:var(--surface);border-bottom:1px solid var(--border);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:var(--shadow);}
+.header-left{display:flex;align-items:center;gap:14px;}
+.brand-blocks{display:flex;gap:3px;}
+.brand-blocks span{width:10px;height:24px;border-radius:3px;}
+.logo-text{font-family:'Space Grotesk';font-weight:700;font-size:13px;color:var(--muted);letter-spacing:-0.2px;}
+.header h1{font-family:'Space Grotesk';font-size:20px;font-weight:700;letter-spacing:-0.5px;}
+.header .sub{font-size:12px;color:var(--muted);margin-top:2px;display:flex;align-items:center;gap:8px;}
+.ae-pill{display:inline-flex;align-items:center;gap:6px;background:var(--accentSoft);color:var(--accent);font-weight:600;font-size:11px;padding:2px 9px;border-radius:20px;}
+.ae-pill .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);}
+.header .meta{display:flex;align-items:center;gap:14px;}
+.refresh-note{font-size:11px;color:var(--faint);}
+.refresh-btn{background:var(--text);color:#fff;border:none;padding:8px 15px;border-radius:9px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:transform 0.1s;}
+.refresh-btn:hover{filter:brightness(1.15);}
+.refresh-btn:active{transform:scale(0.97);}
+
+/* ===== Controls ===== */
+.controls{padding:14px 28px;border-bottom:1px solid var(--border);display:flex;gap:22px;align-items:center;flex-wrap:wrap;background:var(--surface);}
+.ctrl-group{display:flex;align-items:center;gap:10px;}
+.ctrl-label{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;}
+.seg{display:flex;background:var(--bg);border:1px solid var(--border2);border-radius:10px;padding:3px;gap:2px;}
+.seg button{border:none;background:transparent;padding:6px 14px;font-size:12px;font-weight:600;cursor:pointer;border-radius:7px;color:var(--muted);font-family:inherit;transition:all 0.18s;}
+.seg button.active{background:var(--accent);color:#fff;box-shadow:0 2px 6px var(--accentGlow);}
+.seg button:hover:not(.active){background:var(--surface);color:var(--text);}
+
+/* ===== Nav tabs ===== */
+.nav-tabs{padding:0 28px;border-bottom:1px solid var(--border);display:flex;gap:2px;background:var(--surface);overflow-x:auto;}
+.nav-tabs button{border:none;background:transparent;padding:14px 18px;font-size:13px;font-weight:600;cursor:pointer;color:var(--muted);font-family:inherit;border-bottom:3px solid transparent;transition:all 0.18s;white-space:nowrap;}
+.nav-tabs button.active{color:var(--accent);border-bottom-color:var(--accent);}
+.nav-tabs button:hover:not(.active){color:var(--text);}
+.count-badge{display:inline-block;background:var(--bg);color:var(--muted);font-size:10px;font-weight:700;padding:1px 7px;border-radius:10px;margin-left:6px;border:1px solid var(--border2);}
+.nav-tabs button.active .count-badge{background:var(--accentSoft);color:var(--accent);border-color:transparent;}
+
+/* ===== Main ===== */
+.main{padding:24px 28px 60px;max-width:1500px;margin:0 auto;}
+.view{display:none;}
+.view.active{display:block;animation:fadeIn 0.3s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+/* ===== KPI cards ===== */
+.kpi-row{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:26px;}
+.kpi{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:var(--shadow);position:relative;overflow:hidden;transition:transform 0.15s,box-shadow 0.15s;}
+.kpi:hover{transform:translateY(-2px);box-shadow:var(--shadowLg);}
+.kpi::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--accent);opacity:0.7;}
+.kpi.k-yellow::before{background:var(--at-yellow);}.kpi.k-pink::before{background:var(--at-pink);}.kpi.k-purple::before{background:var(--at-purple);}.kpi.k-blue::before{background:var(--at-blue);}.kpi.k-green::before{background:var(--at-green);}.kpi.k-teal::before{background:var(--at-teal);}.kpi.k-orange::before{background:var(--at-orange);}
+.kpi .label{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;}
+.kpi .value{font-family:'Space Grotesk';font-size:34px;font-weight:700;letter-spacing:-1.5px;margin-top:8px;line-height:1;}
+.kpi .delta{font-size:11px;margin-top:6px;font-weight:600;display:flex;align-items:center;gap:3px;}
+.kpi .delta.up{color:var(--at-green);}.kpi .delta.down{color:var(--at-pink);}.kpi .delta.flat{color:var(--faint);}
+.kpi .sub-label{font-size:11px;color:var(--faint);margin-top:3px;}
+
+/* ===== Section ===== */
+.section{margin-bottom:30px;}
+.section-title{font-family:'Space Grotesk';font-size:16px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px;letter-spacing:-0.3px;}
+.section-title .pill{font-size:10px;font-weight:700;padding:3px 9px;border-radius:12px;background:var(--accentSoft);color:var(--accent);text-transform:uppercase;letter-spacing:0.5px;}
+
+/* ===== Tables ===== */
+.tbl{width:100%;border-collapse:separate;border-spacing:0;font-size:12px;background:var(--surface);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);}
+.tbl th{text-align:left;padding:11px 14px;background:var(--bg);border-bottom:2px solid var(--border2);font-weight:700;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:0.4px;white-space:nowrap;cursor:pointer;user-select:none;}
+.tbl th:hover{color:var(--accent);}
+.tbl td{padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:middle;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:var(--bg);}
+.tbl tr.clickable{cursor:pointer;}
+.tbl .num{text-align:right;font-variant-numeric:tabular-nums;font-weight:500;}
+
+/* ===== Badges (Airtable block colors) ===== */
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;padding:3px 8px;border-radius:6px;white-space:nowrap;}
+.badge.high{background:#FEE2E5;color:#C01048;}.badge.medium{background:#FFF4D6;color:#B95C00;}.badge.low{background:#F0F1F3;color:#6B7280;}
+.badge.ws{background:#F3ECFF;color:#7C3AED;}.badge.existing{background:#D4F5DD;color:#0A7B33;}
+.badge.cluster{background:#E8F2FE;color:#1859C1;}.badge.atl{background:#FEE2E5;color:#C01048;}
+.badge.enrich{background:#FFF4D6;color:#B95C00;border:1px dashed #E8B84A;}
+.badge.build{background:#D4F5DD;color:#0A7B33;}.badge.collab{background:#E8F2FE;color:#1859C1;}.badge.active{background:#FFF4D6;color:#B95C00;}
+
+/* ===== Sparkline ===== */
+.spark{display:inline-block;vertical-align:middle;}
+.trend-up{color:var(--at-green);font-weight:700;}.trend-down{color:var(--at-pink);font-weight:700;}.trend-flat{color:var(--faint);}
+
+/* ===== Score bar ===== */
+.score-bar{width:64px;height:7px;background:var(--bg);border-radius:4px;overflow:hidden;display:inline-block;vertical-align:middle;border:1px solid var(--border2);}
+.score-bar .fill{height:100%;border-radius:3px;}
+
+/* ===== Modal ===== */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(29,31,37,0.5);backdrop-filter:blur(4px);z-index:200;padding:40px 20px;overflow-y:auto;}
+.modal-overlay.show{display:flex;align-items:flex-start;justify-content:center;}
+.modal{background:var(--surface);border-radius:18px;max-width:920px;width:100%;margin:auto;box-shadow:0 24px 80px rgba(0,0,0,0.25);overflow:hidden;}
+.modal-head{padding:20px 26px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:start;background:var(--bg);}
+.modal-head h2{font-family:'Space Grotesk';font-size:20px;font-weight:700;letter-spacing:-0.3px;}
+.modal-head .close{background:var(--surface);border:1px solid var(--border2);font-size:18px;cursor:pointer;color:var(--muted);width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;}
+.modal-head .close:hover{color:var(--text);border-color:var(--muted);}
+.modal-body{padding:22px 26px;}
+.modal-body .info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:20px;}
+.modal-body .info-item{background:var(--bg);border-radius:10px;padding:12px 14px;}
+.modal-body .info-item .il{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;font-weight:700;}
+.modal-body .info-item .iv{font-family:'Space Grotesk';font-size:16px;font-weight:700;margin-top:3px;}
+
+/* ===== Talking points ===== */
+.tp-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow);border-left:4px solid var(--accent);}
+.tp-card h3{font-family:'Space Grotesk';font-size:16px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.tp-card ul{list-style:none;}
+.tp-card li{padding:11px 0;border-bottom:1px solid var(--border);font-size:14px;line-height:1.55;padding-left:22px;position:relative;color:var(--text);}
+.tp-card li:last-child{border-bottom:none;}
+.tp-card li:before{content:'';position:absolute;left:0;top:18px;width:8px;height:8px;border-radius:50%;background:var(--accent);}
+
+/* ===== Trending ===== */
+.trending-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;box-shadow:var(--shadow);border-left:4px solid var(--at-green);transition:transform 0.15s,box-shadow 0.15s;cursor:pointer;}
+.trending-card:hover{transform:translateY(-2px);box-shadow:var(--shadowLg);}
+.trending-card .tn{font-weight:700;font-size:14px;font-family:'Space Grotesk';}
+.trending-card .td{font-size:11px;color:var(--muted);margin-top:3px;}
+.trending-card .trend-val{font-family:'Space Grotesk';font-size:22px;font-weight:700;color:var(--at-green);}
+
+/* ===== Weights ===== */
+.weights{background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:14px 18px;font-size:11px;color:var(--muted);margin-bottom:18px;line-height:1.6;}
+.weights b{color:var(--text);}
+.weights .w-tag{display:inline-block;margin-right:16px;}
+.weights .w-dot{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:3px;vertical-align:middle;}
+
+.empty{text-align:center;padding:48px;color:var(--faint);font-size:13px;}
+@media(max-width:1100px){.kpi-row{grid-template-columns:repeat(2,1fr);}.modal-body .info-grid{grid-template-columns:1fr 1fr;}#trendingBody{grid-template-columns:1fr !important;}}
+</style>
+</head>
+<body>
+
+<!-- ===== Password gate ===== -->
+<div id="gate">
+  <div class="gate-card">
+    <div class="gate-logo"><span style="background:#FCB400"></span><span style="background:#F82B60"></span><span style="background:#8B46FF"></span><span style="background:#2D7FF9"></span><span style="background:#18BFFF"></span><span style="background:#20C933"></span></div>
+    <h2>Weekly PSU Review</h2>
+    <p>Daniela Bernardinis &middot; ANZ Strategic</p>
+    <input type="password" class="gate-input" id="pwInput" placeholder="Enter access password" onkeydown="if(event.key==='Enter')checkPw()">
+    <button class="gate-btn" onclick="checkPw()">Access dashboard</button>
+    <div class="gate-err" id="pwErr"></div>
+  </div>
+</div>
+
+<div id="app">
+<div class="header">
+  <div class="header-left">
+    <div class="brand-blocks"><span style="background:#FCB400"></span><span style="background:#F82B60"></span><span style="background:#8B46FF"></span><span style="background:#2D7FF9"></span><span style="background:#18BFFF"></span><span style="background:#20C933"></span></div>
+    <div>
+      <div class="logo-text">AIRTABLE &middot; BDR CO-PILOT</div>
+      <h1>Weekly PSU Review</h1>
+      <div class="sub"><span class="ae-pill"><span class="dot"></span>Daniela Bernardinis</span> ANZ Strategic &middot; <span id="refreshNote"></span></div>
+    </div>
+  </div>
+  <div class="meta">
+    <button class="refresh-btn" onclick="handleRefresh()">&#x21bb; Refresh</button>
+  </div>
+</div>
+
+<div class="controls">
+  <div class="ctrl-group">
+    <span class="ctrl-label">Account</span>
+    <div class="seg" id="typeSeg">
+      <button class="active" data-type="All">All</button>
+      <button data-type="Whitespace">Whitespace</button>
+      <button data-type="Existing Customer">Existing</button>
+    </div>
+  </div>
+</div>
+
+<div class="nav-tabs">
+  <button class="active" data-view="summary">Summary</button>
+  <button data-view="accounts">Accounts <span class="count-badge" id="navAccounts">0</span></button>
+  <button data-view="trending">Trending</button>
+  <button data-view="priority">Priority PSUs <span class="count-badge" id="navPriority">0</span></button>
+  <button data-view="senior">Senior Spotlight <span class="count-badge" id="navSenior">0</span></button>
+  <button data-view="talking">Talking Points</button>
+</div>
+
+<div class="main">
+
+<div class="view active" id="view-summary">
+  <div class="kpi-row" id="kpiRow"></div>
+  <div class="section">
+    <div class="section-title">Week-over-Week Trend <span class="pill">trailing 4 weeks</span></div>
+    <table class="tbl"><thead><tr><th>Account Type</th><th class="num">This Week</th><th class="num">Last Week</th><th class="num">Week -2</th><th class="num">Week -3</th><th class="num">28d Total</th><th>Trend</th></tr></thead><tbody id="trendBody"></tbody></table>
+  </div>
+  <div class="section">
+    <div class="section-title">Priority Tier Distribution <span class="pill">28d</span></div>
+    <div class="weights"><span class="w-tag">Scoring: <span class="w-dot" style="background:#2D7FF9"></span><b>Engagement 0.35</b> &middot; <span class="w-dot" style="background:#8B46FF"></span><b>Seniority 0.30</b> &middot; <span class="w-dot" style="background:#FCB400"></span><b>Clustering 0.35</b></span><span class="w-tag">Tier: <b>&ge;0.60 High</b> &middot; <b>&ge;0.30 Medium</b> &middot; <b>&lt;0.30 Low</b></span></div>
+    <table class="tbl"><thead><tr><th>Tier</th><th class="num">28d Total</th><th class="num">This Week</th></tr></thead><tbody id="tierBody"></tbody></table>
+  </div>
+</div>
+
+<div class="view" id="view-accounts">
+  <div class="section">
+    <div class="section-title">Account-Level Rollup <span class="pill">one row per account &middot; 28d</span></div>
+    <table class="tbl" id="accountsTable"><thead><tr><th data-sort="account_name">Account</th><th data-sort="account_type">Type</th><th data-sort="stage">Stage</th><th data-sort="industry">Industry</th><th class="num" data-sort="psus_this_week">This Wk</th><th class="num" data-sort="psus_28d">28d</th><th>Trend</th><th class="num" data-sort="accel_vs_baseline">Accel</th><th>Cluster</th></tr></thead><tbody id="accountsBody"></tbody></table>
+  </div>
+</div>
+
+<div class="view" id="view-trending">
+  <div class="section">
+    <div class="section-title">Trending Accounts <span class="pill">accelerating vs own baseline</span></div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Accounts where this week's sign-up volume exceeds their trailing 3-week average &mdash; buying-intent acceleration, not just raw volume.</p>
+    <div id="trendingBody" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;"></div>
+  </div>
+</div>
+
+<div class="view" id="view-priority">
+  <div class="section">
+    <div class="section-title">High-Priority PSUs <span class="pill">High tier &middot; sortable</span></div>
+    <div class="weights">Each PSU scored on <b>engagement</b> (in-product activity first 3-7d), <b>seniority</b> (title/ATL persona), and <b>multi-signup clustering</b>. Reason column explains the tier so you can justify it live. <span class="badge enrich">enrich</span> = seniority pending LinkedIn lookup (lower confidence).</div>
+    <table class="tbl" id="priorityTable"><thead><tr><th data-sort="full_name">Name</th><th data-sort="job_title">Title</th><th data-sort="account_name">Account</th><th data-sort="account_type">Type</th><th data-sort="signup_date">Signed Up</th><th>Engagement</th><th class="num" data-sort="total_score">Score</th><th>Why High Priority</th></tr></thead><tbody id="priorityBody"></tbody></table>
+  </div>
+</div>
+
+<div class="view" id="view-senior">
+  <div class="section">
+    <div class="section-title">Senior PSU Spotlight <span class="pill">Director+ &amp; ATL &middot; regardless of score</span></div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:16px;">Worth flagging even without other signals &mdash; senior stakeholders at accounts in your book.</p>
+    <table class="tbl" id="seniorTable"><thead><tr><th data-sort="full_name">Name</th><th data-sort="job_title">Title</th><th>Seniority</th><th data-sort="account_name">Account</th><th data-sort="account_type">Type</th><th data-sort="signup_date">Signed Up</th><th>Active L7d</th></tr></thead><tbody id="seniorBody"></tbody></table>
+  </div>
+</div>
+
+<div class="view" id="view-talking">
+  <div class="section">
+    <div class="section-title">Talking Points <span class="pill">for Daniela &middot; say this out loud</span></div>
+    <div class="tp-card" id="talkingBody"></div>
+  </div>
+</div>
+
+</div></div><!-- /main /app -->
+
+<div class="modal-overlay" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-head"><div><h2 id="modalTitle"></h2><div class="sub" id="modalSub" style="font-size:12px;color:var(--muted);margin-top:4px;"></div></div><button class="close" onclick="closeModal()">&times;</button></div>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+// Password gate
+const PW_HASH='c7db374d8234097409c7ba43c623f0acf2e02726a9e0894e7da3b1dcec610fec';
+function checkPw(){
+  const v=document.getElementById('pwInput').value;
+  // sha256 via SubtleCrypto
+  crypto.subtle.digest('SHA-256',new TextEncoder().encode(v)).then(buf=>{
+    const h=Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+    if(h===PW_HASH){document.getElementById('gate').classList.add('hide');}
+    else{document.getElementById('pwErr').textContent='Incorrect password. Try again.';document.getElementById('pwInput').value='';document.getElementById('pwInput').focus();}
+  });
+}
+
+const DATA = {"ae_name": "Daniela Bernardinis", "high_psus": [{"full_name": "Paul Sykes", "email": "paul.sykes@gravitymedia.com", "job_title": "Head of Si", "seniority": "Director", "is_atl": true, "seniority_source": "direct_email", "account_name": "Gravity Media, LLC", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "signup_date": "2026-06-30", "psu_count_28d": 7, "psu_count_7d": 3, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": true, "engagement_score": 0.6, "seniority_score": 1.0, "clustering_score": 1.0, "total_score": 0.86, "reasons": "Active in last 7d; Above-the-Line persona (senior); 7 signups from this account in 28d (cluster)"}, {"full_name": "Kait Reichardt", "email": "kaitreichardt@jelliscraig.com.au", "job_title": "Operations", "seniority": "", "is_atl": false, "seniority_source": "direct_email", "account_name": "Jellis Craig Corporation", "ae_name": "Daniela Bernardinis", "account_type": "Existing Customer", "signup_date": "2026-06-17", "psu_count_28d": 30, "psu_count_7d": 5, "is_multi_signup": 1, "reached_build_7d": 1, "reached_collab_7d": 1, "is_active_l7d": true, "engagement_score": 1.0, "seniority_score": 0.0, "clustering_score": 1.0, "total_score": 0.7, "reasons": "Reached build stage within 7d; 30 signups from this account in 28d (cluster)"}, {"full_name": "Nicholas Corby", "email": "nicholascorby@jelliscraig.com.au", "job_title": "Partner, Licensed Estate Agent", "seniority": "Director", "is_atl": false, "seniority_source": "direct_email", "account_name": "Jellis Craig Corporation", "ae_name": "Daniela Bernardinis", "account_type": "Existing Customer", "signup_date": "2026-06-18", "psu_count_28d": 30, "psu_count_7d": 5, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": true, "engagement_score": 0.6, "seniority_score": 0.7, "clustering_score": 1.0, "total_score": 0.77, "reasons": "Active in last 7d; Senior title: Director; 30 signups from this account in 28d (cluster)"}, {"full_name": "Charles Atkins", "email": "charlesatkins@jelliscraig.com.au", "job_title": "Partner, Auctioneer", "seniority": "Director", "is_atl": false, "seniority_source": "direct_email", "account_name": "Jellis Craig Corporation", "ae_name": "Daniela Bernardinis", "account_type": "Existing Customer", "signup_date": "2026-06-18", "psu_count_28d": 30, "psu_count_7d": 5, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": false, "engagement_score": 0.4, "seniority_score": 0.7, "clustering_score": 1.0, "total_score": 0.7, "reasons": "Senior title: Director; 30 signups from this account in 28d (cluster)"}, {"full_name": "Hamish Turner", "email": "hturner@nine.com.au", "job_title": "Director 9now, Programming", "seniority": "Director", "is_atl": true, "seniority_source": "direct_email", "account_name": "Nine Entertainment Pty Ltd", "ae_name": "Daniela Bernardinis", "account_type": "Existing Customer", "signup_date": "2026-06-16", "psu_count_28d": 8, "psu_count_7d": 3, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": false, "engagement_score": 0.4, "seniority_score": 1.0, "clustering_score": 1.0, "total_score": 0.79, "reasons": "Above-the-Line persona (senior); 8 signups from this account in 28d (cluster)"}, {"full_name": "Justin Macchio", "email": "justin.macchio@awal.com", "job_title": "VP, Marketing", "seniority": "VP", "is_atl": true, "seniority_source": "direct_email", "account_name": "Awal", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "signup_date": "2026-06-24", "psu_count_28d": 2, "psu_count_7d": 0, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": true, "engagement_score": 0.6, "seniority_score": 1.0, "clustering_score": 0.6, "total_score": 0.72, "reasons": "Active in last 7d; Above-the-Line persona (senior); 2 signups from this account in 28d"}, {"full_name": "Jennifer Kirell", "email": "jennifer.kirell@awal.com", "job_title": "SVP, Artist Development, Catalog", "seniority": "VP", "is_atl": true, "seniority_source": "direct_email", "account_name": "Awal", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "signup_date": "2026-06-19", "psu_count_28d": 2, "psu_count_7d": 0, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": true, "engagement_score": 0.6, "seniority_score": 1.0, "clustering_score": 0.6, "total_score": 0.72, "reasons": "Active in last 7d; Above-the-Line persona (senior); 2 signups from this account in 28d"}, {"full_name": "Emily Wiedenfeld", "email": "e.cleaveland@cheil.com", "job_title": "Account Supervisor, Influencer Marketing", "seniority": "Manager", "is_atl": false, "seniority_source": "direct_email", "account_name": "Cheil Worldwide Inc.", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "signup_date": "2026-06-08", "psu_count_28d": 7, "psu_count_7d": 3, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": false, "engagement_score": 0.4, "seniority_score": 0.4, "clustering_score": 1.0, "total_score": 0.61, "reasons": "Manager-level; 7 signups from this account in 28d (cluster)"}, {"full_name": "Teasha", "email": "paevents@bigpond.com", "job_title": "", "seniority": "", "is_atl": false, "seniority_source": "none", "account_name": "bigpond.com", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "signup_date": "2026-06-21", "psu_count_28d": 21, "psu_count_7d": 7, "is_multi_signup": 1, "reached_build_7d": 1, "reached_collab_7d": 0, "is_active_l7d": false, "engagement_score": 1.0, "seniority_score": 0.0, "clustering_score": 1.0, "total_score": 0.7, "reasons": "Reached build stage within 7d; 21 signups from this account in 28d (cluster)"}, {"full_name": "Simon Shrimpton", "email": "simonshrimpton@jelliscraig.com.au", "job_title": "Partner, Senior Auctioneer", "seniority": "Manager", "is_atl": false, "seniority_source": "direct_email", "account_name": "Jellis Craig Corporation", "ae_name": "Daniela Bernardinis", "account_type": "Existing Customer", "signup_date": "2026-06-18", "psu_count_28d": 30, "psu_count_7d": 5, "is_multi_signup": 1, "reached_build_7d": 0, "reached_collab_7d": 0, "is_active_l7d": false, "engagement_score": 0.4, "seniority_score": 0.4, "clustering_score": 1.0, "total_score": 0.61, "reasons": "Manager-level; 30 signups from this account in 28d (cluster)"}], "senior_spotlight": [{"full_name": "Tanya Fang", "email": "tanyafang@msi.com", "job_title": "GM", "seniority": "VP", "is_atl": "No", "account_name": "Micro-Star INT'L CO., LTD.", "ae_name": "Daniela Bernardinis", "account_type": "Existing Customer", "signup_date": "2026-06-30", "is_active_l7d": false}, {"full_name": "Paul Sykes", "email": "paul.sykes@gravitymedia.com", "job_title": "Head of Si", "seniority": "Director", "is_atl": "Yes (ATL)", "account_name": "Gravity Media, LLC", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "signup_date": "2026-06-30", "is_active_l7d": true}, {"full_name": "Justin Macchio", "email": "justin.macchio@awal.com", "job_title": "VP, Marketing", "seniority": "VP", "is_atl": "Yes (ATL)", "account_name": "Awal", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "signup_date": "2026-06-24", "is_active_l7d": true}, {"full_name": "Jennifer Kirell", "email": "jennifer.kirell@awal.com", "job_title": "SVP, Artist Development, Catalog", "seniority": "VP", "is_atl": "Yes (ATL)", "account_name": "Awal", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "signup_date": "2026-06-19", "is_active_l7d": true}, {"full_name": "Nicholas Corby", "email": "nicholascorby@jelliscraig.com.au", "job_title": "Partner, Licensed Estate Agent", "seniority": "Director", "is_atl": "No", "account_name": "Jellis Craig Corporation", "ae_name": "Daniela Bernardinis", "account_type": "Existing Customer", "signup_date": "2026-06-18", "is_active_l7d": true}, {"full_name": "Simon Shrimpton", "email": "simonshrimpton@jelliscraig.com.au", "job_title": "Partner, Senior Auctioneer", "seniority": "Manager", "is_atl": "No", "account_name": "Jellis Craig Corporation", "ae_name": "Daniela Bernardinis", "account_type": "Existing Customer", "signup_date": "2026-06-18", "is_active_l7d": false}, {"full_name": "Charles Atkins", "email": "charlesatkins@jelliscraig.com.au", "job_title": "Partner, Auctioneer", "seniority": "Director", "is_atl": "No", "account_name": "Jellis Craig Corporation", "ae_name": "Daniela Bernardinis", "account_type": "Existing Customer", "signup_date": "2026-06-18", "is_active_l7d": false}, {"full_name": "Hamish Turner", "email": "hturner@nine.com.au", "job_title": "Director 9now, Programming", "seniority": "Director", "is_atl": "Yes (ATL)", "account_name": "Nine Entertainment Pty Ltd", "ae_name": "Daniela Bernardinis", "account_type": "Existing Customer", "signup_date": "2026-06-16", "is_active_l7d": false}, {"full_name": "Adrian Costello", "email": "adrianco@cloudstaff.com", "job_title": "VP, Client Success", "seniority": "VP", "is_atl": "Yes (ATL)", "account_name": "Cloudstaff", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "signup_date": "2026-06-09", "is_active_l7d": false}], "accounts": [{"account_name": "Australian Broadcasting Corporation", "ae_name": "Daniela Bernardinis", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "1. Strategic", "industry": "Broadcasting", "psus_this_week": 19, "psus_w1": 48, "psus_w2": 214, "psus_w3": 95, "psus_28d": 376, "is_multi_signup": 1, "accel_vs_baseline": -100.0}, {"account_name": "Jellis Craig Corporation", "ae_name": "Daniela Bernardinis", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "2. Mid-Market", "industry": "Real Estate", "psus_this_week": 5, "psus_w1": 15, "psus_w2": 5, "psus_w3": 5, "psus_28d": 30, "is_multi_signup": 1, "accel_vs_baseline": -3.3}, {"account_name": "bigpond.com", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Integrated Telecommunication Services", "psus_this_week": 7, "psus_w1": 4, "psus_w2": 5, "psus_w3": 5, "psus_28d": 21, "is_multi_signup": 1, "accel_vs_baseline": 2.3}, {"account_name": "Beijing Byte Dance Telecommunications Co., Ltd.", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "[4] SQA", "segment": "1. Strategic", "industry": "Internet Software & Services", "psus_this_week": 1, "psus_w1": 0, "psus_w2": 3, "psus_w3": 9, "psus_28d": 13, "is_multi_signup": 1, "accel_vs_baseline": -3.0}, {"account_name": "sydney.edu.au", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "", "segment": "2. Mid-Market", "industry": "Education", "psus_this_week": 1, "psus_w1": 5, "psus_w2": 2, "psus_w3": 3, "psus_28d": 11, "is_multi_signup": 1, "accel_vs_baseline": -2.3}, {"account_name": "Nine Entertainment Pty Ltd", "ae_name": "Daniela Bernardinis", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "1. Strategic", "industry": "Publishing", "psus_this_week": 3, "psus_w1": 2, "psus_w2": 2, "psus_w3": 1, "psus_28d": 8, "is_multi_signup": 1, "accel_vs_baseline": 1.3}, {"account_name": "Cheil Worldwide Inc.", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Advertising", "psus_this_week": 3, "psus_w1": 0, "psus_w2": 1, "psus_w3": 3, "psus_28d": 7, "is_multi_signup": 1, "accel_vs_baseline": 1.7}, {"account_name": "Gravity Media, LLC", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Movies & Entertainment", "psus_this_week": 3, "psus_w1": 0, "psus_w2": 3, "psus_w3": 1, "psus_28d": 7, "is_multi_signup": 1, "accel_vs_baseline": 1.7}, {"account_name": "SRG Global", "ae_name": "Daniela Bernardinis", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "1. Strategic", "industry": "Construction & Engineering", "psus_this_week": 1, "psus_w1": 2, "psus_w2": 1, "psus_w3": 2, "psus_28d": 6, "is_multi_signup": 1, "accel_vs_baseline": -0.7}, {"account_name": "Awal", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Music Production & Services", "psus_this_week": 0, "psus_w1": 2, "psus_w2": 0, "psus_w3": 0, "psus_28d": 2, "is_multi_signup": 1, "accel_vs_baseline": -0.7}, {"account_name": "Telstra International (Aus) Limited", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Integrated Telecommunication Services", "psus_this_week": 2, "psus_w1": 0, "psus_w2": 0, "psus_w3": 0, "psus_28d": 2, "is_multi_signup": 1, "accel_vs_baseline": 2.0}, {"account_name": "Spark New Zealand Trading Ltd", "ae_name": "Daniela Bernardinis", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "1. Strategic", "industry": "Integrated Telecommunication Services", "psus_this_week": 1, "psus_w1": 1, "psus_w2": 0, "psus_w3": 1, "psus_28d": 3, "is_multi_signup": 1, "accel_vs_baseline": 0.3}, {"account_name": "Cloudstaff", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "[4] SQA", "segment": "1. Strategic", "industry": "Professional Services", "psus_this_week": 0, "psus_w1": 0, "psus_w2": 0, "psus_w3": 1, "psus_28d": 1, "is_multi_signup": 0, "accel_vs_baseline": -0.3}, {"account_name": "Micro-Star INT'L CO., LTD.", "ae_name": "Daniela Bernardinis", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "1. Strategic", "industry": "Computer Hardware", "psus_this_week": 1, "psus_w1": 0, "psus_w2": 0, "psus_w3": 0, "psus_28d": 1, "is_multi_signup": 0, "accel_vs_baseline": 1.0}, {"account_name": "adelaide.edu.au", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "[3] PQA", "segment": "1. Strategic", "industry": "Education", "psus_this_week": 0, "psus_w1": 2, "psus_w2": 2, "psus_w3": 0, "psus_28d": 4, "is_multi_signup": 1, "accel_vs_baseline": -1.3}, {"account_name": "Zomato", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "[3] PQA", "segment": "1. Strategic", "industry": "Retail", "psus_this_week": 0, "psus_w1": 2, "psus_w2": 1, "psus_w3": 1, "psus_28d": 4, "is_multi_signup": 1, "accel_vs_baseline": -1.3}, {"account_name": "The University of Sydney", "ae_name": "Daniela Bernardinis", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "2. Mid-Market", "industry": "Higher Education", "psus_this_week": 0, "psus_w1": 0, "psus_w2": 3, "psus_w3": 1, "psus_28d": 4, "is_multi_signup": 1, "accel_vs_baseline": -1.3}, {"account_name": "Downer EDI Services Pty Ltd", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Internet Software & Services", "psus_this_week": 1, "psus_w1": 3, "psus_w2": 0, "psus_w3": 0, "psus_28d": 4, "is_multi_signup": 1, "accel_vs_baseline": 0.0}, {"account_name": "uwa.edu.au", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "[4] SQA", "segment": "1. Strategic", "industry": "Education", "psus_this_week": 0, "psus_w1": 3, "psus_w2": 0, "psus_w3": 0, "psus_28d": 3, "is_multi_signup": 1, "accel_vs_baseline": -1.0}, {"account_name": "unsw.edu.au", "ae_name": "Daniela Bernardinis", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "1. Strategic", "industry": "Education", "psus_this_week": 1, "psus_w1": 1, "psus_w2": 1, "psus_w3": 0, "psus_28d": 3, "is_multi_signup": 1, "accel_vs_baseline": 0.3}, {"account_name": "optusnet.com.au", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Integrated Telecommunication Services", "psus_this_week": 0, "psus_w1": 0, "psus_w2": 1, "psus_w3": 2, "psus_28d": 3, "is_multi_signup": 1, "accel_vs_baseline": -1.0}, {"account_name": "Sanrio Inc.", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "", "segment": "2. Mid-Market", "industry": "Specialty Retail", "psus_this_week": 1, "psus_w1": 0, "psus_w2": 1, "psus_w3": 1, "psus_28d": 3, "is_multi_signup": 1, "accel_vs_baseline": 0.3}, {"account_name": "PTT Oil and Retail Business", "ae_name": "Daniela Bernardinis", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "1. Strategic", "industry": "Gas Utilities", "psus_this_week": 1, "psus_w1": 0, "psus_w2": 0, "psus_w3": 1, "psus_28d": 2, "is_multi_signup": 1, "accel_vs_baseline": 0.7}, {"account_name": "Theory, LLC", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Apparel, Accessories & Luxury Goods", "psus_this_week": 1, "psus_w1": 2, "psus_w2": 2, "psus_w3": 0, "psus_28d": 5, "is_multi_signup": 1, "accel_vs_baseline": -0.3}, {"account_name": "Kabam, Inc.", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Internet Software & Services", "psus_this_week": 0, "psus_w1": 0, "psus_w2": 2, "psus_w3": 0, "psus_28d": 2, "is_multi_signup": 1, "accel_vs_baseline": -0.7}, {"account_name": "FCM Travel", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Consumer Services", "psus_this_week": 0, "psus_w1": 1, "psus_w2": 1, "psus_w3": 0, "psus_28d": 2, "is_multi_signup": 1, "accel_vs_baseline": -0.7}, {"account_name": "Honda Motor Europe Logistics NV", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Automotive", "psus_this_week": 0, "psus_w1": 1, "psus_w2": 1, "psus_w3": 0, "psus_28d": 2, "is_multi_signup": 1, "accel_vs_baseline": -0.7}, {"account_name": "Stan", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Internet Software & Services", "psus_this_week": 0, "psus_w1": 0, "psus_w2": 0, "psus_w3": 1, "psus_28d": 1, "is_multi_signup": 0, "accel_vs_baseline": -0.3}, {"account_name": "FUJIFILM Corporation", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Internet Software & Services", "psus_this_week": 0, "psus_w1": 1, "psus_w2": 0, "psus_w3": 0, "psus_28d": 1, "is_multi_signup": 0, "accel_vs_baseline": -0.3}, {"account_name": "Aristocrat Technologies INC", "ae_name": "Daniela Bernardinis", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "1. Strategic", "industry": "Internet Software & Services", "psus_this_week": 0, "psus_w1": 1, "psus_w2": 0, "psus_w3": 0, "psus_28d": 1, "is_multi_signup": 0, "accel_vs_baseline": -0.3}, {"account_name": "CSL", "ae_name": "Daniela Bernardinis", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "1. Strategic", "industry": "Professional Services", "psus_this_week": 1, "psus_w1": 0, "psus_w2": 0, "psus_w3": 0, "psus_28d": 1, "is_multi_signup": 0, "accel_vs_baseline": 1.0}, {"account_name": "curtin.edu.au", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "[3] PQA", "segment": "1. Strategic", "industry": "Colleges & Universities", "psus_this_week": 1, "psus_w1": 0, "psus_w2": 0, "psus_w3": 0, "psus_28d": 1, "is_multi_signup": 0, "accel_vs_baseline": 1.0}, {"account_name": "Doosan Bobcat EMEA", "ae_name": "Daniela Bernardinis", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "1. Strategic", "industry": "Consulting", "psus_this_week": 1, "psus_w1": 0, "psus_w2": 0, "psus_w3": 0, "psus_28d": 1, "is_multi_signup": 0, "accel_vs_baseline": 1.0}, {"account_name": "merkle.com", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "", "psus_this_week": 0, "psus_w1": 1, "psus_w2": 1, "psus_w3": 1, "psus_28d": 3, "is_multi_signup": 1, "accel_vs_baseline": -1.0}, {"account_name": "Maurice Blackburn Pty Ltd", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "[3] PQA", "segment": "2. Mid-Market", "industry": "Law Firms & Legal Services", "psus_this_week": 0, "psus_w1": 0, "psus_w2": 0, "psus_w3": 1, "psus_28d": 1, "is_multi_signup": 0, "accel_vs_baseline": -0.3}, {"account_name": "dxglobal.com", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Media", "psus_this_week": 0, "psus_w1": 0, "psus_w2": 1, "psus_w3": 0, "psus_28d": 1, "is_multi_signup": 0, "accel_vs_baseline": -0.3}, {"account_name": "Lifestyle Group", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "[4] SQA", "segment": "3. Commercial", "industry": "Real Estate", "psus_this_week": 0, "psus_w1": 1, "psus_w2": 0, "psus_w3": 1, "psus_28d": 2, "is_multi_signup": 1, "accel_vs_baseline": -0.7}, {"account_name": "Bendigo Kangan Institute", "ae_name": "Daniela Bernardinis", "account_type": "Existing Customer", "stage": "[5] Ent Customer", "segment": "2. Mid-Market", "industry": "Education Services", "psus_this_week": 0, "psus_w1": 0, "psus_w2": 0, "psus_w3": 2, "psus_28d": 2, "is_multi_signup": 1, "accel_vs_baseline": -0.7}, {"account_name": "cims.com", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "[3] PQA", "segment": "3. Commercial", "industry": "Electrical Equipment", "psus_this_week": 0, "psus_w1": 0, "psus_w2": 1, "psus_w3": 0, "psus_28d": 1, "is_multi_signup": 0, "accel_vs_baseline": -0.3}, {"account_name": "det.nsw.edu.au", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Education", "psus_this_week": 0, "psus_w1": 1, "psus_w2": 1, "psus_w3": 0, "psus_28d": 2, "is_multi_signup": 1, "accel_vs_baseline": -0.7}, {"account_name": "ad.unsw.edu.au", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "", "segment": "1. Strategic", "industry": "Education", "psus_this_week": 0, "psus_w1": 0, "psus_w2": 1, "psus_w3": 2, "psus_28d": 3, "is_multi_signup": 1, "accel_vs_baseline": -1.0}, {"account_name": "student.rmit.edu.au", "ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "stage": "[4] SQA", "segment": "1. Strategic", "industry": "Education", "psus_this_week": 0, "psus_w1": 0, "psus_w2": 1, "psus_w3": 0, "psus_28d": 1, "is_multi_signup": 0, "accel_vs_baseline": -0.3}], "weekly_trend": [{"ae_name": "Daniela Bernardinis", "account_type": "Existing Customer", "this_week": 34, "last_week": 70, "week_2": 226, "week_3": 108, "total_28d": 438}, {"ae_name": "Daniela Bernardinis", "account_type": "Whitespace", "this_week": 21, "last_week": 29, "week_2": 31, "week_3": 32, "total_28d": 113}], "tier_dist": [{"priority_tier": "High", "psu_count": 10, "this_week": 1}, {"priority_tier": "Medium", "psu_count": 516, "this_week": 49}, {"priority_tier": "Low", "psu_count": 25, "this_week": 5}]};
+let state={type:'All',view:'summary',sort:{},modalAccount:null};
+function filt(arr){return arr.filter(r=>{if(state.type!=='All'&&r.account_type!==state.type)return false;return true;});}
+function spark(vals,w,h){const max=Math.max(...vals,1),min=Math.min(...vals,0),range=max-min||1;const pts=vals.map((v,i)=>`${(i/(vals.length-1))*w},${h-((v-min)/range)*h}`).join(' ');return `<svg class="spark" width="${w}" height="${h}"><defs><linearGradient id="sg${Math.random()}"> </linearGradient></defs><polyline fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" points="${pts}"/><polyline fill="rgba(45,127,249,0.08)" stroke="none" points="0,${h} ${pts} ${w},${h}"/><circle cx="${w}" cy="${h-((vals[vals.length-1]-min)/range)*h}" r="3" fill="var(--accent)"/></svg>`;}
+function renderKPIs(){
+  const a=filt(DATA.accounts),tw=a.reduce((s,r)=>s+(+r.psus_this_week),0);
+  const ws=a.filter(r=>r.account_type==='Whitespace').reduce((s,r)=>s+(+r.psus_this_week),0);
+  const ex=a.filter(r=>r.account_type==='Existing Customer').reduce((s,r)=>s+(+r.psus_this_week),0);
+  const multi=a.filter(r=>r.is_multi_signup==1).length;
+  const highT=DATA.tier_dist.find(t=>t.priority_tier==='High');
+  const highThisWk=highT?highT.this_week:0;
+  const lastW=a.reduce((s,r)=>s+(+r.psus_w1),0);
+  const wow=lastW>0?Math.round((tw-lastW)/lastW*100):0;
+  const wowCls=wow>5?'up':(wow<-5?'down':'flat'),wowSign=wow>0?'+':'';
+  const arrow=wow>5?'&uarr;':(wow<-5?'&darr;':'&rarr;');
+  document.getElementById('kpiRow').innerHTML=`<div class="kpi k-blue"><div class="label">New PSUs This Week</div><div class="value">${tw}</div><div class="delta ${wowCls}">${arrow} ${wowSign}${wow}% vs last week</div><div class="sub-label">across ${a.length} accounts</div></div><div class="kpi k-purple"><div class="label">Whitespace</div><div class="value" style="color:#8B46FF">${ws}</div><div class="sub-label">no existing relationship</div></div><div class="kpi k-green"><div class="label">Existing Customer</div><div class="value" style="color:#20C933">${ex}</div><div class="sub-label">expansion signals</div></div><div class="kpi k-pink"><div class="label">High-Priority (wk)</div><div class="value" style="color:#F82B60">${highThisWk}</div><div class="sub-label">tier = High</div></div><div class="kpi k-yellow"><div class="label">Multi-Signup Accounts</div><div class="value" style="color:#FCB400">${multi}</div><div class="sub-label">2+ in 28d</div></div>`;
+}
+function renderTrend(){
+  const rows=filt(DATA.weekly_trend);const tb=document.getElementById('trendBody');
+  if(!rows.length){tb.innerHTML=`<tr><td colspan="7" class="empty">No data</td></tr>`;return;}
+  tb.innerHTML=rows.map(r=>{const vals=[r.week_3,r.week_2,r.last_week,r.this_week];const tb2=r.account_type==='Whitespace'?'<span class="badge ws">WS</span>':'<span class="badge existing">Exist</span>';return `<tr><td>${tb2} ${r.account_type}</td><td class="num"><b>${r.this_week}</b></td><td class="num">${r.last_week}</td><td class="num">${r.week_2}</td><td class="num">${r.week_3}</td><td class="num"><b>${r.total_28d}</b></td><td>${spark(vals,80,22)}</td></tr>`;}).join('');
+}
+function renderTiers(){document.getElementById('tierBody').innerHTML=DATA.tier_dist.map(t=>`<tr><td><span class="badge ${t.priority_tier.toLowerCase()}">${t.priority_tier}</span></td><td class="num"><b>${t.psu_count}</b></td><td class="num">${t.this_week}</td></tr>`).join('');}
+function renderAccounts(){
+  let rows=filt(DATA.accounts);const sk=state.sort.accounts;
+  if(sk){rows.sort((a,b)=>{let av=a[sk],bv=b[sk];if(typeof av==='string'){av=av.toLowerCase();bv=(bv||'').toLowerCase();}if(av==null)av='';if(bv==null)bv='';const d=state.sortDir==='desc'?-1:1;return av>bv?d:av<bv?-d:0;});}
+  const tb=document.getElementById('accountsBody');
+  if(!rows.length){tb.innerHTML=`<tr><td colspan="9" class="empty">No accounts</td></tr>`;return;}
+  tb.innerHTML=rows.map(r=>{const vals=[r.psus_w3,r.psus_w2,r.psus_w1,r.psus_this_week];const tb2=r.account_type==='Whitespace'?'<span class="badge ws">WS</span>':'<span class="badge existing">Exist</span>';const accel=+r.accel_vs_baseline;const aCls=accel>1?'trend-up':(accel<-1?'trend-down':'trend-flat');const aStr=accel>0?`+${accel}`:`${accel}`;const cluster=r.is_multi_signup==1?`<span class="badge cluster">${r.psus_28d} PSU${r.psus_28d>1?'s':''}</span>`:'<span style="color:var(--faint)">&mdash;</span>';const stage=r.stage||'<span style="color:var(--faint)">n/a</span>';return `<tr class="clickable" onclick="openAccount('${r.account_name.replace(/'/g,"\\'")}')"><td><b>${r.account_name}</b></td><td>${tb2}</td><td>${stage}</td><td style="color:var(--muted)">${r.industry||'&mdash;'}</td><td class="num"><b>${r.psus_this_week}</b></td><td class="num">${r.psus_28d}</td><td>${spark(vals,76,20)}</td><td class="num ${aCls}">${aStr}</td><td>${cluster}</td></tr>`;}).join('');
+  document.getElementById('navAccounts').textContent=rows.length;
+}
+function renderTrending(){
+  let rows=filt(DATA.accounts).filter(r=>+r.accel_vs_baseline>0.5).sort((a,b)=>(+b.accel_vs_baseline)-(+a.accel_vs_baseline));
+  const tb=document.getElementById('trendingBody');
+  if(!rows.length){tb.innerHTML=`<div class="empty" style="grid-column:1/-1">No accelerating accounts</div>`;return;}
+  tb.innerHTML=rows.map(r=>{const tb2=r.account_type==='Whitespace'?'<span class="badge ws">Whitespace</span>':'<span class="badge existing">Existing</span>';const v=[r.psus_w3,r.psus_w2,r.psus_w1,r.psus_this_week];return `<div class="trending-card" onclick="openAccount('${r.account_name.replace(/'/g,"\\'")}')"><div><div class="tn">${r.account_name}</div><div class="td">${tb2} &middot; ${r.industry||''}</div><div class="td" style="margin-top:6px">${spark(v,100,26)}</div></div><div class="trend-val">+${r.accel_vs_baseline}</div></div>`;}).join('');
+}
+function renderPriority(){
+  let rows=filt(DATA.high_psus);const sk=state.sort.priority;
+  if(sk){rows.sort((a,b)=>{let av=a[sk],bv=b[sk];if(sk==='signup_date'){av=new Date(av);bv=new Date(bv);}else if(typeof av==='string'){av=av.toLowerCase();bv=(bv||'').toLowerCase();}if(av==null)av='';if(bv==null)bv='';const d=state.sortDir==='desc'?-1:1;return av>bv?d:av<bv?-d:0;});}
+  const tb=document.getElementById('priorityBody');
+  if(!rows.length){tb.innerHTML=`<tr><td colspan="8" class="empty">No high-priority PSUs</td></tr>`;return;}
+  tb.innerHTML=rows.map(r=>{const tb2=r.account_type==='Whitespace'?'<span class="badge ws">WS</span>':'<span class="badge existing">Exist</span>';const tf=r.seniority_source==='none'?'<span class="badge enrich" title="Pending LinkedIn enrichment">enrich</span>':'';const eng=[];if(r.reached_build_7d)eng.push('<span class="badge build">Build &le;7d</span>');if(r.reached_collab_7d)eng.push('<span class="badge collab">Collab &le;7d</span>');if(r.is_active_l7d&&!r.reached_build_7d)eng.push('<span class="badge active">Active L7d</span>');if(!eng.length)eng.push('<span style="color:var(--faint)">no early activity</span>');const sc=r.total_score>=0.8?'#F82B60':r.total_score>=0.6?'#FCB400':'#9CA3AF';const name=r.full_name||r.email.split('@')[0];return `<tr class="clickable" onclick="openAccount('${r.account_name.replace(/'/g,"\\'")}')"><td><b>${name}</b><br><span style="font-size:10px;color:var(--faint)">${r.email}</span></td><td>${r.job_title||'<span style="color:var(--faint)">&mdash;</span>'} ${tf}</td><td>${r.account_name}</td><td>${tb2}</td><td class="mono">${r.signup_date}</td><td>${eng.join(' ')}</td><td class="num"><div class="score-bar"><div class="fill" style="width:${r.total_score*100}%;background:${sc}"></div></div> <b>${r.total_score}</b></td><td style="font-size:11px;color:var(--muted)">${r.reasons}</td></tr>`;}).join('');
+  document.getElementById('navPriority').textContent=rows.length;
+}
+function renderSenior(){
+  let rows=filt(DATA.senior_spotlight);const sk=state.sort.senior;
+  if(sk){rows.sort((a,b)=>{let av=a[sk],bv=b[sk];if(sk==='signup_date'){av=new Date(av);bv=new Date(bv);}else if(typeof av==='string'){av=av.toLowerCase();bv=(bv||'').toLowerCase();}if(av==null)av='';if(bv==null)bv='';const d=state.sortDir==='desc'?-1:1;return av>bv?d:av<bv?-d:0;});}
+  const tb=document.getElementById('seniorBody');
+  if(!rows.length){tb.innerHTML=`<tr><td colspan="7" class="empty">No senior sign-ups</td></tr>`;return;}
+  tb.innerHTML=rows.map(r=>{const tb2=r.account_type==='Whitespace'?'<span class="badge ws">WS</span>':'<span class="badge existing">Exist</span>';const atl=r.is_atl==='Yes (ATL)'?'<span class="badge atl">ATL</span>':'';const name=r.full_name||r.email.split('@')[0];const active=r.is_active_l7d?'<span style="color:#20C933;font-weight:700">Yes</span>':'<span style="color:var(--faint)">No</span>';return `<tr class="clickable" onclick="openAccount('${r.account_name.replace(/'/g,"\\'")}')"><td><b>${name}</b></td><td>${r.job_title}</td><td>${atl} ${r.seniority||'<span style="color:var(--faint)">&mdash;</span>'}</td><td>${r.account_name}</td><td>${tb2}</td><td class="mono">${r.signup_date}</td><td>${active}</td></tr>`;}).join('');
+  document.getElementById('navSenior').textContent=rows.length;
+}
+function talkingPoints(){
+  const accts=filt(DATA.accounts),high=filt(DATA.high_psus),senior=filt(DATA.senior_spotlight);
+  function bullets(){const b=[];if(!accts.length)return['No PSU activity under current filters.'];const top=[...accts].sort((a,b)=>b.psus_28d-a.psus_28d)[0];b.push(`${top.account_name} is your hottest account &mdash; <b>${top.psus_28d} sign-ups in 28d</b> (${top.psus_this_week} this week). ${top.account_type==='Whitespace'?'Still whitespace &mdash; strong expansion opening.':'Existing customer &mdash; deepening usage.'}`);const tr=accts.filter(a=>+a.accel_vs_baseline>1).sort((a,b)=>b.accel_vs_baseline-a.accel_vs_baseline);if(tr.length)b.push(`${tr[0].account_name} is <b>accelerating (+${tr[0].accel_vs_baseline})</b> vs its own baseline &mdash; worth a proactive call this week.`);const sr=senior.filter(s=>s.is_atl==='Yes (ATL)'||['Director','VP','C-level'].includes(s.seniority));if(sr.length){const s=sr[0];b.push(`${s.account_name} had a <b>${s.seniority||'senior'} sign-up</b>${s.is_atl==='Yes (ATL)'?' (ATL persona)':''} &mdash; ${s.job_title}. Worth flagging before your next touch.`);}if(high.length){const h=high[0];b.push(`${h.account_name} hit <b>High priority</b> &mdash; ${h.reasons}. ${h.psu_count_28d} total sign-ups there in 28d.`);}const multi=accts.filter(a=>a.is_multi_signup==1&&a.psus_28d>=3);if(multi.length>=2)b.push(`<b>${multi.length} accounts</b> showing multi-signup clustering (&ge;3 in 28d) &mdash; coordinated interest, not one-offs.`);return b.slice(0,5);}
+  document.getElementById('talkingBody').innerHTML=`<h3><span style="width:10px;height:10px;border-radius:50%;background:var(--accent);display:inline-block"></span>Daniela</h3><ul>${bullets().map(x=>`<li>${x}</li>`).join('')}</ul>`;
+}
+function openAccount(name){
+  const acct=DATA.accounts.find(a=>a.account_name===name);if(!acct)return;state.modalAccount=name;
+  const psus=DATA.high_psus.filter(p=>p.account_name===name),seniors=DATA.senior_spotlight.filter(s=>s.account_name===name);
+  const tb=acct.account_type==='Whitespace'?'<span class="badge ws">Whitespace</span>':'<span class="badge existing">Existing Customer</span>';
+  document.getElementById('modalTitle').textContent=acct.account_name;
+  document.getElementById('modalSub').innerHTML=`${tb} &middot; ${acct.stage||'no stage'} &middot; ${acct.industry||''}`;
+  const vals=[acct.psus_w3,acct.psus_w2,acct.psus_w1,acct.psus_this_week];
+  document.getElementById('modalBody').innerHTML=`<div class="info-grid"><div class="info-item"><div class="il">This Week / 28d</div><div class="iv">${acct.psus_this_week} / ${acct.psus_28d}</div></div><div class="info-item"><div class="il">Acceleration</div><div class="iv" style="color:${+acct.accel_vs_baseline>1?'#20C933':(+acct.accel_vs_baseline<-1?'#F82B60':'var(--text)')}">${acct.accel_vs_baseline>0?'+':''}${acct.accel_vs_baseline}</div></div><div class="info-item"><div class="il">Cluster</div><div class="iv">${acct.is_multi_signup==1?'<span class="badge cluster">Multi-signup</span>':'Single'}</div></div></div><div style="margin-bottom:18px">${spark(vals,300,44)}</div><div class="section-title">High-Priority Sign-ups <span class="pill">${psus.length}</span></div>${psus.length?`<table class="tbl"><thead><tr><th>Name</th><th>Title</th><th>Signed Up</th><th>Engagement</th><th>Score</th><th>Reason</th></tr></thead><tbody>${psus.map(p=>`<tr><td><b>${p.full_name||p.email}</b><br><span style="font-size:10px;color:var(--faint)">${p.email}</span></td><td>${p.job_title||'&mdash;'} ${p.seniority_source==='none'?'<span class="badge enrich">enrich</span>':''}</td><td class="mono">${p.signup_date}</td><td>${p.is_active_l7d?'<span class="badge active">Active L7d</span>':'&mdash;'}</td><td class="num"><b>${p.total_score}</b></td><td style="font-size:11px;color:var(--muted)">${p.reasons}</td></tr>`).join('')}</tbody></table>`:'<p class="empty">No high-priority sign-ups at this account.</p>'}<div class="section-title" style="margin-top:20px">Senior Sign-ups <span class="pill">${seniors.length}</span></div>${seniors.length?`<table class="tbl"><thead><tr><th>Name</th><th>Title</th><th>Seniority</th><th>Signed Up</th></tr></thead><tbody>${seniors.map(s=>`<tr><td><b>${s.full_name||s.email}</b></td><td>${s.job_title}</td><td>${s.is_atl==='Yes (ATL)'?'<span class="badge atl">ATL</span> ':''}${s.seniority||'&mdash;'}</td><td class="mono">${s.signup_date}</td></tr>`).join('')}</tbody></table>`:'<p class="empty">No senior sign-ups at this account.</p>'}`;
+  document.getElementById('modal').classList.add('show');
+}
+function closeModal(){document.getElementById('modal').classList.remove('show');state.modalAccount=null;}
+function handleRefresh(){const btn=event.target.closest('button');btn.innerHTML='&#x21bb; Refreshing...';btn.disabled=true;setTimeout(()=>{const now=new Date();document.getElementById('refreshNote').textContent='Refreshed '+now.toLocaleString('en-AU',{dateStyle:'medium',timeStyle:'short'})+' AEST';btn.innerHTML='&#x21bb; Refresh';btn.disabled=false;renderAll();},900);}
+function bindSort(tid,vk){document.querySelectorAll('#'+tid+' th[data-sort]').forEach(th=>th.addEventListener('click',()=>{const k=th.dataset.sort;if(state.sort[vk]===k){state.sortDir=state.sortDir==='asc'?'desc':'asc';}else{state.sort[vk]=k;state.sortDir='desc';}renderAll();}));}
+function renderAll(){renderKPIs();renderTrend();renderTiers();renderAccounts();renderTrending();renderPriority();renderSenior();talkingPoints();}
+document.querySelectorAll('#typeSeg button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('#typeSeg button').forEach(x=>x.classList.remove('active'));b.classList.add('active');state.type=b.dataset.type;renderAll();}));
+document.querySelectorAll('.nav-tabs button').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.nav-tabs button').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));document.getElementById('view-'+b.dataset.view).classList.add('active');state.view=b.dataset.view;}));
+bindSort('accountsTable','accounts');bindSort('priorityTable','priority');bindSort('seniorTable','senior');
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+const now=new Date();document.getElementById('refreshNote').textContent='Updated '+now.toLocaleString('en-AU',{dateStyle:'medium',timeStyle:'short'})+' AEST';
+renderAll();
+</script>
+</body></html>
