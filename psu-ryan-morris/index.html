@@ -107,7 +107,7 @@ body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var
   <div class="header-left">
     <div class="brand-blocks"><span style="background:#FCB400"></span><span style="background:#F82B60"></span><span style="background:#8B46FF"></span><span style="background:#2D7FF9"></span><span style="background:#18BFFF"></span><span style="background:#20C933"></span></div>
     <div><div class="logo-text">AIRTABLE · BDR CO-PILOT</div><h1>Weekly PSU Review</h1>
-    <div class="sub"><span class="ae-pill"><span class="dot"></span>Ryan Morris</span> ANZ Strategic · <span class="refresh-note">Thu 02 Jul 2026, 15:31 AEST</span></div></div>
+    <div class="sub"><span class="ae-pill"><span class="dot"></span>Ryan Morris</span> ANZ Strategic · <span class="refresh-note">Thu 02 Jul 2026, 15:38 AEST</span></div></div>
   </div>
   <div class="meta"><button class="refresh-btn" onclick="handleRefresh()">&#x21bb; Refresh</button></div>
 </div>
@@ -188,7 +188,7 @@ function renderLensCards(){
 }
 
 function sortRows(rows,key){rows.sort((a,b)=>{let av=a[key],bv=b[key];if(key==='signup_date'){av=new Date(av);bv=new Date(bv);}else if(typeof av==='string'){av=av.toLowerCase();bv=(bv||'').toLowerCase();}if(av==null)av='';if(bv==null)bv='';const d=state.sortDir==='desc'?-1:1;return av>bv?d:av<bv?-d:0;});return rows;}
-function bindSort(tid,key){document.querySelectorAll('#'+tid+' th[data-sort]').forEach(th=>th.addEventListener('click',()=>{const k=th.dataset.sort;if(state.sort[key]===k)state.sortDir=state.sortDir==='asc'?'desc':'asc';else{state.sort[key]=k;state.sortDir='desc';}renderAll();})));}
+function bindSort(tid,key){document.querySelectorAll('#'+tid+' th[data-sort]').forEach(th=>th.addEventListener('click',()=>{const k=th.dataset.sort;if(state.sort[key]===k)state.sortDir=state.sortDir==='asc'?'desc':'asc';else{state.sort[key]=k;state.sortDir='desc';}renderAll();}));}
 function tb(r){return r.account_type==='Whitespace'?'<span class="badge ws">WS</span>':'<span class="badge existing">Exist</span>';}
 function nameCell(r){const nm=r.full_name||r.email.split('@')[0];return `<td><b>${nm}</b><br><span style="font-size:10px;color:var(--faint)">${r.email}</span></td>`;}
 function titleCell(r){const tf=r.seniority_source==='none'?' <span class="badge enrich">enrich</span>':'';return `<td>${r.job_title||'—'}${tf}</td>`;}
