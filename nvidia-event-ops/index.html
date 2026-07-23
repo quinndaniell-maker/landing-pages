@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NVIDIA Event Ops × Airtable | Prepared by Quinn Daniell</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0a0f;
+    --card:#13131e;
+    --card2:#161622;
+    --border:#222233;
+    --green:#76B900;
+    --green-dim:rgba(118,185,0,0.12);
+    --white:#f0f0f8;
+    --muted:#9494aa;
+    --muted2:#66667a;
+    --red:#c25454;
+    --red-dim:rgba(194,84,84,0.08);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--white);
+    font-family:'Inter',sans-serif;
+    font-weight:400;
+    line-height:1.6;
+    overflow-x:hidden;
+    position:relative;
+  }
+  h1,h2,h3,h4{
+    font-family:'Playfair Display',serif;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+
+  /* ===== Decorative background shapes ===== */
+  .bg-decor{
+    position:fixed;
+    top:0;left:0;
+    width:100%;height:100%;
+    z-index:0;
+    pointer-events:none;
+    overflow:hidden;
+  }
+  .bg-decor svg{position:absolute;opacity:0.06;}
+  .bg-decor .s1{top:-120px;right:-160px;width:600px;height:600px;}
+  .bg-decor .s2{top:40%;left:-220px;width:500px;height:500px;opacity:0.04;}
+  .bg-decor .s3{bottom:-200px;right:10%;width:700px;height:700px;opacity:0.05;}
+
+  main, header, footer{position:relative;z-index:1;}
+
+  /* ===== Nav ===== */
+  .nav{
+    position:fixed;
+    top:0;left:0;right:0;
+    z-index:100;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 40px;
+    background:rgba(10,10,15,0.82);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--border);
+  }
+  .nav-left{display:flex;align-items:center;gap:16px;}
+  .nav-x{color:var(--muted2);font-size:14px;font-weight:300;}
+  .nav-right{display:flex;align-items:center;gap:18px;}
+  .nav-prepared{
+    font-size:13px;
+    color:var(--muted);
+    display:none;
+  }
+  .nav-cta{
+    background:var(--green);
+    color:#0a0a0f;
+    font-weight:600;
+    font-size:13.5px;
+    padding:10px 20px;
+    border-radius:100px;
+    white-space:nowrap;
+    transition:transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow:0 0 0 rgba(118,185,0,0.4);
+  }
+  .nav-cta:hover{
+    transform:translateY(-1px);
+    box-shadow:0 6px 20px rgba(118,185,0,0.35);
+  }
+
+  @media (min-width:760px){
+    .nav-prepared{display:inline;}
+  }
+
+  /* ===== Container ===== */
+  .wrap{
+    max-width:920px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+
+  section{
+    padding:100px 0;
+    position:relative;
+  }
+
+  .section-label{
+    color:var(--green);
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    margin-bottom:16px;
+    display:block;
+  }
+
+  /* ===== Hero ===== */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:160px 24px 100px;
+  }
+  .chip{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--green);
+    font-size:13px;
+    font-weight:600;
+    padding:8px 18px;
+    border-radius:100px;
+    margin-bottom:32px;
+    letter-spacing:0.02em;
+  }
+  .chip::before{
+    content:'';
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--green);
+    box-shadow:0 0 8px var(--green);
+  }
+  .hero h1{
+    font-size:clamp(2.2rem, 5.2vw, 3.8rem);
+    line-height:1.18;
+    max-width:880px;
+    color:var(--white);
+    margin-bottom:28px;
+  }
+  .hero h1 em{
+    color:var(--green);
+    font-style:italic;
+  }
+  .hero .subtext{
+    max-width:680px;
+    color:var(--muted);
+    font-size:17px;
+    line-height:1.75;
+    margin-bottom:40px;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-weight:600;
+    font-size:15px;
+    padding:15px 30px;
+    border-radius:100px;
+    transition:all 0.25s ease;
+  }
+  .btn-primary{
+    background:var(--green);
+    color:#0a0a0f;
+    box-shadow:0 0 0 rgba(118,185,0,0.4);
+  }
+  .btn-primary:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 30px rgba(118,185,0,0.35);
+  }
+  .btn-secondary{
+    background:transparent;
+    color:var(--white);
+    border:1px solid var(--border);
+  }
+  .btn-secondary:hover{
+    border-color:var(--green);
+    color:var(--green);
+    transform:translateY(-2px);
+  }
+
+  /* ===== Traction bar ===== */
+  .traction{
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+    background:var(--card2);
+    padding:0;
+  }
+  .traction-grid{
+    max-width:1040px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+  }
+  .traction-item{
+    padding:48px 20px;
+    text-align:center;
+    border-right:1px solid var(--border);
+  }
+  .traction-item:last-child{border-right:none;}
+  .traction-num{
+    font-family:'Playfair Display',serif;
+    font-size:clamp(1.8rem,3.4vw,2.6rem);
+    font-weight:700;
+    color:var(--green);
+    line-height:1;
+    margin-bottom:10px;
+  }
+  .traction-label{
+    color:var(--muted);
+    font-size:12.5px;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+  }
+
+  /* ===== Section heading ===== */
+  .section-head{
+    max-width:720px;
+    margin-bottom:56px;
+  }
+  .section-head h2{
+    font-size:clamp(1.7rem,3.4vw,2.5rem);
+    color:var(--white);
+    line-height:1.3;
+  }
+
+  /* ===== Cards grid (4-up) ===== */
+  .grid-4{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
+  }
+  .card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:32px;
+    transition:border-color 0.25s ease, transform 0.25s ease;
+  }
+  .card:hover{
+    border-color:rgba(118,185,0,0.35);
+    transform:translateY(-3px);
+  }
+  .card h3{
+    font-size:19px;
+    color:var(--white);
+    margin-bottom:12px;
+    font-weight:600;
+  }
+  .card h3 .tag{
+    display:block;
+    color:var(--green);
+    font-family:'Inter',sans-serif;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  .card p{
+    color:var(--muted);
+    font-size:15px;
+    line-height:1.7;
+  }
+
+  /* ===== ClickUp comparison ===== */
+  .compare-section{
+    background:var(--card2);
+    border-top:1px solid var(--border);
+    border-bottom:1px solid var(--border);
+  }
+  .compare-head{
+    text-align:center;
+    max-width:640px;
+    margin:0 auto 56px;
+  }
+  .compare-head h2{
+    font-size:clamp(1.6rem,3.2vw,2.3rem);
+    color:var(--white);
+    line-height:1.3;
+  }
+  .compare-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+    max-width:900px;
+    margin:0 auto;
+  }
+  .compare-col{
+    border-radius:16px;
+    padding:32px;
+    border:1px solid var(--border);
+  }
+  .compare-col.left{
+    background:var(--red-dim);
+    border-color:rgba(194,84,84,0.28);
+  }
+  .compare-col.right{
+    background:var(--green-dim);
+    border-color:rgba(118,185,0,0.4);
+  }
+  .compare-col h4{
+    font-family:'Inter',sans-serif;
+    font-size:13px;
+    font-weight:700;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    margin-bottom:22px;
+  }
+  .compare-col.left h4{color:var(--red);}
+  .compare-col.right h4{color:var(--green);}
+  .compare-col ul{list-style:none;}
+  .compare-col li{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    font-size:15px;
+    color:var(--muted);
+    padding:12px 0;
+    border-top:1px solid rgba(255,255,255,0.05);
+  }
+  .compare-col li:first-child{border-top:none;padding-top:0;}
+  .compare-col.left li::before{
+    content:'✕';
+    color:var(--red);
+    font-size:13px;
+    flex-shrink:0;
+    margin-top:2px;
+  }
+  .compare-col.right li::before{
+    content:'✓';
+    color:var(--green);
+    font-size:13px;
+    flex-shrink:0;
+    margin-top:2px;
+  }
+  .compare-col.right li{color:var(--white);}
+  .compare-note{
+    text-align:center;
+    max-width:640px;
+    margin:44px auto 0;
+    padding:20px 28px;
+    border:1px solid rgba(118,185,0,0.3);
+    border-radius:14px;
+    background:rgba(118,185,0,0.06);
+    color:var(--white);
+    font-size:15px;
+  }
+  .compare-note strong{color:var(--green);}
+
+  /* ===== Proof points ===== */
+  .proof-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+  }
+  .proof-card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:30px 26px;
+  }
+  .proof-logo{
+    font-family:'Inter',sans-serif;
+    font-weight:800;
+    font-size:13px;
+    letter-spacing:0.08em;
+    color:var(--green);
+    margin-bottom:22px;
+    text-transform:uppercase;
+  }
+  .proof-block{margin-bottom:18px;}
+  .proof-block:last-child{margin-bottom:0;}
+  .proof-block .k{
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--muted2);
+    margin-bottom:6px;
+    display:block;
+  }
+  .proof-block .v{
+    font-size:14.5px;
+    color:var(--muted);
+    line-height:1.6;
+  }
+  .proof-block.result .v{
+    color:var(--white);
+    font-weight:500;
+  }
+
+  /* ===== CTA section ===== */
+  .cta-section{
+    text-align:center;
+    max-width:720px;
+  }
+  .cta-photo-wrap{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    margin-bottom:36px;
+  }
+  .cta-photo{
+    width:96px;
+    height:96px;
+    border-radius:50%;
+    object-fit:cover;
+    border:3px solid var(--green);
+    box-shadow:0 0 0 6px rgba(118,185,0,0.12);
+    margin-bottom:16px;
+  }
+  .cta-name{
+    font-size:16px;
+    font-weight:600;
+    color:var(--white);
+  }
+  .cta-role{
+    font-size:13.5px;
+    color:var(--muted2);
+    margin-top:2px;
+  }
+  .cta-section h2{
+    font-size:clamp(1.8rem,3.8vw,2.7rem);
+    color:var(--white);
+    margin-bottom:18px;
+    line-height:1.3;
+  }
+  .cta-section .subtext{
+    color:var(--muted);
+    font-size:16.5px;
+    margin-bottom:38px;
+  }
+  .cta-buttons{
+    display:flex;
+    justify-content:center;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-bottom:28px;
+  }
+  .btn-white{
+    background:#f0f0f8;
+    color:#0a0a0f;
+  }
+  .btn-white:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 30px rgba(240,240,248,0.18);
+  }
+  .cta-email{
+    color:var(--muted2);
+    font-size:14px;
+    border-bottom:1px solid transparent;
+    transition:color 0.2s ease, border-color 0.2s ease;
+  }
+  .cta-email:hover{
+    color:var(--green);
+    border-color:var(--green);
+  }
+
+  /* ===== Footer ===== */
+  footer{
+    border-top:1px solid var(--border);
+    padding:36px 24px;
+    text-align:center;
+  }
+  footer p{
+    color:var(--muted2);
+    font-size:13px;
+    letter-spacing:0.01em;
+  }
+
+  /* ===== Fade animation ===== */
+  .fade{
+    opacity:0;
+    transform:translateY(24px);
+    transition:opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade.in{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width:760px){
+    .nav{padding:14px 20px;}
+    section{padding:70px 0;}
+    .traction-grid{grid-template-columns:repeat(2,1fr);}
+    .traction-item{
+      border-right:1px solid var(--border);
+      border-bottom:1px solid var(--border);
+      padding:32px 14px;
+    }
+    .traction-item:nth-child(2n){border-right:none;}
+    .grid-4{grid-template-columns:1fr;}
+    .compare-grid{grid-template-columns:1fr;}
+    .proof-grid{grid-template-columns:1fr;}
+    .hero{padding:140px 20px 70px;}
+    .cta-buttons{flex-direction:column;width:100%;}
+    .cta-buttons .btn{justify-content:center;}
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-decor">
+  <svg class="s1" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="300" cy="300" r="280" stroke="#76B900" stroke-width="1" fill="none"/>
+    <circle cx="300" cy="300" r="200" stroke="#76B900" stroke-width="1" fill="none"/>
+    <circle cx="300" cy="300" r="120" stroke="#76B900" stroke-width="1" fill="none"/>
+  </svg>
+  <svg class="s2" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+    <rect x="40" y="40" width="420" height="420" stroke="#76B900" stroke-width="1" fill="none" transform="rotate(15 250 250)"/>
+    <rect x="100" y="100" width="300" height="300" stroke="#76B900" stroke-width="1" fill="none" transform="rotate(15 250 250)"/>
+  </svg>
+  <svg class="s3" viewBox="0 0 700 700" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="350,20 680,600 20,600" stroke="#76B900" stroke-width="1" fill="none"/>
+  </svg>
+</div>
+
+<header class="nav">
+  <div class="nav-left">
+    <!-- NVIDIA logo -->
+    <svg width="112" height="24" viewBox="0 0 112 24" xmlns="http://www.w3.org/2000/svg" aria-label="NVIDIA">
+      <rect x="0" y="0" width="24" height="24" rx="6" fill="#76B900"/>
+      <text x="12" y="17" font-family="Inter, sans-serif" font-weight="800" font-size="13" fill="#0a0a0f" text-anchor="middle">N</text>
+      <text x="32" y="17" font-family="Inter, sans-serif" font-weight="700" font-size="15" fill="#f0f0f8" letter-spacing="0.5">NVIDIA</text>
+    </svg>
+    <span class="nav-x">×</span>
+    <!-- Airtable logo -->
+    <svg width="104" height="24" viewBox="0 0 104 24" xmlns="http://www.w3.org/2000/svg" aria-label="Airtable">
+      <g transform="translate(0,3)">
+        <path d="M8.6 0.4 1 3.5c-0.5 0.2-0.5 0.9 0 1.1l7.6 3c0.6 0.2 1.2 0.2 1.8 0l7.6-3c0.5-0.2 0.5-0.9 0-1.1l-7.6-3.1c-0.6-0.2-1.2-0.2-1.8 0z" fill="#FCB400"/>
+        <path d="M10.6 9.4v8.4c0 0.4 0.4 0.7 0.8 0.5l8.1-3.2c0.3-0.1 0.5-0.4 0.5-0.7V6c0-0.4-0.4-0.7-0.8-0.5l-8.1 3.2c-0.3 0.1-0.5 0.4-0.5 0.7z" fill="#18BFFF"/>
+        <path d="M8.3 9.9 5.6 8.6 0.9 6.6C0.5 6.4 0 6.7 0 7.1v8.2c0 0.3 0.2 0.6 0.4 0.7l7.4 3.2c0.4 0.2 0.8-0.1 0.8-0.5v-8.1c0-0.3-0.1-0.5-0.3-0.7z" fill="#F82B60"/>
+      </g>
+      <text x="26" y="17" font-family="Inter, sans-serif" font-weight="600" font-size="15" fill="#f0f0f8">airtable</text>
+    </svg>
+  </div>
+  <div class="nav-right">
+    <span class="nav-prepared">Prepared for NVIDIA Event Ops by Quinn Daniell</span>
+    <a class="nav-cta" href="https://meet.airtable.com/c/Quinn_Daniell" target="_blank" rel="noopener noreferrer">Explore with Quinn →</a>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero">
+    <div class="chip fade">NVIDIA × Airtable, Event Operations</div>
+    <h1 class="fade">Your event marketing team replaced tens of thousands of spreadsheets. <em>Event ops is next.</em></h1>
+    <p class="subtext fade">NVIDIA's marketing teams manage logo approvals across 3,000 stakeholders for GTC and CES in Airtable. Scale AI coordinated a 10,000-person conference in 60 days. Cisco ripped out ClickUp for this. Here's why event ops is the natural next step.</p>
+    <a class="btn btn-primary fade" href="https://meet.airtable.com/c/Quinn_Daniell" target="_blank" rel="noopener noreferrer">Let's explore together →</a>
+  </section>
+
+  <div class="traction">
+    <div class="traction-grid">
+      <div class="traction-item fade">
+        <div class="traction-num">2,437</div>
+        <div class="traction-label">Airtable Users at NVIDIA</div>
+      </div>
+      <div class="traction-item fade">
+        <div class="traction-num">3,000</div>
+        <div class="traction-label">Stakeholders in Event Marketing</div>
+      </div>
+      <div class="traction-item fade">
+        <div class="traction-num">19,000</div>
+        <div class="traction-label">Cisco Seats on Airtable</div>
+      </div>
+      <div class="traction-item fade">
+        <div class="traction-num">40 hrs/wk</div>
+        <div class="traction-label">Saved per Person (Scale AI)</div>
+      </div>
+    </div>
+  </div>
+
+  <section class="wrap">
+    <div class="section-head fade">
+      <span class="section-label">Already happening at NVIDIA</span>
+      <h2>What other teams at NVIDIA already run on Airtable</h2>
+    </div>
+    <div class="grid-4">
+      <div class="card fade">
+        <h3><span class="tag">Event Marketing</span></h3>
+        <p>Logo approval lifecycle for GTC and CES across 3,000 stakeholders. Regional ecosystem maps. Workshop registrations synced into a master calendar.</p>
+      </div>
+      <div class="card fade">
+        <h3><span class="tag">Engineering</span></h3>
+        <p>GeForce NOW team tracks data center power consumption and server provisioning. Replaced Google Sheets and Confluence.</p>
+      </div>
+      <div class="card fade">
+        <h3><span class="tag">GTM &amp; Product</span></h3>
+        <p>Automated "Plan of Record" tracking for new product introductions. Digest emails for missing docs. Executive visibility into launch risks.</p>
+      </div>
+      <div class="card fade">
+        <h3><span class="tag">Procurement</span></h3>
+        <p>Procure-to-pay workflow for contractor quotes. POs, invoices, remaining budget, spend history. Replaced manual Excel reconciliation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="section-head fade">
+      <span class="section-label">What this means for event ops</span>
+      <h2>Where speakers, sessions, sponsors, and venues come together</h2>
+    </div>
+    <div class="grid-4">
+      <div class="card fade">
+        <h3>One change, full picture</h3>
+        <p>A speaker cancels. Instantly see which sessions, sponsors, marketing assets, and attendee comms are affected. No chasing across tools.</p>
+      </div>
+      <div class="card fade">
+        <h3>Sponsors stop emailing you</h3>
+        <p>Every stakeholder gets their own live view. Sponsors see their booth and deadlines. Speakers see their sessions. Leadership sees the portfolio.</p>
+      </div>
+      <div class="card fade">
+        <h3>50 events, one portfolio view</h3>
+        <p>See every event's status without a weekly meeting. Production timelines, vendor logistics, creative assets, all connected and live.</p>
+      </div>
+      <div class="card fade">
+        <h3>Post-event data flows forward</h3>
+        <p>Attendance data, session ratings, and follow-up campaigns connected automatically. No manual handoffs between events and marketing.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="compare-section">
+    <div class="wrap">
+      <div class="compare-head fade">
+        <h2>ClickUp tracks tasks. Event ops needs operations.</h2>
+      </div>
+      <div class="compare-grid">
+        <div class="compare-col left fade">
+          <h4>Task Management, ClickUp</h4>
+          <ul>
+            <li>Tracks whether a task is done</li>
+            <li>Flat boards and lists</li>
+            <li>Everyone sees the same view</li>
+            <li>Manual status updates</li>
+          </ul>
+        </div>
+        <div class="compare-col right fade">
+          <h4>Connected Operations, Airtable</h4>
+          <ul>
+            <li>Shows what else is affected when something changes</li>
+            <li>Everything connected: speakers → sessions → sponsors → venues</li>
+            <li>Every stakeholder sees what's relevant to them</li>
+            <li>Changes cascade automatically</li>
+          </ul>
+        </div>
+      </div>
+      <div class="compare-note fade">
+        <strong>Cisco</strong> consolidated ClickUp, Asana, and Monday onto Airtable. 19,000 seats. $2M+ ACV.
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="section-head fade">
+      <span class="section-label">Proven at scale</span>
+      <h2>Teams like yours already made this move</h2>
+    </div>
+    <div class="proof-grid">
+      <div class="proof-card fade">
+        <div class="proof-logo">Scale AI</div>
+        <div class="proof-block">
+          <span class="k">Challenge</span>
+          <p class="v">10,000-person conference with a skeleton crew and 60-day timeline.</p>
+        </div>
+        <div class="proof-block">
+          <span class="k">Solution</span>
+          <p class="v">Automated speaker coordination and session scheduling. Synced data with Fivetran.</p>
+        </div>
+        <div class="proof-block result">
+          <span class="k">Result</span>
+          <p class="v">40 hours saved per week per person. Cost savings of 2 full-time employees.</p>
+        </div>
+      </div>
+      <div class="proof-card fade">
+        <div class="proof-logo">Cisco</div>
+        <div class="proof-block">
+          <span class="k">Challenge</span>
+          <p class="v">Product org fragmented across ClickUp, Asana, and Monday.</p>
+        </div>
+        <div class="proof-block">
+          <span class="k">Solution</span>
+          <p class="v">One Cisco Roadmap, consolidated onto Airtable across 19,000 seats.</p>
+        </div>
+        <div class="proof-block result">
+          <span class="k">Result</span>
+          <p class="v">$2.18M ACV. +1,750 seats YoY. Reduced manual reporting, improved delivery speed.</p>
+        </div>
+      </div>
+      <div class="proof-card fade">
+        <div class="proof-logo">Virgin Voyages</div>
+        <div class="proof-block">
+          <span class="k">Challenge</span>
+          <p class="v">80+ marketers managing campaigns and events across scattered tools.</p>
+        </div>
+        <div class="proof-block">
+          <span class="k">Solution</span>
+          <p class="v">One platform for end-to-end marketing ops with AI-powered reporting.</p>
+        </div>
+        <div class="proof-block result">
+          <span class="k">Result</span>
+          <p class="v">90% time savings on reporting. Six-figure agency cost savings.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap cta-section">
+    <div class="cta-photo-wrap fade">
+      <img class="cta-photo" src="data:image/jpeg;base64,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" alt="Quinn Daniell">
+      <div class="cta-name">Quinn Daniell</div>
+      <div class="cta-role">Accounts Team, Airtable</div>
+    </div>
+    <h2 class="fade">Ready to explore what this looks like for your team?</h2>
+    <p class="subtext fade">20 minutes. No deck. Just a live look at how your event ops team could use Airtable.</p>
+    <div class="cta-buttons fade">
+      <a class="btn btn-primary" href="https://meet.airtable.com/c/Quinn_Daniell" target="_blank" rel="noopener noreferrer">Start a conversation →</a>
+      <a class="btn btn-white" href="https://airtable.com/signup" target="_blank" rel="noopener noreferrer">Try Airtable free →</a>
+    </div>
+    <a class="cta-email fade" href="mailto:quinn.daniell@airtable.com">quinn.daniell@airtable.com</a>
+  </section>
+
+</main>
+
+<footer>
+  <p>Prepared by Airtable for NVIDIA event operations leadership. July 2026.</p>
+</footer>
+
+<script>
+  const faders = document.querySelectorAll('.fade');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  faders.forEach((el) => observer.observe(el));
+</script>
+
+</body>
+</html>
