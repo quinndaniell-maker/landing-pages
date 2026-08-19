@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Airtable × lululemon | Resources for lululemon supply chain teams</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lulu-red:#E20010;
+    --lulu-red-soft:rgba(226,0,16,.14);
+    --ink:#0c0c0d;
+    --ink-2:#121214;
+    --ink-3:#1a1a1d;
+    --line:rgba(255,255,255,.09);
+    --txt:#f6f6f7;
+    --txt-dim:rgba(246,246,247,.66);
+    --txt-faint:rgba(246,246,247,.42);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    background:var(--ink);
+    color:var(--txt);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.6;
+  }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 40px}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:96px 0 88px;
+    position:relative;
+    overflow:hidden;
+    background:
+      radial-gradient(1200px 500px at 85% -10%, rgba(226,0,16,.10), transparent 60%),
+      var(--ink);
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--lulu-red);
+    margin-bottom:26px;
+  }
+  .eyebrow::before{content:"";width:26px;height:2px;background:var(--lulu-red)}
+  h1{
+    font-size:clamp(38px,5.2vw,60px);
+    font-weight:800;letter-spacing:-0.03em;line-height:1.04;
+    max-width:16ch;
+    margin-bottom:28px;
+  }
+  h1 .accent{color:var(--lulu-red)}
+  .lede{
+    font-size:19px;color:var(--txt-dim);max-width:56ch;font-weight:400;
+  }
+  .lede + .lede{margin-top:18px}
+  .lede strong{color:var(--txt);font-weight:600}
+
+  /* ---------- SECTION LABEL ---------- */
+  .section{padding:78px 0}
+  .section-label{
+    font-size:13px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--txt-faint);margin-bottom:14px;
+  }
+  .section-title{
+    font-size:clamp(26px,3vw,36px);font-weight:800;letter-spacing:-0.02em;
+    margin-bottom:12px;max-width:24ch;
+  }
+  .section-sub{font-size:16px;color:var(--txt-dim);max-width:60ch;margin-bottom:44px}
+
+  /* ---------- RESOURCE GRID ---------- */
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{
+    background:var(--ink-2);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:30px 28px 32px;
+    display:flex;flex-direction:column;
+    transition:border-color .2s, transform .2s, background .2s;
+    text-decoration:none;color:inherit;
+  }
+  .card:hover{border-color:rgba(226,0,16,.45);transform:translateY(-3px);background:var(--ink-3)}
+  .card-tag{
+    display:inline-flex;align-items:center;gap:7px;
+    font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--lulu-red);margin-bottom:18px;
+  }
+  .card-tag .dot{width:7px;height:7px;border-radius:50%;background:var(--lulu-red)}
+  .card-title{font-size:20px;font-weight:700;letter-spacing:-0.01em;line-height:1.28;margin-bottom:12px}
+  .card-desc{font-size:14.5px;color:var(--txt-dim);flex:1;margin-bottom:22px}
+  .card-metric{
+    border-top:1px solid var(--line);padding-top:18px;
+    font-size:13px;color:var(--txt-faint);
+  }
+  .card-metric b{display:block;color:var(--txt);font-size:22px;font-weight:800;letter-spacing:-0.02em;margin-bottom:2px}
+  .card-cta{
+    margin-top:20px;font-size:14px;font-weight:700;color:var(--lulu-red);
+    display:inline-flex;align-items:center;gap:7px;
+  }
+  .card:hover .card-cta{gap:11px}
+  .card-cta{transition:gap .2s}
+
+  /* ---------- PROOF STRIP ---------- */
+  .proof{
+    background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .proof-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+  .proof-quote{
+    font-size:clamp(22px,2.6vw,30px);font-weight:700;letter-spacing:-0.02em;line-height:1.32;
+  }
+  .proof-quote .accent{color:var(--lulu-red)}
+  .proof-attr{margin-top:22px;font-size:14px;color:var(--txt-faint)}
+  .proof-stats{display:grid;grid-template-columns:1fr 1fr;gap:2px;background:var(--line);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+  .stat{background:var(--ink-3);padding:26px 24px}
+  .stat b{display:block;font-size:30px;font-weight:800;letter-spacing:-0.03em;color:var(--lulu-red)}
+  .stat span{font-size:13px;color:var(--txt-dim)}
+
+  /* ---------- CTA ---------- */
+  .cta{padding:96px 0;text-align:center;position:relative;overflow:hidden}
+  .cta::before{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(700px 320px at 50% 0%, var(--lulu-red-soft), transparent 65%);
+    pointer-events:none;
+  }
+  .cta h2{font-size:clamp(30px,4vw,44px);font-weight:800;letter-spacing:-0.03em;margin-bottom:18px;position:relative}
+  .cta p{font-size:17px;color:var(--txt-dim);max-width:52ch;margin:0 auto 36px;position:relative}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    background:var(--lulu-red);color:#fff;
+    font-size:16px;font-weight:700;
+    padding:17px 36px;border-radius:999px;
+    text-decoration:none;position:relative;
+    transition:transform .2s, box-shadow .2s;
+    box-shadow:0 8px 30px rgba(226,0,16,.35);
+  }
+  .btn:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(226,0,16,.45)}
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    padding:34px 0 44px;
+    text-align:center;
+  }
+  footer p{font-size:13px;color:var(--txt-faint)}
+  footer .brand{color:var(--lulu-red);font-weight:600}
+
+  @media (max-width:900px){
+    .grid{grid-template-columns:1fr}
+    .proof-grid{grid-template-columns:1fr;gap:36px}
+    .wrap{padding:0 24px}
+    .hero{padding:64px 0 60px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Airtable × lululemon</div>
+    <h1>One connected system for lululemon's <span class="accent">supply chain</span>.</h1>
+    <p class="lede">
+      Across the GTM lifecycle, every function keeps its own tracker, exporting or copy-pasting
+      out of systems of record like FlexPLM, and none of those trackers talk to each other.
+      The time savings live in the <strong>coordination between teams</strong>, at the handoff points.
+    </p>
+    <p class="lede">
+      Today it is hard to even measure how long each step takes or where things are held up,
+      because every tracker sits disconnected from the rest. These are the three resources
+      most relevant to fixing that.
+    </p>
+  </div>
+</header>
+
+<!-- ============ RESOURCES ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-label">Three places to start</div>
+    <h2 class="section-title">Built for teams connecting the handoffs</h2>
+    <p class="section-sub">Two short demos and one apparel operator story, matched to how supply chain, sourcing, and product teams actually work.</p>
+
+    <div class="grid">
+      <!-- Demo 1 -->
+      <a class="card" href="#demo-supply-chain">
+        <div class="card-tag"><span class="dot"></span>Demo · 4 min</div>
+        <div class="card-title">Airtable for supply chain and merchandising ops</div>
+        <div class="card-desc">
+          See how trackers for sourcing, samples, and production stop living in separate
+          spreadsheets and start reading from one connected layer, so every handoff is visible.
+        </div>
+        <div class="card-cta">Watch the demo <span>→</span></div>
+      </a>
+
+      <!-- Demo 2 -->
+      <a class="card" href="#demo-productcentral">
+        <div class="card-tag"><span class="dot"></span>Demo · 5 min</div>
+        <div class="card-title">ProductCentral for product development</div>
+        <div class="card-desc">
+          How product development, planning, and sourcing stay on the same record from line plan
+          to PO, with cycle time per step measured instead of guessed.
+        </div>
+        <div class="card-cta">Watch the demo <span>→</span></div>
+      </a>
+
+      <!-- Customer story -->
+      <a class="card" href="#story-koj">
+        <div class="card-tag"><span class="dot"></span>Customer story · Apparel retail</div>
+        <div class="card-title">How KOJ freed up 30% of its team's time</div>
+        <div class="card-desc">
+          An international fashion and beauty retail group replaced spreadsheet version-clashing
+          and manual data entry with one connected system for product development and inventory.
+        </div>
+        <div class="card-metric">
+          <b>143,000 hrs</b>
+          saved per year across the group
+        </div>
+        <div class="card-cta">Read the story <span>→</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROOF ============ -->
+<section class="proof section" id="story-koj">
+  <div class="wrap">
+    <div class="proof-grid">
+      <div>
+        <div class="section-label">Proof from apparel</div>
+        <p class="proof-quote">
+          "It is no coincidence that we had a <span class="accent">peak trading period</span>
+          after implementing Airtable."
+        </p>
+        <p class="proof-attr">Kamal Osman Jamjoom (KOJ), international fashion and beauty retail group</p>
+      </div>
+      <div class="proof-stats">
+        <div class="stat"><b>143,000</b><span>hours saved per year</span></div>
+        <div class="stat"><b>30%</b><span>of team time freed up</span></div>
+        <div class="stat"><b>50%</b><span>faster sister-brand launch</span></div>
+        <div class="stat"><b>1,600</b><span>fewer emails per brand, per year</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SECOND STORY ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-label">And in fashion supply chain specifically</div>
+    <h2 class="section-title">Jamjoom Fashion connected its entire value chain</h2>
+    <p class="section-sub">
+      Data was siloed across multiple platforms with limited visibility into the supply chain.
+      Centralizing product lifecycle and supply chain data in Airtable, connected to their ERP,
+      turned that around.
+    </p>
+    <div class="grid">
+      <div class="card" style="cursor:default">
+        <div class="card-metric" style="border:none;padding-top:0">
+          <b>99.9%</b>
+          on-time delivery rate
+        </div>
+      </div>
+      <div class="card" style="cursor:default">
+        <div class="card-metric" style="border:none;padding-top:0">
+          <b>5%</b>
+          reduction in inventory costs
+        </div>
+      </div>
+      <div class="card" style="cursor:default">
+        <div class="card-metric" style="border:none;padding-top:0">
+          <b>10%</b>
+          increase in warehouse productivity
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="cta">
+  <div class="wrap">
+    <h2>Worth 20 minutes to pressure-test the hypothesis?</h2>
+    <p>
+      The pattern at two very large apparel and footwear brands was the same: the savings lived
+      in the coordination between teams. Happy to walk through what that looked like and whether
+      it maps to lululemon's GTM Evo initiative.
+    </p>
+    <a class="btn" href="https://meet.airtable.com/c/Max_Harling">Book time with Max <span>→</span></a>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="wrap">
+    <p>Curated for <span class="brand">lululemon</span> supply chain and product teams by the Airtable account team.</p>
+  </div>
+</footer>
+
+</body>
+</html>
